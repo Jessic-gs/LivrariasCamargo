@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Categorias</title>
+</h:head>
+<h:body>
+ 
+<p:megaMenu orientation="#{megaMenuView.orientation}" 
+			style="margin-top:0px;
+				   height: 30px;
+				   font-size: 15px;">
+	<p:menuitem value="Home" url="home.xhtml" />
+    <p:menuitem value="Categorias" url="categoria.xhtml" />
+</p:megaMenu>
+
+	<h2>Categoria</h2>
+	
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Nome : " />
+			<p:inputText value="${categoriaMB.categoriaAtual.nome}" 
+						 style="font-size: 12px;
+						 		width: 300px"/>
+
+			<h:commandButton value="Adicionar" 
+							 action="${categoriaMB.adiciona()}" 
+							 rendered="${categoriaMB.categoriaAtual.codigo == 0}"
+							 style="font-size: 12px;"/>
+							 							 
+			<h:commandButton value="Atualizar" 
+							 action="${categoriaMB.adiciona()}" 
+							 rendered="${categoriaMB.categoriaAtual.codigo != 0}"
+							 style="font-size: 12px;"/>
+
+		</h:panelGrid>
+		<p:dataTable value="${categoriaMB.categorias}" 
+					 var="categoria" 
+					 border="2" 
+					 rendered="${categoriaMB.categorias.size() > 0}"
+					 style="font-size: 15px;">
+			<p:column>
+				<f:facet name="header">
+					Nome
+				</f:facet>
+				${categoria.nome}
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					Ações
+				</f:facet>
+				<h:commandButton	value="Editar" 
+									action="${categoriaMB.editar( categoria )}"
+									style="font-size: 12px;"/>
+				<h:commandButton	value="Remover" 
+									action="${categoriaMB.remover( categoria )}"
+									style="font-size: 12px;"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
