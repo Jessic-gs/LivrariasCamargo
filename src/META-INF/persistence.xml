@@ -7,6 +7,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	<persistence-unit name="livrarias_camargo">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.livraria.dominio.Categoria</class>
+		<class>br.livraria.dominio.Pedido</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
