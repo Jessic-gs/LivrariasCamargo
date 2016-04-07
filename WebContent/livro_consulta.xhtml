@@ -19,9 +19,7 @@
     <p:menuitem value="Carrinho de Compras" url="carrinho.xhtml" />
     <p:menuitem value="Consulta Livros" url="livro_consulta.xhtml" />
 </p:megaMenu>
-
 		<h2>Consultar Livro</h2>
-		
 		<h:form>
 			<p:dataTable value="${carrinhoMB.livros}" 
 						 var="livro"
@@ -32,7 +30,7 @@
 					<f:facet name="header">
 						Livro
 					</f:facet>
-					<center><p:graphicImage value="${livro.ilustracao[0]}" width="100" height="100"/></center>
+					<center><p:graphicImage value="${livro.ilustracao[0]}" height="150"/></center>
 				</p:column>
 				<p:column>
 					<div>${livro.nome}</div>
