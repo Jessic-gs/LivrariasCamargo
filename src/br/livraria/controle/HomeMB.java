@@ -8,9 +8,7 @@ public class HomeMB {
 	private List<String> imagens = new ArrayList<String>();
 	
 	public HomeMB(){
-		imagens.add("./img/img01.jpg");
-		imagens.add("./img/img02.jpg");
-		imagens.add("./img/img03.jpg");
+		
 	}
 	
 	public List<String> getImagens() {
