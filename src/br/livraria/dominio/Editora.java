@@ -2,7 +2,7 @@ package br.livraria.dominio;
 
 import javax.persistence.Entity;
 
-@Entity
+
 public class Editora {
 	
 	private int cnpj;
