@@ -3,34 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Carrinho de Compras</title>
-</h:head>
-<h:body>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Carrinho de Compras</title>
+	</h:head>
+	<h:body>
 	
-<p:megaMenu orientation="#{megaMenuView.orientation}" 
-			style="margin-top:0px;
-				   height: 30px;
-				   font-size: 15px;">
-	<p:menuitem value="Home" url="home.xhtml" />
-    <p:menuitem value="Carrinho de Compras" url="carrinho.xhtml" />
-    <p:menuitem value="Consulta Livros" url="livro_consulta.xhtml" />
-</p:megaMenu>
+		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 
 		<h2>Carrinho de Compras</h2>
 		
 		<h:form>			
 			<p:dataTable value="${carrinhoMB.itens}" 
-						 var="iten"
+						 var="item"
 						 border="2" 
 						 rendered="${carrinhoMB.itens.size() > 0}"
 						 style="font-size: 15px;">
 				<p:column>
 					<center>
 					<h:commandButton	value="Remover Livro" 
-										action="${carrinhoMB.remover(iten)}"
+										action="${carrinhoMB.remover(item)}"
 										style="font-size: 12px;"/>
 					</center>
 				</p:column>
@@ -38,11 +32,11 @@
 					<f:facet name="header">
 						Livro
 					</f:facet>
-					<center><p:graphicImage value="${iten.livro.ilustracao[0]}" height="150"/></center>
+					<center><p:graphicImage value="${item.livro.ilustracao[0]}" height="150"/></center>
 				</p:column>
 				<p:column>
-					<div>${iten.livro.nome}</div>
-					<div>R$ ${iten.livro.preco}</div>
+					<div>${item.livro.nome}</div>
+					<div>R$ ${item.livro.preco}</div>
 				</p:column>
 				<p:column>
 					<f:facet name="header">
@@ -50,13 +44,13 @@
 					</f:facet>
 					<center>
 						<h:commandButton	value="+" 
-											action="${carrinhoMB.editar( iten )}"
+											action="${carrinhoMB.soma( item )}"
 											style="font-size: 12px;"/>
 											
-						${iten.quantidade}
+						${item.quantidade}
 						
 						<h:commandButton	value="-" 
-											action="${carrinhoMB.remover( iten )}"
+											action="${carrinhoMB.subtrai( item )}"
 											style="font-size: 12px;"/>
 					</center>
 				</p:column>

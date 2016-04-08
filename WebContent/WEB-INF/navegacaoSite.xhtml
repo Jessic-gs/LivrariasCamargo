@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:megaMenu orientation="#{megaMenuView.orientation}"
+		style="margin-top:0px;
+				   height: 30px;
+				   font-size: 15px;">
+		<p:menuitem value="Home" url="home.xhtml">
+			<f:param name="i" value="0" />
+		</p:menuitem>
+	    <p:menuitem value="Carrinho de Compras" url="carrinho.xhtml">
+	    	<f:param name="i" value="1" />
+		</p:menuitem>
+	    <p:menuitem value="Consulta Livros" url="livro_consulta.xhtml">
+	    	<f:param name="i" value="2" />
+		</p:menuitem>
+	</p:megaMenu>
+</ui:composition>

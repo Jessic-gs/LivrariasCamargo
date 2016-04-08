@@ -82,7 +82,7 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}
 
-		return "";
+		return "Adicionado ao carrinho";
 	}
 	
 	public void atualizar(ItemLivro p){
@@ -99,6 +99,25 @@ public class CarrinhoMB {
 		return "";
 	}
 	
+	public void soma(ItemLivro item){
+		int quantidade;
+		itemLivroAtual = item;
+		quantidade = item.getQuantidade();
+		quantidade++;
+		itemLivroAtual.setQuantidade(quantidade);
+	}
+	
+	public void subtrai(ItemLivro item) {
+		int quantidade;
+		itemLivroAtual = item;
+		quantidade = item.getQuantidade();
+		quantidade--;
+		itemLivroAtual.setQuantidade(quantidade);
+		if (itemLivroAtual.getQuantidade() <= 0){
+			remover(itemLivroAtual);
+		}
+	}
+
 	public String remover(ItemLivro il){
 		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();
 		try {
