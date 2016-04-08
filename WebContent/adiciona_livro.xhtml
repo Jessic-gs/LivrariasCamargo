@@ -13,7 +13,104 @@
 	<ui:include src="WEB-INF/navegacao.xhtml" />
 	<h2>Novo Livro</h2>
 	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Titulo : " />
+			<p:inputText value="" style="font-size: 12px;
+						 		width: 300px" />
 
+			<h:outputText value="Editora : " />
+
+			<p:inputText value="" style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:outputText value="ISBN : " />
+
+			<p:inputText value="" style="font-size: 12px;
+						 		width: 300px" />
+		</h:panelGrid>
+
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<h:outputLabel for="menu_autor" value="Autor(es)" />
+			<p:selectCheckboxMenu id="menu_autor"
+				value="#{checkboxView.selectedCities}" label="Autores" filter="true"
+				filterMatchMode="startsWith" panelStyle="width:250px">
+				<f:selectItems value="#{checkboxView.cities}" />
+			</p:selectCheckboxMenu>
+			<p:commandLink value="Confirmar" update="display_autor" />
+
+		</h:panelGrid>
+
+		<p:outputPanel id="display_autor"
+			style="width:250px;padding-left:5px;margin-top:10px">
+			<p:dataList value="#{checkboxView.selectedCities}" var="autor"
+				emptyMessage="Nenhum autor selecionado">
+            #{autor}
+        </p:dataList>
+		</p:outputPanel>
+
+		<h:panelGrid columns="3" cellpadding="5">
+
+			<h:outputLabel for="menu_categoria" value="Categoria(s):" />
+			<p:selectCheckboxMenu id="menu_categoria"
+				value="#{checkboxView.selectedCities}" label="Categoria"
+				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+				<f:selectItems value="#{checkboxView.cities}" />
+			</p:selectCheckboxMenu>
+			<p:commandLink value="Confirmar" update="display_Categoria" />
+
+		</h:panelGrid>
+
+		<p:outputPanel id="display_Categoria"
+			style="width:250px;padding-left:5px;margin-top:10px">
+			<p:dataList value="#{checkboxView.selectedCities}" var="categoria"
+				emptyMessage="Nenhuma categoria selecionada">
+            #{categoria}
+        </p:dataList>
+		</p:outputPanel>
+
+		<h:panelGrid columns="2">
+			<h:outputText value="Resumo : " />
+
+			<p:inputText value="" style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:outputText value="Sumário : " />
+
+			<p:inputText value="" style="font-size: 12px;
+						 		width: 300px" />
+
+			<p:outputLabel value="Tipo de Livro: " />
+
+			<p:outputLabel for="tipo" value="Tipo do Livro: " />
+			<p:selectOneMenu id="tipo" value="#{dropdownView.country}"
+				style="width:150px">
+				<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
+				<f:selectItem itemLabel="Selecion o tipo do livro" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{dropdownView.countries}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="data_publicacao" value="Data de publicação " />
+			<p:inputMask id="data_publicacao" value="#{maskView.date}"
+				mask="99/99/9999" />
+
+			<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
+				mode="advanced" dragDropSupport="false" multiple="true"
+				update="messages" sizeLimit="100000" fileLimit="2"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+
+			<p:growl id="messages" showDetail="true" />
+
+			
+			<!--<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
+				rendered="${categoriaMB.categoriaAtual.codigo == 0}"
+				style="font-size: 12px;" />
+
+			<h:commandButton value="Atualizar" action="${categoriaMB.adiciona()}"
+				rendered="${categoriaMB.categoriaAtual.codigo != 0}"
+				style="font-size: 12px;" />-->
+		</h:panelGrid>
 	</h:form>
 </h:body>
 </html>
