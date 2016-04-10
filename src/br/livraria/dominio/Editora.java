@@ -1,7 +1,5 @@
 package br.livraria.dominio;
 
-import javax.persistence.Entity;
-
 
 public class Editora {
 	

@@ -36,13 +36,9 @@ public class EditoraDaoImpl implements EditoraDao{
 	}
 
 	@Override
-	public void excluirEditora(Editora ed) throws SQLException{
-		EntityManager em = emf.createEntityManager();
-		Editora ed1 = em.getReference(Editora.class, ed.getCnpj());
-		em.getTransaction().begin();
-		em.remove(ed1);
-		em.getTransaction().commit();
-		em.close();
+	public void editarEditora(Editora ed) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -58,11 +54,15 @@ public class EditoraDaoImpl implements EditoraDao{
 		} 
 		return editoras;
 	}
-
+	
 	@Override
-	public void editarEditora(Editora ed) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void excluirEditora(Editora edi) throws SQLException{
+		EntityManager em = emf.createEntityManager();
+		Editora edi1 = em.getReference(Editora.class, edi.getCnpj());
+		em.getTransaction().begin();
+		em.remove(edi1);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 }
