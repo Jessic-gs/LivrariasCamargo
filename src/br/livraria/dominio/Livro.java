@@ -11,22 +11,28 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Livro {
 
-	private int insb;
+	private int isbn;
 	private String nome;
 	private String sinopse;
 	private String sumario;
 	private Date dataPublicacao;
+	
+	@OneToMany(mappedBy="livro")
 	private List<Categoria> categorias;
+	
 	private List<Autor> autores;
 	private int tipoLivro;
 	private float preco;
-	private double custo;
+	private float custo;
 	private List<String> ilustracao;
 
+	@Column(name = "sumario")
 	public String getSumario() {
 		return sumario;
 	}
@@ -36,9 +42,9 @@ public class Livro {
 	}
 
 	@Id
-	@Column(name="isbn")
-	public int getInsb() {
-		return insb;
+	@Column(name = "isbn")
+	public int getIsbn() {
+		return isbn;
 	}
 
 	@Column(name = "nome")
@@ -56,8 +62,8 @@ public class Livro {
 		return preco;
 	}
 
-	public void setInsb(int insb) {
-		this.insb = insb;
+	public void setIsbn(int isbn) {
+		this.isbn = isbn;
 	}
 
 	public void setNome(String nome) {
@@ -71,9 +77,11 @@ public class Livro {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
+
 	@ElementCollection
-	@CollectionTable(name="Ilustracoes", joinColumns= @JoinColumn(name="isbn"))
-	@Column(name="ilustracao")
+	@CollectionTable(name = "Ilustracoes", joinColumns = @JoinColumn(name =
+	"isbn") )
+	@Column(name = "ilustracao")
 	public List<String> getIlustracao() {
 		return ilustracao;
 	}
@@ -92,15 +100,16 @@ public class Livro {
 	}
 
 	@Column
-	public double getCusto() {
+	public float getCusto() {
 		return custo;
 	}
 
-	public void setCusto(double custo) {
+	public void setCusto(float custo) {
 		this.custo = custo;
 	}
 
-	@OneToMany(mappedBy = "livro", targetEntity = Autor.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Autor.class)
+    @JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "id_autor") })
 	public List<Autor> getAutores() {
 		return autores;
 	}
@@ -109,8 +118,9 @@ public class Livro {
 		this.autores = autores;
 	}
 
-	@OneToMany(mappedBy = "livro", targetEntity = Categoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<Categoria> getCategorias() {
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Categoria.class)
+    @JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
+		public List<Categoria> getCategorias() {
 		return categorias;
 	}
 

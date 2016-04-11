@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.livraria.dominio.Autor;
-import br.livraria.dominio.Categoria;
 
 
 public class AutorDaoImpl implements AutorDao{
