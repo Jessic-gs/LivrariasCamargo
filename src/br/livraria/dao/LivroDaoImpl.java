@@ -6,7 +6,7 @@ import java.util.List;
 import br.livraria.dominio.Livro;
 
 public class LivroDaoImpl implements LivroDao{
-
+/*
 	@Override
 	public void adicionar(Livro l) throws SQLException {
 		// TODO Auto-generated method stub
@@ -24,5 +24,5 @@ public class LivroDaoImpl implements LivroDao{
 		// TODO Auto-generated method stub
 		
 	}
-
+*/
 }

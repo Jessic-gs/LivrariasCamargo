@@ -11,7 +11,7 @@ public interface AutorDao {
 	public void adicionarAutor(Autor aut) throws SQLException;
 	public void editarAutor(Autor aut) throws SQLException;
 	public List<Autor> listaAutores() throws SQLException;
-	
+	public void excluirAutor(Autor aut) throws SQLException;
 }
 
 

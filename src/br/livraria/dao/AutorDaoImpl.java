@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.livraria.dominio.Autor;
+import br.livraria.dominio.Categoria;
 
 
 public class AutorDaoImpl implements AutorDao{
@@ -38,13 +39,22 @@ public class AutorDaoImpl implements AutorDao{
 	@Override
 	public void editarAutor(Autor aut) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
+	}
+	@Override
+	public void excluirAutor(Autor aut) throws SQLException {
+		EntityManager em = emf.createEntityManager();
+		Autor aut1 = em.getReference(Autor.class, aut.getCodigo());
+		em.getTransaction().begin();
+		em.remove(aut1);
+		em.getTransaction().commit();
+		em.close();		
 	}
 	
 	@Override
 	public List<Autor> listaAutores() throws SQLException{
-		String sql = " select  a" +
-	     			 " from Editora a";
+		String sql = " select sa" +
+	     			 " from Autor a";
 		
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Autor> qry = em.createQuery(sql, Autor.class);
