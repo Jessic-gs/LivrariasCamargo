@@ -53,9 +53,9 @@
 
 			<h:outputLabel for="menu_categoria" value="Categoria(s):" />
 			<p:selectCheckboxMenu id="menu_categoria"
-				value="#{checkboxView.selectedCities}" label="Categoria"
+				value="#{livroMB.livroAtual.categorias}" label="Categoria"
 				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{checkboxView.cities}" />
+				<f:selectItems value="#{categoriaMB.categorias.nome}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_Categoria" />
 
@@ -63,33 +63,32 @@
 
 		<p:outputPanel id="display_Categoria"
 			style="width:250px;padding-left:5px;margin-top:10px">
-			<p:dataList value="#{checkboxView.selectedCities}" var="categoria"
+			<p:dataList value="#{livroMB.livroAtual}" var="livro"
 				emptyMessage="Nenhuma categoria selecionada">
-            #{categoria}
+            #{livro.categorias}
         </p:dataList>
 		</p:outputPanel>
 
 		<h:panelGrid columns="2">
 			<h:outputText value="Resumo : " />
 
-			<p:inputText value="" style="font-size: 12px;
-						 		width: 300px" />
+			<p:inputTextarea rows="6" cols="33" value="#{livroMB.livroAtual.sinopse}" />
 
 			<h:outputText value="Sumário : " />
 
-			<p:inputText value="" style="font-size: 12px;
-						 		width: 300px" />
+			<p:inputTextarea rows="6" cols="33" value="#{livroMB.livroAtual.sumario}"/>
 
 			<p:outputLabel value="Tipo de Livro: " />
 
 			<p:outputLabel for="tipo" value="Tipo do Livro: " />
-			<p:selectOneMenu id="tipo" value="#{dropdownView.country}"
+			<p:selectOneMenu id="tipo" value="#{livroMB.livroAtual.tipo}"
 				style="width:150px">
-				<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-				<f:selectItem itemLabel="Selecion o tipo do livro" itemValue=""
+				<f:selectItem itemLabel="Selecione" itemValue=""
 					noSelectionOption="true" />
-				<f:selectItems value="#{dropdownView.countries}" />
+				<f:selectItem itemLabel="Capa Dura" itemValue="Capa Dura" />
+				<f:selectItem itemLabel="Normal" itemValue="Normal" />
 			</p:selectOneMenu>
+
 
 			<p:outputLabel for="data_publicacao" value="Data de publicação " />
 			<p:inputMask id="data_publicacao" value="#{maskView.date}"
@@ -97,12 +96,12 @@
 
 			<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
 				mode="advanced" dragDropSupport="false" multiple="true"
-				update="messages" sizeLimit="100000" fileLimit="2"
+				update="messages" fileLimit="2"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
 			<p:growl id="messages" showDetail="true" />
 
-			
+
 			<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
 				rendered="${categoriaMB.categoriaAtual.codigo == 0}"
 				style="font-size: 12px;" />

@@ -23,11 +23,10 @@ public class Livro {
 	private String sumario;
 	private Date dataPublicacao;
 	
-	@OneToMany(mappedBy="livro")
 	private List<Categoria> categorias;
 	
 	private List<Autor> autores;
-	private int tipoLivro;
+	private int tipo;
 	private float preco;
 	private float custo;
 	private List<String> ilustracao;
@@ -129,12 +128,12 @@ public class Livro {
 	}
 
 	@Column
-	public int getTipoLivro() {
-		return tipoLivro;
+	public int getTipo() {
+		return tipo;
 	}
 
-	public void setTipoLivro(int tipoLivro) {
-		this.tipoLivro = tipoLivro;
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 }

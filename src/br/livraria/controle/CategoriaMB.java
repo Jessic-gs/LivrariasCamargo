@@ -1,6 +1,7 @@
 package br.livraria.controle;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -20,6 +21,7 @@ public class CategoriaMB {
 	public CategoriaMB(){
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		categoriaAtual = new Categoria();
+		categorias = new ArrayList<Categoria>();
 		try {
 			categorias = catDao.listaCategorias();
 		} catch (SQLException e) {
