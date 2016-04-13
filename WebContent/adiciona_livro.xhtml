@@ -15,7 +15,7 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="Titulo : " />
-			<p:inputText value="livroMB.livroAtual.titulo" style="font-size: 12px;
+			<p:inputText value="${livroMB.livroAtual.nome}" style="font-size: 12px;
 						 		width: 300px" />
 
 			<p:outputLabel for="editora" value="Editora: " />
@@ -26,7 +26,7 @@
 
 			<h:outputText value="ISBN : " />
 
-			<p:inputText value="livroMB.livroAtual.isbn" style="font-size: 12px;
+			<p:inputText value="${livroMB.livroAtual.isbn}" style="font-size: 12px;
 						 		width: 300px" />
 		</h:panelGrid>
 
@@ -79,8 +79,6 @@
 
 			<p:inputTextarea rows="6" cols="33" value="#{livroMB.livroAtual.sumario}"/>
 
-			<p:outputLabel value="Tipo de Livro: " />
-
 			<p:outputLabel for="tipo" value="Tipo do Livro: " />
 			<p:selectOneMenu id="tipo" value="#{livroMB.livroAtual.tipo}"
 				style="width:150px">
@@ -91,7 +89,7 @@
 			</p:selectOneMenu>
 
 
-			<p:outputLabel for="data_publicacao" value="Data de publicação " />
+			<p:outputLabel for="data_publicacao" value="Data de publicação: " />
 			<p:inputMask id="data_publicacao" value="#{livroMB.livroAtual.dataPublicacao}"
 				mask="99/99/9999" />
 
