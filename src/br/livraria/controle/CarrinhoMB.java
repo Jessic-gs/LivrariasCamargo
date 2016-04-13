@@ -17,31 +17,28 @@ import br.livraria.dominio.Pedido;
 public class CarrinhoMB {
 	
 	private ItemLivro itemLivroAtual;
+	private Pedido pedido;
 	private List<ItemLivro> itens;
-	private List<Livro> livros;
-	private List<String> imagens;
-
+	private List<Livro> livros; // Sera Apagado
 	
 	public CarrinhoMB(){
 		//ItemLivroDao ilDao = new ItemLivroDaoImpl();
 		itemLivroAtual = new ItemLivro();
 		itens = new ArrayList<ItemLivro>();
+		pedido = new Pedido();
 		/*try {
 			itens = ilDao.listaItemLivro();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}*/
-		livros = carregalista();	
-		setImagens(carregaImagens());
+		livros = carregalista();
+		pedido.setValorTotal(0.0f);
 	}
 	
-	public List<String> carregaImagens() {
-		List<String> lista = new ArrayList<String>();
-		lista.add("/img/livro-jogosvorazes-4.jpg");
-		lista.add("/img/guerra-civil-quadrinheiros.jpg");
-		return lista;
-	}
-
+	//**************************************************************
+	// Sera apagado
+	// Só o fiz aqui para testar o carrinho
+	// Esse metodo não é aqui é no LivroMB e também não é assim
 	public List<Livro> carregalista(){
 		List<Livro> lista = new ArrayList<Livro>();
 		
@@ -66,6 +63,7 @@ public class CarrinhoMB {
 		l2 = new Livro();
 		return lista;
 	}
+	//**************************************************************
 	
 	public String adiciona( Livro livro ){
 		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();
@@ -76,11 +74,16 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}*/
 		
-		Pedido pedido = new Pedido();
+		float valorTotal = pedido.getValorTotal()+livro.getPreco();
 		pedido.setNumero(1);
+		pedido.setValorTotal(valorTotal);
 		
+		itemLivroAtual = new ItemLivro();
 		itemLivroAtual.setLivro(livro);
 		itemLivroAtual.setPedido(pedido);
+		if (itemLivroAtual.getQuantidade() != 1){
+			itemLivroAtual.setQuantidade(1);
+		}
 		
 		itens.add(itemLivroAtual);
 		itemLivroAtual = new ItemLivro();
@@ -115,6 +118,8 @@ public class CarrinhoMB {
 		quantidade = item.getQuantidade();
 		quantidade++;
 		itemLivroAtual.setQuantidade(quantidade);
+		float valorTotal = pedido.getValorTotal()+itemLivroAtual.getLivro().getPreco();
+		pedido.setValorTotal(valorTotal);
 	}
 	
 	public void subtrai(ItemLivro item) {
@@ -126,6 +131,8 @@ public class CarrinhoMB {
 		if (itemLivroAtual.getQuantidade() <= 0){
 			remover(itemLivroAtual);
 		}
+		float valorTotal = pedido.getValorTotal()-itemLivroAtual.getLivro().getPreco();
+		pedido.setValorTotal(valorTotal);
 	}
 
 	public String remover(ItemLivro il){
@@ -137,6 +144,8 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}*/
 		itens.remove(il);
+		float valorTotal = pedido.getValorTotal()-(itemLivroAtual.getLivro().getPreco()*il.getQuantidade());
+		pedido.setValorTotal(valorTotal);
 		return "Remover";
 	}
 
@@ -155,7 +164,9 @@ public class CarrinhoMB {
 	public void setItens(List<ItemLivro> itens) {
 		this.itens = itens;
 	}
-
+	
+	//**************************************************************
+	// Sera apagado
 	public List<Livro> getLivros() {
 		return livros;
 	}
@@ -163,15 +174,14 @@ public class CarrinhoMB {
 	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
 	}
+	//**************************************************************
 
-	public List<String> getImagens() {
-		return imagens;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setImagens(List<String> imagens) {
-		this.imagens = imagens;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
-	
-	
 	
 }
