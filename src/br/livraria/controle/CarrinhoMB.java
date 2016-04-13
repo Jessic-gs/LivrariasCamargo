@@ -19,6 +19,8 @@ public class CarrinhoMB {
 	private ItemLivro itemLivroAtual;
 	private List<ItemLivro> itens;
 	private List<Livro> livros;
+	private List<String> imagens;
+
 	
 	public CarrinhoMB(){
 		//ItemLivroDao ilDao = new ItemLivroDaoImpl();
@@ -29,9 +31,17 @@ public class CarrinhoMB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}*/
-		livros = carregalista();				
+		livros = carregalista();	
+		setImagens(carregaImagens());
 	}
 	
+	public List<String> carregaImagens() {
+		List<String> lista = new ArrayList<String>();
+		lista.add("/img/livro-jogosvorazes-4.jpg");
+		lista.add("/img/guerra-civil-quadrinheiros.jpg");
+		return lista;
+	}
+
 	public List<Livro> carregalista(){
 		List<Livro> lista = new ArrayList<Livro>();
 		
@@ -152,6 +162,14 @@ public class CarrinhoMB {
 
 	public void setLivros(List<Livro> livros) {
 		this.livros = livros;
+	}
+
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
 	}
 	
 	
