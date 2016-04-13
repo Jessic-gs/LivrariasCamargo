@@ -15,27 +15,28 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="Titulo : " />
-			<p:inputText value="" style="font-size: 12px;
+			<p:inputText value="livroMB.livroAtual.titulo" style="font-size: 12px;
 						 		width: 300px" />
 
-			<h:outputText value="Editora : " />
-
-			<p:inputText value="" style="font-size: 12px;
-						 		width: 300px" />
+			<p:outputLabel for="editora" value="Editora: " />
+			<p:selectOneMenu id="editora" value="#{livroMB.livroAtual.editora}"
+				style="width:150px">
+				<f:selectItems value="#{EditoraMB.editoras}" />
+			</p:selectOneMenu>
 
 			<h:outputText value="ISBN : " />
 
-			<p:inputText value="" style="font-size: 12px;
+			<p:inputText value="livroMB.livroAtual.isbn" style="font-size: 12px;
 						 		width: 300px" />
 		</h:panelGrid>
 
 		<h:panelGrid columns="3" cellpadding="5">
 
-			<h:outputLabel for="menu_autor" value="Autor(es)" />
+			<h:outputLabel for="menu_autor" value="Autor(es):" />
 			<p:selectCheckboxMenu id="menu_autor"
-				value="#{checkboxView.selectedCities}" label="Autores" filter="true"
+				value="#{livroMB.livroAtual.autores}" label="Autor" filter="true"
 				filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{checkboxView.cities}" />
+				<f:selectItems value="#{livroMB.livros}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_autor" />
 
@@ -55,7 +56,7 @@
 			<p:selectCheckboxMenu id="menu_categoria"
 				value="#{livroMB.livroAtual.categorias}" label="Categoria"
 				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{categoriaMB.categorias.nome}" />
+				<f:selectItems value="#{categoriaMB.categorias}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_Categoria" />
 
@@ -63,9 +64,9 @@
 
 		<p:outputPanel id="display_Categoria"
 			style="width:250px;padding-left:5px;margin-top:10px">
-			<p:dataList value="#{livroMB.livroAtual}" var="livro"
+			<p:dataList value="#{livroMB.livroAtual.categorias}" var="categoria"
 				emptyMessage="Nenhuma categoria selecionada">
-            #{livro.categorias}
+            #{categoria}
         </p:dataList>
 		</p:outputPanel>
 
@@ -91,7 +92,7 @@
 
 
 			<p:outputLabel for="data_publicacao" value="Data de publicação " />
-			<p:inputMask id="data_publicacao" value="#{maskView.date}"
+			<p:inputMask id="data_publicacao" value="#{livroMB.livroAtual.dataPublicacao}"
 				mask="99/99/9999" />
 
 			<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"

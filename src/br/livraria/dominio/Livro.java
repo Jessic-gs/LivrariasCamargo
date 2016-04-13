@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,6 +27,8 @@ public class Livro {
 	private List<Categoria> categorias;
 	
 	private List<Autor> autores;
+	private Editora editora;
+
 	private int tipo;
 	private float preco;
 	private float custo;
@@ -134,6 +137,16 @@ public class Livro {
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	@ManyToOne(targetEntity=Editora.class)
+	@JoinColumn(name="id_editora")
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
 	}
 
 }

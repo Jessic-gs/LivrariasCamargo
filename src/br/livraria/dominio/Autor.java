@@ -75,4 +75,8 @@ public class Autor {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	@Override
+	public String toString() {
+		return getNome();
+	}
 }
