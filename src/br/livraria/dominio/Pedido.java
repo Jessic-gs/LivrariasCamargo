@@ -11,7 +11,7 @@ public class Pedido {
 	private int numero;
 	private String status;
 	private String data;
-	private float valor;
+	private float valorTotal;
 	
 	@Id
 	@GeneratedValue
@@ -39,11 +39,11 @@ public class Pedido {
 	}
 	
 	@Column
-	public float getValor() {
-		return valor;
+	public float getValorTotal() {
+		return valorTotal;
 	}
-	public void setValor(float valor) {
-		this.valor = valor;
+	public void setValorTotal(float valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	
 }

@@ -23,7 +23,7 @@
 						 style="font-size: 15px;">
 				<p:column>
 					<center>
-					<h:commandButton	value="Remover Livro" 
+					<h:commandButton	value="X" 
 										action="${carrinhoMB.remover(item)}"
 										style="font-size: 12px;"/>
 					</center>
@@ -55,6 +55,35 @@
 					</center>
 				</p:column>
 			</p:dataTable>
+			<div style="padding-top: 1em;">
+				<div style="width: 500px;  float: left">
+						<h:commandButton	value="Limpar Carrinho de Compras" 
+											action="${carrinhoMB.limpaCarrinho()}"
+											style="font-size: 12px;"/>
+				</div>
+				<div align="right" style="width: 350px; float: right">
+					<div>
+						CEP:
+						<p:inputText style="font-size: 12px;
+							 	 	 width: 150px"/>
+						<h:commandButton	value="Calcular Frete" 
+											action="${carrinhoMB.limpaCarrinho()}"
+											style="font-size: 12px;"/>
+					</div>
+					<div style="padding-top: 10px;">
+						Frete: R$ 0,00
+					</div>
+					<div style="padding-top: 10px;"
+						 rendered="${carrinhoMB.pedido.valorTotal != 0}">
+						Valor Total: R$ ${carrinhoMB.pedido.valorTotal}
+					</div>
+					<div style="padding-top: 15px;">
+						<h:commandButton	value="Concluir Pedido" 
+											action="${carrinhoMB.limpaCarrinho()}"
+											style="font-size: 12px;"/>
+					</div>
+				</div>
+			</div>
 		</h:form>
 	</h:body>
 </html>
