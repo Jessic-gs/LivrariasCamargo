@@ -84,7 +84,7 @@ public class CarrinhoMB {
 		if (itemLivroAtual.getQuantidade() != 1){
 			itemLivroAtual.setQuantidade(1);
 		}
-		
+				
 		itens.add(itemLivroAtual);
 		itemLivroAtual = new ItemLivro();
 		
@@ -95,20 +95,6 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}
 
-		return "Adicionado ao carrinho";
-	}
-	
-	public void atualizar(ItemLivro p){
-		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();
-		try {
-			ilDao.inserirItemLivro(p);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}*/
-	}
-	
-	public String editar(ItemLivro il) {
-		itemLivroAtual = il;
 		return "";
 	}
 	
@@ -122,16 +108,15 @@ public class CarrinhoMB {
 		pedido.setValorTotal(valorTotal);
 	}
 	
-	public void subtrai(ItemLivro item) {
+	public void subtrai(ItemLivro li) {
 		int quantidade;
-		itemLivroAtual = item;
-		quantidade = item.getQuantidade();
+		quantidade = li.getQuantidade();
 		quantidade--;
-		itemLivroAtual.setQuantidade(quantidade);
-		if (itemLivroAtual.getQuantidade() <= 0){
-			remover(itemLivroAtual);
+		li.setQuantidade(quantidade);
+		if (li.getQuantidade() <= 0){
+			remover(li);
 		}
-		float valorTotal = pedido.getValorTotal()-itemLivroAtual.getLivro().getPreco();
+		float valorTotal = pedido.getValorTotal()-li.getLivro().getPreco();
 		pedido.setValorTotal(valorTotal);
 	}
 
@@ -144,9 +129,26 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}*/
 		itens.remove(il);
-		float valorTotal = pedido.getValorTotal()-(itemLivroAtual.getLivro().getPreco()*il.getQuantidade());
+		float valorTotal = pedido.getValorTotal()-(il.getLivro().getPreco()*il.getQuantidade());
 		pedido.setValorTotal(valorTotal);
-		return "Remover";
+		return "";
+	}
+	
+	public String limpaCarrinho(){
+		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();
+		try {
+			ilDao.excluirItemLivro(p);
+			itens = ilDao.listaItemLivro();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}*/
+		itens = new ArrayList<ItemLivro>();
+		pedido.setValorTotal(0.0f);
+		return "";
+	}
+	
+	public String concluirPedido(List<ItemLivro> listaIL){
+		return "";
 	}
 
 	public ItemLivro getItemLivroAtual() {
