@@ -11,7 +11,6 @@ import javax.persistence.Id;
 public class Autor {
 	private int codigo;
 	private String nome;
-	private String nascimento;
 	private String biografia;
 	private Date dataNascimento;
 	private Date dataFalecimento;
@@ -25,13 +24,7 @@ public class Autor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	@Column
-	public String getNascimento() {
-		return nascimento;
-	}
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
-	}
+
 	@Column
 	public String getBiografia() {
 		return biografia;

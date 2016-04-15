@@ -36,7 +36,7 @@
 			<p:selectCheckboxMenu id="menu_autor"
 				value="#{livroMB.livroAtual.autores}" label="Autor" filter="true"
 				filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{livroMB.livros}" />
+				<f:selectItems value="#{autoresMB.autores}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_autor" />
 
@@ -44,7 +44,7 @@
 
 		<p:outputPanel id="display_autor"
 			style="width:250px;padding-left:5px;margin-top:10px">
-			<p:dataList value="#{checkboxView.selectedCities}" var="autor"
+			<p:dataList value="#{livroMB.livroAtual.autores}" var="autor"
 				emptyMessage="Nenhum autor selecionado">
             #{autor}
         </p:dataList>
@@ -90,8 +90,8 @@
 
 
 			<p:outputLabel for="data_publicacao" value="Data de publicação: " />
-			<p:inputMask id="data_publicacao" value="#{livroMB.livroAtual.dataPublicacao}"
-				mask="99/99/9999" />
+			<p:calendar id="data_publicacao" value="#{livroMB.livroAtual.dataPublicacao}"
+					navigator="true" locale="pt" />
 
 			<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
 				mode="advanced" dragDropSupport="false" multiple="true"
@@ -101,13 +101,13 @@
 			<p:growl id="messages" showDetail="true" />
 
 
-			<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
-				rendered="${categoriaMB.categoriaAtual.codigo == 0}"
+			<h:commandButton value="Adicionar" action="${livroMB.adiciona()}"
+
 				style="font-size: 12px;" />
 
-			<h:commandButton value="Atualizar" action="${categoriaMB.adiciona()}"
-				rendered="${categoriaMB.categoriaAtual.codigo != 0}"
-				style="font-size: 12px;" />
+			<!-- <h:commandButton value="Atualizar" action="${livroMB.adiciona()}"
+				rendered="${livroMB.livroAtual.isbn != 0}"
+				style="font-size: 12px;" />-->
 		</h:panelGrid>
 	</h:form>
 </h:body>

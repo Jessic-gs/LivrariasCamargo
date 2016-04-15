@@ -1,11 +1,13 @@
 package br.livraria.controle;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import br.livraria.dao.LivroDao;
 import br.livraria.dao.LivroDaoImpl;
+import br.livraria.dominio.Autor;
 import br.livraria.dominio.Livro;
 
 @ManagedBean
@@ -24,12 +26,11 @@ public class LivroMB {
 			e.printStackTrace();
 		}
 	}
-
 	public String adiciona(){
 		LivroDao livroDao = new LivroDaoImpl();
 		try {
 			livroDao.adicionar( livroAtual );
-			setLivros(livroDao.pesquisarPorTodos());
+			livros = (livroDao.pesquisarPorTodos());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
