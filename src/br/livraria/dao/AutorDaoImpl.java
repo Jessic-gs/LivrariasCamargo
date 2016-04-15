@@ -52,7 +52,7 @@ public class AutorDaoImpl implements AutorDao{
 	
 	@Override
 	public List<Autor> listaAutores() throws SQLException{
-		String sql = " select sa" +
+		String sql = " select a" +
 	     			 " from Autor a";
 		
 		EntityManager em = emf.createEntityManager();

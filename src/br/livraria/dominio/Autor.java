@@ -17,10 +17,11 @@ public class Autor {
 	private String localNascimento;
 	private String localFalecimento;
 	
+	@Column
 	public String getNome() {
 		return nome;
 	}
-	@Column
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

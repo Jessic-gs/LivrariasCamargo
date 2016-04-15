@@ -26,6 +26,7 @@ public class LivroMB {
 			e.printStackTrace();
 		}
 	}
+
 	public String adiciona(){
 		LivroDao livroDao = new LivroDaoImpl();
 		try {

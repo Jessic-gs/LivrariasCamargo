@@ -3,17 +3,15 @@ package br.livraria.dominio;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Livro {
@@ -23,12 +21,9 @@ public class Livro {
 	private String sinopse;
 	private String sumario;
 	private Date dataPublicacao;
-	
 	private List<Categoria> categorias;
-	
 	private List<Autor> autores;
 	private Editora editora;
-
 	private int tipo;
 	private float preco;
 	private float custo;
@@ -110,8 +105,8 @@ public class Livro {
 		this.custo = custo;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Autor.class)
-    @JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "id_autor") })
+	@ManyToMany
+    @JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
 	public List<Autor> getAutores() {
 		return autores;
 	}
@@ -120,9 +115,9 @@ public class Livro {
 		this.autores = autores;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Categoria.class)
-    @JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "id_categoria") })
-		public List<Categoria> getCategorias() {
+	@ManyToMany
+    @JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
+	public List<Categoria> getCategorias() {
 		return categorias;
 	}
 
