@@ -21,12 +21,12 @@
 
 			<h:commandButton value="Adicionar" 
 							 action="${editoraMB.adiciona()}" 
-							 rendered="${editoraMB.editoraAtual.codigo == 0}"
+							 rendered="${editoraMB.editoraAtual.cnpj == 0}"
 							 style="font-size: 12px;"/>
 							 							 
 			<h:commandButton value="Atualizar" 
 							 action="${editoraMB.adiciona()}" 
-							 rendered="${editoraMB.editoraAtual.codigo != 0}"
+							 rendered="${editoraMB.editoraAtual.cnpj != 0}"
 							 style="font-size: 12px;"/>
 
 		</h:panelGrid>

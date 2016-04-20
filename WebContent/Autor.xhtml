@@ -21,12 +21,12 @@
 
 			<h:commandButton value="Adicionar" 
 							 action="${autorMB.adiciona()}" 
-							 rendered="${autorMB.autorAtual.codigo == 0}"
+							 rendered="${autorMB.autorAtual.id == 0}"
 							 style="font-size: 12px;"/>
 							 							 
 			<h:commandButton value="Atualizar" 
 							 action="${autorMB.adiciona()}" 
-							 rendered="${autorMB.autorAtual.codigo != 0}"
+							 rendered="${autorMB.autorAtual.id != 0}"
 							 style="font-size: 12px;"/>
 
 		</h:panelGrid>
