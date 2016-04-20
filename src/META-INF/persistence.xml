@@ -11,8 +11,6 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		<class>br.livraria.dominio.Livro</class>
 		<class>br.livraria.dominio.Autor</class>
 		<class>br.livraria.dominio.Editora</class>
-		<class>br.livraria.dominio.LivroCategoria</class>
-		<class>br.livraria.dominio.LivroAutor</class>
 		
 		
 		<properties>

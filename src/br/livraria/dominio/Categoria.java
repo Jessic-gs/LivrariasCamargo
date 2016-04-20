@@ -1,41 +1,37 @@
 package br.livraria.dominio;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 @Entity
-public class Categoria {
-	
-	private int codigo;
-	private String nome;
-	private List<LivroCategoria> livroCategorias = new ArrayList<LivroCategoria>();;
+public class Categoria implements EntityGenerica{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3196691560562032386L;
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
+	private long id;
 	@Column
-	public int getCodigo() {
-		return codigo;
-	}
-	@Column
+	private String nome;
+	@ManyToMany(mappedBy = "categorias")
+	private List<Livro> livros;
 	public String getNome() {
 		return nome;
 	}
-	@OneToMany(mappedBy = "categoria", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	/*@OneToMany(mappedBy = "categoria", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public List<LivroCategoria> getLivroCategorias() {
 		return livroCategorias;
 	}
 	public void setLivroCategorias(List<LivroCategoria> livroCategorias) {
 		this.livroCategorias = livroCategorias;
-	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+	}*/
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -43,5 +39,18 @@ public class Categoria {
 	public String toString() {
 		return getNome();
 	}
-
+	public List<Livro> getLivros() {
+		return livros;
+	}
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
+	@Override
+	public long getId() {
+		return id;
+	}
+	@Override
+	public void setId(long id) {
+		this.id = id;		
+	}
 }

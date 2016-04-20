@@ -1,43 +1,72 @@
 package br.livraria.dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 @Entity
-public class Livro {
-
-	private int isbn;
-	private String nome;
-	private String sinopse;
-	private String sumario;
-	private Date dataPublicacao;
-	private List<LivroCategoria> livroCategorias = new ArrayList<LivroCategoria>();
-	private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
-	private Editora editora;
-	private int tipo;
-	private float preco;
-	private float custo;
-	private List<String> ilustracao;
-
+public class Livro implements EntityGenerica {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3944201228532106574L;
 	@Id
 	@Column(name = "isbn")
-	public int getIsbn() {
-		return isbn;
-	}
+	private long id;
+	@Column(name = "nome")
+
+	private String nome;
+	@Column(name = "sinopse")
+
+	private String sinopse;
 	@Column(name = "sumario")
+
+	private String sumario;
+	@Column
+
+	private Date dataPublicacao;
+	// private List<LivroCategoria> livroCategorias = new
+	// ArrayList<LivroCategoria>();
+	// private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
+	@ManyToMany
+	@JoinTable(name = "livro_categoria", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "categoria_codigo") )
+	private List<Categoria> categorias = new ArrayList<Categoria>();;
+	@ManyToMany
+	@JoinTable(name = "livro_autor", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "autor_codigo") )
+	private List<Autor> autores = new ArrayList<Autor>();
+
+	@ManyToOne(targetEntity = Editora.class)
+	@JoinColumn(name = "id_editora")
+	private Editora editora;
+	@Column
+
+	private int tipo;
+	@Column(name = "preco")
+
+	private float preco;
+	@Column
+
+	private float custo;
+
+	@ElementCollection
+	@CollectionTable(name = "Ilustracoes", joinColumns = @JoinColumn(name = "isbn") )
+	@Column(name = "ilustracao")
+	private List<String> ilustracao;
+
+
 	public String getSumario() {
 		return sumario;
 	}
@@ -46,23 +75,16 @@ public class Livro {
 		this.sumario = sumario;
 	}
 
-	@Column(name = "nome")
 	public String getNome() {
 		return nome;
 	}
 
-	@Column(name = "sinopse")
 	public String getSinopse() {
 		return sinopse;
 	}
 
-	@Column(name = "preco")
 	public float getPreco() {
 		return preco;
-	}
-
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
 	}
 
 	public void setNome(String nome) {
@@ -77,10 +99,6 @@ public class Livro {
 		this.preco = preco;
 	}
 
-	@ElementCollection
-	@CollectionTable(name = "Ilustracoes", joinColumns = @JoinColumn(name =
-	"isbn") )
-	@Column(name = "ilustracao")
 	public List<String> getIlustracao() {
 		return ilustracao;
 	}
@@ -89,7 +107,6 @@ public class Livro {
 		this.ilustracao = ilustracao;
 	}
 
-	@Column
 	public Date getDataPublicacao() {
 		return dataPublicacao;
 	}
@@ -98,26 +115,25 @@ public class Livro {
 		this.dataPublicacao = dataPublicacao;
 	}
 
-	@Column
 	public float getCusto() {
 		return custo;
 	}
 
 	public void setCusto(float custo) {
 		this.custo = custo;
-	}
-	//@ManyToMany
-    //@JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
-	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@OneToMany(mappedBy = "livro", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<LivroCategoria> getLivroCategorias() {
-		return livroCategorias;
-	}
-	public void setLivroCategorias(List<LivroCategoria> livroCategorias) {
-		this.livroCategorias = livroCategorias;
-	}
+	}/*
+		 * //@ManyToMany //@JoinTable(name = "livro_categoria", joinColumns =
+		 * { @JoinColumn(name = "isbn") }, inverseJoinColumns =
+		 * { @JoinColumn(name = "codigo") }) //@OneToMany(cascade =
+		 * CascadeType.ALL, orphanRemoval = true)
+		 * 
+		 * @OneToMany(mappedBy = "livro", targetEntity = LivroCategoria.class,
+		 * fetch = FetchType.LAZY, cascade = CascadeType.ALL) public
+		 * List<LivroCategoria> getLivroCategorias() { return livroCategorias; }
+		 * public void setLivroCategorias(List<LivroCategoria> livroCategorias)
+		 * { this.livroCategorias = livroCategorias; }
+		 */
 
-	@Column
 	public int getTipo() {
 		return tipo;
 	}
@@ -126,8 +142,6 @@ public class Livro {
 		this.tipo = tipo;
 	}
 
-	@ManyToOne(targetEntity=Editora.class)
-	@JoinColumn(name="id_editora")
 	public Editora getEditora() {
 		return editora;
 	}
@@ -135,12 +149,37 @@ public class Livro {
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-	
-	@OneToMany(mappedBy = "livro", targetEntity = LivroAutores.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<LivroAutores> getLivroAutores() {
-		return livroAutores;
+	/*
+	 * @OneToMany(mappedBy = "livro", targetEntity = LivroAutores.class, fetch =
+	 * FetchType.LAZY, cascade = CascadeType.ALL) public List<LivroAutores>
+	 * getLivroAutores() { return livroAutores; } public void
+	 * setLivroAutores(List<LivroAutores> livroAutores) { this.livroAutores =
+	 * livroAutores; }
+	 */
+
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
-	public void setLivroAutores(List<LivroAutores> livroAutores) {
-		this.livroAutores = livroAutores;
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
+
+	@Override
+	public long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(long id) {
+		this.id = id;		
 	}
 }

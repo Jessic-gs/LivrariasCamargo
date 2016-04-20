@@ -21,12 +21,12 @@
 
 			<h:commandButton value="Adicionar" 
 							 action="${categoriaMB.adiciona()}" 
-							 rendered="${categoriaMB.categoriaAtual.codigo == 0}"
+							 rendered="${categoriaMB.categoriaAtual.id == 0}"
 							 style="font-size: 12px;"/>
 							 							 
 			<h:commandButton value="Atualizar" 
 							 action="${categoriaMB.adiciona()}" 
-							 rendered="${categoriaMB.categoriaAtual.codigo != 0}"
+							 rendered="${categoriaMB.categoriaAtual.id != 0}"
 							 style="font-size: 12px;"/>
 
 		</h:panelGrid>

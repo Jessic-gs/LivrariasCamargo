@@ -38,7 +38,7 @@ public class CategoriaDaoImpl implements CategoriaDao{
 	@Override
 	public void excluirCategoria(Categoria cat) throws SQLException{
 		EntityManager em = emf.createEntityManager();
-		Categoria cat1 = em.getReference(Categoria.class, cat.getCodigo());
+		Categoria cat1 = em.getReference(Categoria.class, cat.getId());
 		em.getTransaction().begin();
 		em.remove(cat1);
 		em.getTransaction().commit();

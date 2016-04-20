@@ -41,7 +41,7 @@ public class LivroDaoImpl implements LivroDao {
 	@Override
 	public void remover(Livro l) throws SQLException {
 		EntityManager em = emf.createEntityManager();
-		Livro l1 = em.getReference(Livro.class, l.getIsbn());
+		Livro l1 = em.getReference(Livro.class, l.getId());
 		em.getTransaction().begin();
 		em.remove(l1);
 		em.getTransaction().commit();

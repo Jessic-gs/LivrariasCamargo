@@ -43,7 +43,7 @@ public class AutorDaoImpl implements AutorDao{
 	@Override
 	public void excluirAutor(Autor aut) throws SQLException {
 		EntityManager em = emf.createEntityManager();
-		Autor aut1 = em.getReference(Autor.class, aut.getCodigo());
+		Autor aut1 = em.getReference(Autor.class, aut.getId());
 		em.getTransaction().begin();
 		em.remove(aut1);
 		em.getTransaction().commit();
