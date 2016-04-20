@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import br.livraria.dao.LivroDao;
 import br.livraria.dao.LivroDaoImpl;
-import br.livraria.dominio.Autor;
 import br.livraria.dominio.Livro;
 
 @ManagedBean
@@ -20,6 +19,7 @@ public class LivroMB {
 	public LivroMB(){
 		LivroDao livroDao = new LivroDaoImpl();
 		livroAtual = new Livro();
+		livros = new ArrayList<Livro>();
 		try {
 			livros = livroDao.pesquisarPorTodos();
 		} catch (SQLException e) {
@@ -29,12 +29,17 @@ public class LivroMB {
 
 	public String adiciona(){
 		LivroDao livroDao = new LivroDaoImpl();
+		//System.out.println("Premeiro  "+livroAtual.getCategorias().get(0).getCodigo());
+		//System.out.println("Segundo " +livroAtual.getCategorias().get(1).getCodigo());
+
+
 		try {
 			livroDao.adicionar( livroAtual );
 			livros = (livroDao.pesquisarPorTodos());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		livroAtual = new Livro();
 		return "";
 	}

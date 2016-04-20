@@ -1,17 +1,19 @@
 package br.livraria.dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Livro {
@@ -21,14 +23,20 @@ public class Livro {
 	private String sinopse;
 	private String sumario;
 	private Date dataPublicacao;
-	private List<Categoria> categorias;
-	private List<Autor> autores;
+	private List<LivroCategoria> livroCategorias = new ArrayList<LivroCategoria>();
+	private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
 	private Editora editora;
 	private int tipo;
 	private float preco;
 	private float custo;
 	private List<String> ilustracao;
 
+	
+	@Id
+	@Column(name = "isbn")
+	public int getIsbn() {
+		return isbn;
+	}
 	@Column(name = "sumario")
 	public String getSumario() {
 		return sumario;
@@ -36,12 +44,6 @@ public class Livro {
 
 	public void setSumario(String sumario) {
 		this.sumario = sumario;
-	}
-
-	@Id
-	@Column(name = "isbn")
-	public int getIsbn() {
-		return isbn;
 	}
 
 	@Column(name = "nome")
@@ -104,25 +106,15 @@ public class Livro {
 	public void setCusto(float custo) {
 		this.custo = custo;
 	}
-
-	@ManyToMany
-    @JoinTable(name = "livro_autor", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
-	public List<Autor> getAutores() {
-		return autores;
+	//@ManyToMany
+    //@JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
+	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "livro", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<LivroCategoria> getLivroCategorias() {
+		return livroCategorias;
 	}
-
-	public void setAutores(List<Autor> autores) {
-		this.autores = autores;
-	}
-
-	@ManyToMany
-    @JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "isbn") }, inverseJoinColumns = { @JoinColumn(name = "codigo") })
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
+	public void setLivroCategorias(List<LivroCategoria> livroCategorias) {
+		this.livroCategorias = livroCategorias;
 	}
 
 	@Column
@@ -143,5 +135,12 @@ public class Livro {
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-
+	
+	@OneToMany(mappedBy = "livro", targetEntity = LivroAutores.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<LivroAutores> getLivroAutores() {
+		return livroAutores;
+	}
+	public void setLivroAutores(List<LivroAutores> livroAutores) {
+		this.livroAutores = livroAutores;
+	}
 }

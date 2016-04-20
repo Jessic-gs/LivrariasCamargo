@@ -1,32 +1,38 @@
 package br.livraria.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
+import javax.persistence.OneToMany;
 @Entity
 public class Categoria {
 	
 	private int codigo;
 	private String nome;
-	private List<Livro> livros;
-		
+	private List<LivroCategoria> livroCategorias = new ArrayList<LivroCategoria>();;
 	@Id
 	@GeneratedValue
+	@Column
 	public int getCodigo() {
 		return codigo;
 	}
+	@Column
 	public String getNome() {
 		return nome;
 	}
-	
-	@Column
+	@OneToMany(mappedBy = "categoria", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<LivroCategoria> getLivroCategorias() {
+		return livroCategorias;
+	}
+	public void setLivroCategorias(List<LivroCategoria> livroCategorias) {
+		this.livroCategorias = livroCategorias;
+	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -37,14 +43,5 @@ public class Categoria {
 	public String toString() {
 		return getNome();
 	}
-	
-	@ManyToMany
-    @JoinTable(name = "livro_categoria", joinColumns = { @JoinColumn(name = "codigo") }, inverseJoinColumns = { @JoinColumn(name = "isbn") })
-	public List<Livro> getLivros() {
-		return livros;
-	}
-	
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
-	}
+
 }

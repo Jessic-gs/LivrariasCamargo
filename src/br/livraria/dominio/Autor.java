@@ -1,11 +1,16 @@
 package br.livraria.dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Autor {
@@ -16,7 +21,8 @@ public class Autor {
 	private Date dataFalecimento;
 	private String localNascimento;
 	private String localFalecimento;
-	
+	private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
+
 	@Column
 	public String getNome() {
 		return nome;
@@ -72,5 +78,14 @@ public class Autor {
 	@Override
 	public String toString() {
 		return getNome();
+	}
+
+	@OneToMany(mappedBy = "autor", targetEntity = LivroAutores.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	public List<LivroAutores> getLivroAutores() {
+		return livroAutores;
+	}
+
+	public void setLivroAutores(List<LivroAutores> livroAutores) {
+		this.livroAutores = livroAutores;
 	}
 }
