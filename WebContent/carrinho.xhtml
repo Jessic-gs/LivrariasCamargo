@@ -12,6 +12,7 @@
 	<h:body>
 	
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
+		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
 
 		<h2>Carrinho de Compras</h2>
 		
@@ -43,14 +44,14 @@
 						Quantidade
 					</f:facet>
 					<center>
-						<h:commandButton	value="+" 
-											action="${carrinhoMB.soma( item )}"
-											style="font-size: 12px;"/>
-											
-						${item.quantidade}
-						
 						<h:commandButton	value="-" 
 											action="${carrinhoMB.subtrai( item )}"
+											style="font-size: 12px;"/>
+						
+						${item.quantidade}
+						
+						<h:commandButton	value="+" 
+											action="${carrinhoMB.soma( item )}"
 											style="font-size: 12px;"/>
 					</center>
 				</p:column>
