@@ -2,17 +2,37 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 
-	<p:megaMenu orientation="#{megaMenuView.orientation}"
-		style="margin-top:0px;
-				   height: 30px;
-				   font-size: 15px;">
-		<p:menuitem value="Livro" url="adiciona_livro.xhtml">
-			<f:param name="i" value="0" />
-		</p:menuitem>
-		<p:menuitem value="Categoria" url="categoria.xhtml">
-			<f:param name="i" value="1" />
-		</p:menuitem>
-	</p:megaMenu>
+	<b:navBar style="border-radius: 0; 
+					 width:100%; 
+					 margin-bottom:0;
+					 background-color: #e06666;
+				  	 border: 0 solid;
+				  	 font-size: 15px;">
+		<b:navbarLinks> 
+			<b:dropMenu value="Livro">
+				<b:navLink value="Novo Livro" href="adiciona_livro.xhtml">
+					<f:param name="i" value="0" />
+				</b:navLink> 
+				<b:navLink value="Categoria" href="categoria.xhtml">
+					<f:param name="i" value="1" />
+				</b:navLink> 
+			</b:dropMenu>
+		    <b:navLink  value="Autor" href="Autor.xhtml">
+		    	<f:param name="i" value="1" />
+			</b:navLink>
+			<b:navLink  value="Editora" href="Editora.xhtml">
+		    	<f:param name="i" value="1" />
+			</b:navLink>
+		    <b:navLink  value="Relatórios" href="#">
+		    	<f:param name="i" value="2" />
+			</b:navLink>
+			<b:navLink  value="Emails" href="#">
+		    	<f:param name="i" value="3" />
+			</b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	
 </ui:composition>
