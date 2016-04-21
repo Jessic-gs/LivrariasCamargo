@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Livros</title>
@@ -13,7 +14,7 @@
 		
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
-
+		
 		<h2>Consultar Livro</h2>
 		<h:form>
 			<p:dataTable value="${carrinhoMB.livros}" 
@@ -32,16 +33,16 @@
 					<div>R$ ${livro.preco}</div>
 				</p:column>
 				<p:column>
-						<div>
-							<h:commandButton value="Adicionar ao Carrinho" 
-								 			 action="${carrinhoMB.adiciona( livro )}"
-								 			style="font-size: 12px;"/>
-						</div>
-						<div>
-							<h:commandButton value="Visualizar" 
-								 			 action="${carrinhoMB.remover()}"
-								 			 style="font-size: 12px;"/>
-						</div>
+					<div>
+						<h:commandButton value="Adiciona" 
+							 action="${carrinhoMB.adiciona( livro )}"
+							 style="font-size: 12px;"/>
+					</div>
+					<div>
+						<h:commandButton value="Visualizar" 
+								 	     action="a"
+								 		 style="font-size: 12px;"/>
+					</div>
 				</p:column>
 			</p:dataTable>
 		</h:form>

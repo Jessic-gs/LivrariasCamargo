@@ -4,29 +4,30 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
+	
+		<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
 
-		<b:navBar style="border-radius: 0; 
-				  		 width:100%; 
-				  		 background-color: #f6b26b;
-				  		 border: 0 solid">		
-			<h:form styleClass="navbar-form navbar-right">			
+		<b:navBar class="pesquisa menu_topo" align="center">				  		 		
+			<h:form styleClass="navbar-form navbar-middle">			
 				<div class="form-group">
 					<b:inputText id="campo"
 							value="#{pesquisaMB.campo}"
 							panelStyle="width:250px"
-							fieldSize="sm" />
+							fieldSize="sm" 
+							style="width:500px; font-size: 15px;"/>
 			    </div> 
 			    <div class="form-group"> 
-			        <b:selectOneMenu id="tipo" value="#{pesquisaMB.tipo}" style="width:125px" fieldSize="sm">
+			        <b:selectOneMenu id="tipo" value="#{pesquisaMB.tipo}" style="width:150px; font-size: 15px;" fieldSize="sm">
 			            <f:selectItem value="#{pesquisaMB.tipo}" itemLabel="Titulo" itemValue="1" />
 			            <f:selectItem value="#{pesquisaMB.tipo}" itemLabel="Autor" itemValue="2" />
 			            <f:selectItem value="#{pesquisaMB.tipo}" itemLabel="Categoria" itemValue="3" />
 			        </b:selectOneMenu>
 			    </div>
 			    <div class="form-group">	        	 
-				    <b:commandButton	value="Pesquisar" 
-										action="${pesquisaMB.pesquisa()}"
-										style="font-size: 12px;"/>
+				    <b:commandButton value="Pesquisar" 
+									 action="${pesquisaMB.pesquisa()}"
+									 icon="search" iconAlign="left"
+									 style="font-size: 12px;"/>
 				</div>			    
 			</h:form>			
 		</b:navBar> 

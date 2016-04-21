@@ -4,13 +4,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
+	
+	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
 
-	<b:navBar style="border-radius: 0; 
-					 width:100%; 
-					 margin-bottom:0;
-					 background-color: #e06666;
-				  	 border: 0 solid;
-				  	 font-size: 15px;">
+	<b:navBar class="menu_topo" style="color: white;">
 		<b:navbarLinks> 
 			<b:dropMenu value="Livro">
 				<b:navLink value="Novo Livro" href="adiciona_livro.xhtml">
@@ -31,6 +28,9 @@
 			</b:navLink>
 			<b:navLink  value="Emails" href="#">
 		    	<f:param name="i" value="3" />
+			</b:navLink>
+			<b:navLink  value="Sair" href="home.xhtml">
+		    	<f:param name="i" value="4" />
 			</b:navLink>
 		</b:navbarLinks>
 	</b:navBar>

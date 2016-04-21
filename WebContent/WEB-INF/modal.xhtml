@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
+	
+	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
+
+	<!-- MODAL PARA CONFIRMAR ADD AO CARRINHO -->
+	<b:modal id="add_carrinho" title="Confiramar Adição ao Carrinho" styleClass="modalPseudoClass">
+	    <h:form>
+			<p:dataTable value="${carrinhoMB.itemLivroAtual}" 
+						 var="item"
+						 border="2"
+						 style="font-size: 15px;">
+				<p:column>
+					<f:facet name="header">
+						Livro
+					</f:facet>
+					<center><p:graphicImage value="${item.livro.ilustracao[0]}" height="150"/></center>
+				</p:column>
+				<p:column>
+					<div>${item.livro.nome}</div>
+					<div>R$ ${item.livro.preco}</div>
+				</p:column>
+			</p:dataTable>
+			<h:commandButton value="Adiciona" 
+						 action="${carrinhoMB.adiciona( livro )}"
+						 style="font-size: 12px;"/>
+		</h:form>	    
+	    <f:facet name="footer">
+	        <b:button value="close" dismiss="modal" onclick="return false;"/>
+	        <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+	    </f:facet>
+	</b:modal>
+	<!-- ************************************ -->
+	
+</ui:composition>

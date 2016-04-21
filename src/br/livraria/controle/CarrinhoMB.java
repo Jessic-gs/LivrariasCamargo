@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.text.html.ListView;
 
 import br.livraria.dominio.ItemLivro;
 import br.livraria.dominio.Livro;
@@ -64,6 +65,19 @@ public class CarrinhoMB {
 		return lista;
 	}
 	//**************************************************************
+	
+	public String confirmaLivro( Livro livro ){
+		pedido.setNumero(1);
+		
+		itemLivroAtual = new ItemLivro();
+		itemLivroAtual.setLivro(livro);
+		itemLivroAtual.setPedido(pedido);
+		if (itemLivroAtual.getQuantidade() != 1){
+			itemLivroAtual.setQuantidade(1);
+		}
+		
+		return "";
+	}
 	
 	public String adiciona( Livro livro ){
 		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();

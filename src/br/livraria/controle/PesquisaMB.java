@@ -1,11 +1,13 @@
 package br.livraria.controle;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.hibernate.type.IntegerType;
 
@@ -34,6 +36,13 @@ public class PesquisaMB {
 			resultado = pesquisarPorAutor(Integer.parseInt(getCampo()));
 		} else {
 			resultado = pesquisarPorCategoria(Integer.parseInt(getCampo()));
+		}
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("pesquisa.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return resultado;

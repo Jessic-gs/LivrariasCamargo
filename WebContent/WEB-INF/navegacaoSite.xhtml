@@ -4,23 +4,47 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
+	
+	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"></link>
 
-	<b:navBar style="border-radius: 0; 
-					 width:100%; 
-					 margin-bottom:0;
-					 background-color: #e06666;
-				  	 border: 0 solid">
+	<b:navBar class="menu_topo">
+		
 		<b:navbarLinks> 
 			<b:navLink value="Home" href="home.xhtml">
 				<f:param name="i" value="0" />
 			</b:navLink>
-		    <b:navLink  value="Carrinho de Compras" href="carrinho.xhtml">
+		    <b:navLink  value="Consulta Livros" href="livro_consulta.xhtml">
 		    	<f:param name="i" value="1" />
 			</b:navLink>
-		    <b:navLink  value="Consulta Livros" href="livro_consulta.xhtml">
-		    	<f:param name="i" value="2" />
+		</b:navbarLinks>
+		
+		<h:form styleClass="navbar-form navbar-left"> 
+			<div class="form-group">
+				<b:inputText placeholder="Login" fieldSize="sm"/> 
+			</div> 
+			<div class="form-group"> 
+				<b:inputText placeholder="Senha" fieldSize="sm"/> 
+			</div> #{' '} 
+			<b:commandButton action="a" value="Entrar" style="font-size: 12px;"/> 
+		</h:form> 
+		
+		<b:navbarLinks styleClass="navbar-right">
+		    <b:navLink  href="carrinho.xhtml">
+		    	<i class="fa fa-cart-plus fa-2x icon"></i>
+		    	<f:param name="i" value="0" />
+			</b:navLink>
+			<b:navLink  href="#">
+		    	<i class="fa fa-user-plus fa-2x icon"></i>
+		    	<f:param name="i" value="1" />
+			</b:navLink>
+			<b:navLink  value="Admin" href="categoria.xhtml">
+		    	<f:param name="i" value="1" />
 			</b:navLink>
 		</b:navbarLinks>
+		
 	</b:navBar>
+	
+	
 
 </ui:composition>

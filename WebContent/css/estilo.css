@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.menu_topo{
+	border-radius: 0; 
+	width:100%; 
+	margin-bottom:0;
+	background-color: #e06666;
+	border: 0 solid;
+	font-size: 15px;
+}
+
+.pesquisa{
+	background-color: #f6b26b;
+	text-align: center;
+}
+
+.icon {
+	color: white;
+	margin-bottom: -10em; 
+	margin-top: -10em;
+}
