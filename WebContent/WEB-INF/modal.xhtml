@@ -8,27 +8,35 @@
 	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
 
 	<!-- MODAL PARA CONFIRMAR ADD AO CARRINHO -->
-	<b:modal id="add_carrinho" title="Confiramar Adição ao Carrinho" styleClass="modalPseudoClass">
-	    <h:form>
-			<p:dataTable value="${carrinhoMB.itemLivroAtual}" 
-						 var="item"
+	<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass"
+		        closable="false" close-on-escape="false" backdrop="false">
+		<p:dataTable value="${livroMB.livroAtual}" 
+						 var="livro"
 						 border="2"
 						 style="font-size: 15px;">
 				<p:column>
 					<f:facet name="header">
 						Livro
 					</f:facet>
-					<center><p:graphicImage value="${item.livro.ilustracao[0]}" height="150"/></center>
+					<center><p:graphicImage value="${livro.ilustracao[0]}" height="150"/></center>
 				</p:column>
 				<p:column>
-					<div>${item.livro.nome}</div>
-					<div>R$ ${item.livro.preco}</div>
+					<div>${livro.nome}</div>
+					<div>R$ ${livro.preco}</div>
+				</p:column>
+				<p:column>
+					<div>
+						<h:commandButton value="Adiciona" 
+							 action="${carrinhoMB.adiciona( livro )}"
+							 style="font-size: 12px;"/>					        
+					</div>
+					<div>
+						<h:commandButton value="Visualizar" 
+								 	     action="a"
+								 		 style="font-size: 12px;"/>
+					</div>
 				</p:column>
 			</p:dataTable>
-			<h:commandButton value="Adiciona" 
-						 action="${carrinhoMB.adiciona( livro )}"
-						 style="font-size: 12px;"/>
-		</h:form>	    
 	    <f:facet name="footer">
 	        <b:button value="close" dismiss="modal" onclick="return false;"/>
 	        <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>

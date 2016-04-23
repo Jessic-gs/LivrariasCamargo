@@ -8,43 +8,57 @@
 	xmlns:b="http://bootsfaces.net/ui">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>		
+		<h:outputStylesheet library="css" name="fonts.awesome.css"/>
 		<title>Livros</title>
 	</h:head>
 	<h:body>
-		
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
 		
-		<h2>Consultar Livro</h2>
-		<h:form>
-			<p:dataTable value="${carrinhoMB.livros}" 
-						 var="livro"
-						 border="2" 
-						 rendered="${carrinhoMB.livros.size() > 0}"
-						 style="font-size: 15px;">
-				<p:column>
-					<f:facet name="header">
-						Livro
-					</f:facet>
-					<center><p:graphicImage value="${livro.ilustracao[0]}" height="150"/></center>
-				</p:column>
-				<p:column>
-					<div>${livro.nome}</div>
-					<div>R$ ${livro.preco}</div>
-				</p:column>
-				<p:column>
-					<div>
-						<h:commandButton value="Adiciona" 
-							 action="${carrinhoMB.adiciona( livro )}"
-							 style="font-size: 12px;"/>
-					</div>
-					<div>
-						<h:commandButton value="Visualizar" 
-								 	     action="a"
-								 		 style="font-size: 12px;"/>
-					</div>
-				</p:column>
-			</p:dataTable>
-		</h:form>
+		<b:container>
+			<h2>Consultar Livro</h2>
+			<h:form>
+				<ui:include src="WEB-INF/modal.xhtml" />
+				<p:dataTable value="${carrinhoMB.livros}" 
+							 var="livro" paginator="true" rows="10"
+							 rendered="${carrinhoMB.livros.size() > 0}"
+							 style="font-size: 15px;">
+					<p:column>
+						<div class="box_livro">
+							<div class="imagem_livro">
+								<p:graphicImage value="${livro.ilustracao[0]}" height="200"/>
+							</div>
+							<div class="info_livro">
+								<div>${livro.nome}</div>
+								<div>R$ ${livro.preco}</div>
+							</div>
+							<div class="button_livro">
+								<div>
+									<b:commandButton value="Adiciona" 
+										 action="${carrinhoMB.adiciona( livro )}"
+										 style="font-size: 12px;"/>
+										 
+									<b:commandButton value=" Comprar"
+											  style="font-family: FontAwesome;"
+											  styleClass="fa fa-cart-plus" iconAlign="left"
+											  onclick="$('.modalPseudoClass').modal();return false;"
+											  action="${livroMB.setLivroAtual( livro )}"
+											  size="lg" />
+									
+								</div>
+								<div>
+									<b:commandButton value=" Visualizar"
+											  		 style="font-family: FontAwesome;"
+											 		 styleClass="fa fa-eye" iconAlign="left"
+											 	     action="a"
+											 	     size="lg" />
+								</div>
+							</div>
+						</div>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</b:container>
 	</h:body>
 </html>

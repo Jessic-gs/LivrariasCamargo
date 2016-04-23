@@ -19,3 +19,26 @@
 	margin-bottom: -10em; 
 	margin-top: -10em;
 }
+
+.box_livro {
+	background-color: #ffe599;
+	height: 250px;
+	border: 1px solid black;
+	font-size: 15px;s
+}
+
+.imagem_livro {
+	float: left;
+	margin: 25px 25px 25px 25px;
+}
+
+.info_livro {
+	width: 30%;
+	float: left;
+	margin: 75px 300px 0 0;
+}
+
+.button_livro {
+	text-align: left;
+	margin: 75px 50px 50px 300px;
+}
