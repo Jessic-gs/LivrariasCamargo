@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+.box_livro {
+	background-color: #ffe599;
+	height: 250px;
+	border: 1px solid black;
+	font-size: 16px;
+}
+
+.box_livro_modal {
+	height: 300px;
+}
+
+.imagem_livro {
+	float: left;
+	margin: 25px 30px 25px 80px;
+}
+
+.imagem_livro_modal {
+	height: 20%;
+	margin-left: 25px;
+}
+
+.info_livro {
+	width: 20%;
+	float: left;
+	margin: 75px 0 0 0;
+}
+
+.info_livro_modal {
+	width: 30%;
+}
+
+.qnt_modal {
+	width: 30%;
+	float: left;
+	margin: 75px 0 0 0;
+}
+
+.qnt_num_modal {
+	width: 50%;
+}
+
+.button_livro {
+	text-align: center;
+	margin: 75px 50px 50px 80%;
+}
+
+.button_livro_modal {
+	text-align: center;
+	margin: 250px 0 0 0;
+}
+
+.button {
+	width: 150px;
+	text-align: center;
+	margin: 10px 0 0 0;
+}

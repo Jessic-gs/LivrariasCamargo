@@ -6,20 +6,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
+	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>		
+		<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>	
+		<link rel="StyleSheet" type="text/css" href="css/estilo_consulta.css" media="screen"></link>	
 		<h:outputStylesheet library="css" name="fonts.awesome.css"/>
 		<title>Livros</title>
 	</h:head>
+	
 	<h:body>
+		
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
-		
+		<ui:include src="WEB-INF/modal.xhtml" />
+				
 		<b:container>
 			<h2>Consultar Livro</h2>
 			<h:form>
-				<ui:include src="WEB-INF/modal.xhtml" />
 				<p:dataTable value="${carrinhoMB.livros}" 
 							 var="livro" paginator="true" rows="10"
 							 rendered="${carrinhoMB.livros.size() > 0}"
@@ -34,22 +38,25 @@
 								<div>R$ ${livro.preco}</div>
 							</div>
 							<div class="button_livro">
-								<div>
-									<b:commandButton value="Adiciona" 
-										 action="${carrinhoMB.adiciona( livro )}"
-										 style="font-size: 12px;"/>
-										 
+								<div class="button">										 
 									<b:commandButton value=" Comprar"
-											  style="font-family: FontAwesome;"
-											  styleClass="fa fa-cart-plus" iconAlign="left"
-											  onclick="$('.modalPseudoClass').modal();return false;"
-											  action="${livroMB.setLivroAtual( livro )}"
-											  size="lg" />
-									
+											  		 style="font-family: comic sans MS, FontAwesome; 
+											  		 		width: 100%;
+											  		 		border-radius: 0;
+											  		 		border: 1px solid black;"
+											  		 styleClass="fa fa-cart-plus" iconAlign="left"
+											  		 data="${livro}"
+											  		 onclick="$('.modalPseudoClass').modal();return false;"
+											  		 size="lg">
+										<f:ajax execute="@this" render="item_modal" />
+									</b:commandButton>									
 								</div>
-								<div>
+								<div class="button">
 									<b:commandButton value=" Visualizar"
-											  		 style="font-family: FontAwesome;"
+											  		 style="font-family: comic sans MS, FontAwesome; 
+											  		 		width: 100%;
+											  		 		border-radius: 0;
+											  		 		border: 1px solid black;"
 											 		 styleClass="fa fa-eye" iconAlign="left"
 											 	     action="a"
 											 	     size="lg" />

@@ -6,42 +6,45 @@
 	xmlns:b="http://bootsfaces.net/ui">
 	
 	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
+	<link rel="StyleSheet" type="text/css" href="css/estilo_consulta.css" media="screen"></link>
 
 	<!-- MODAL PARA CONFIRMAR ADD AO CARRINHO -->
-	<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass"
-		        closable="false" close-on-escape="false" backdrop="false">
-		<p:dataTable value="${livroMB.livroAtual}" 
-						 var="livro"
-						 border="2"
-						 style="font-size: 15px;">
-				<p:column>
-					<f:facet name="header">
-						Livro
-					</f:facet>
-					<center><p:graphicImage value="${livro.ilustracao[0]}" height="150"/></center>
-				</p:column>
-				<p:column>
-					<div>${livro.nome}</div>
-					<div>R$ ${livro.preco}</div>
-				</p:column>
-				<p:column>
-					<div>
-						<h:commandButton value="Adiciona" 
-							 action="${carrinhoMB.adiciona( livro )}"
-							 style="font-size: 12px;"/>					        
-					</div>
-					<div>
-						<h:commandButton value="Visualizar" 
-								 	     action="a"
-								 		 style="font-size: 12px;"/>
-					</div>
-				</p:column>
-			</p:dataTable>
-	    <f:facet name="footer">
-	        <b:button value="close" dismiss="modal" onclick="return false;"/>
-	        <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
-	    </f:facet>
+	<b:modal class="box_livro_modal box_livro" id="amodal" title="Modal Example" styleClass="modalPseudoClass"
+		     closable="false" close-on-escape="false" backdrop="false">
+		<h:form id="item_modal">
+			<div class="box_livro_modal box_livro">
+				<div class="imagem_livro_modal imagem_livro">
+					<p:graphicImage value="${item.livro.ilustracao[0]}" height="200"/>
+				</div>
+				<div class="info_livro_modal info_livro">
+					<div>${item.livro.nome}</div>
+					<div>R$ ${item.livro.preco}</div>
+				</div>
+				<div class="qnt_modal">
+					<div>Quantidade</div>
+					<div><b:inputText value="#{1}" class="qnt_num_modal" /></div>
+				</div>
+				<div class="button_livro_modal">
+					<b:commandButton value=" Adiciona" 
+									 style="font-family: comic sans MS; 
+							  		 		width: 30%;
+							  		 		border-radius: 0;
+							  		 		border: 1px solid black;
+							  		 		margin: 0 10px 0 0;"
+						 			 action="${carrinhoMB.adiciona( item.livro )}" 
+						 			 size="lg" />
+							 			 
+					<b:button value=" Cancelar"
+							  style="font-family: comic sans MS; 
+							    	 width: 30%;
+								  	 border-radius: 0;
+								  	 border: 1px solid black;"
+							  dismiss="modal" onclick="return false;"
+							  size="lg" />
+				</div>
+			</div>
+		</h:form>
 	</b:modal>
 	<!-- ************************************ -->
-	
+
 </ui:composition>
