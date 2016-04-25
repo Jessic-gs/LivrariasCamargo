@@ -39,7 +39,7 @@
 			<p:selectCheckboxMenu id="menu_autor"
 				value="#{livroMB.livroAtual.autores}" label="Autor" filter="true"
 				filterMatchMode="startsWith" panelStyle="width:250px"
-				converter="simpleIndexConverter">
+				 converter="simpleIndexConverter">
 				<f:selectItems value="#{autorMB.autores}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_autor" />

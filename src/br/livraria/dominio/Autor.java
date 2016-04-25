@@ -87,9 +87,6 @@ public class Autor implements EntityGenerica {
 	public void setLocalFalecimento(String localFalecimento) {
 		this.localFalecimento = localFalecimento;
 	}
-
-	
-
 	@Override
 	public String toString() {
 		return getNome();
