@@ -44,7 +44,7 @@ public class CarrinhoMB {
 		List<Livro> lista = new ArrayList<Livro>();
 		
 		List<String> ilustracao = new ArrayList<String>();
-		ilustracao.add("/img/livro-jogosvorazes-4.jpg");
+		ilustracao.add("resources/img/livro-jogosvorazes-4.jpg");
 		
 		Livro l1 = new Livro();
 		l1.setIlustracao(ilustracao);
@@ -52,7 +52,7 @@ public class CarrinhoMB {
 		l1.setPreco(20.0f);
 		
 		List<String> ilustracao2 = new ArrayList<String>();
-		ilustracao2.add("/img/guerra-civil-quadrinheiros.jpg");
+		ilustracao2.add("resources/img/guerra-civil-quadrinheiros.jpg");
 		
 		Livro l2 = new Livro();
 		l2.setIlustracao(ilustracao2);
