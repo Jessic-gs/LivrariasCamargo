@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Livros</title>
 	<h:outputScript library="js" name="locales.js" />
-	
+
 </h:head>
 <h:body>
 	<ui:include src="WEB-INF/navegacao.xhtml" />
@@ -105,18 +105,39 @@
 				value="#{livroMB.livroAtual.dataPublicacao}" navigator="true"
 				locale="pt" />
 
-			<h:form enctype="multipart/form-data">
+			<p:growl id="mensagens" autoUpdate="true" />
+			<h:form enctype="multipart/form-data" id="formFoto">
+
 				<p:fileUpload fileUploadListener="#{livroMB.upload}"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" showButtons="false"
-					label="Procurar..." />
+					fileLimitMessage="Excedido Limite de arquivos"
+					cancelLabel="Cancelar" label="Arquivo" uploadLabel="Anexar"
+					invalidFileMessage="Somente arquivos .jpg, .png ou .gif"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" value="#{livroMB.file}"
+					mode="advanced" skinSimple="true" update="outputPanelUpload" />
+
+
+				<p:outputPanel id="outputPanelUpload">
+					<h:panelGrid columns="4">
+						<p:graphicImage
+							style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
+							value="#{livroMB.imagens[0]}"
+							rendered="${livroMB.imagens[0] != null}" height="150" />
+						<p:commandButton value="Excluir"
+							rendered="${livroMB.imagens[0] != null}"
+							actionListener="#{livroMB.excluirFoto}"
+							update="outputPanelUpload" />
+
+						<p:graphicImage
+							style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
+							value="#{livroMB.imagens[1]}"
+							rendered="${livroMB.imagens[1] != null}" height="150px" />
+						<p:commandButton value="Excluir"
+							rendered="${livroMB.imagens[1] != null}"
+							actionListener="#{livroMB.excluirFoto1}"
+							update="outputPanelUpload" />
+					</h:panelGrid>
+				</p:outputPanel>
 			</h:form>
-			<p:messages severity="info" escape="false" showDetail="true"
-				autoUpdate="true" closable="true" />
-
-
-
-
-
 			<h:commandButton value="Adicionar" action="${livroMB.adiciona()}"
 				style="font-size: 12px;" />
 		</h:panelGrid>
