@@ -8,9 +8,8 @@
 	xmlns:b="http://bootsfaces.net/ui">
 	
 	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>	
-		<link rel="StyleSheet" type="text/css" href="css/estilo_consulta.css" media="screen"></link>	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+		<link rel="StyleSheet" type="text/css" href="resources/css/estilo_consulta.css" media="screen"></link>	
 		<h:outputStylesheet library="css" name="fonts.awesome.css"/>
 		<title>Livros</title>
 	</h:head>
@@ -19,7 +18,6 @@
 		
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
-		<ui:include src="WEB-INF/modal.xhtml" />
 				
 		<b:container>
 			<h2>Consultar Livro</h2>
@@ -45,11 +43,8 @@
 											  		 		border-radius: 0;
 											  		 		border: 1px solid black;"
 											  		 styleClass="fa fa-cart-plus" iconAlign="left"
-											  		 data="${livro}"
-											  		 onclick="$('.modalPseudoClass').modal();return false;"
-											  		 size="lg">
-										<f:ajax execute="@this" render="item_modal" />
-									</b:commandButton>									
+											  		 action="${carrinhoMB.confirmaLivro( livro )}"
+											  		 size="lg" />									
 								</div>
 								<div class="button">
 									<b:commandButton value=" Visualizar"

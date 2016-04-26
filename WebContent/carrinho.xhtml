@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Carrinho de Compras</title>
@@ -13,78 +14,90 @@
 	
 		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
 		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
-
-		<h2>Carrinho de Compras</h2>
-		
-		<h:form>			
-			<p:dataTable value="${carrinhoMB.itens}" 
-						 var="item"
-						 border="2" 
-						 rendered="${carrinhoMB.itens.size() > 0}"
-						 style="font-size: 15px;">
-				<p:column>
-					<center>
-					<h:commandButton	value="X" 
-										action="${carrinhoMB.remover(item)}"
-										style="font-size: 12px;"/>
-					</center>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						Livro
-					</f:facet>
-					<center><p:graphicImage value="${item.livro.ilustracao[0]}" height="150"/></center>
-				</p:column>
-				<p:column>
-					<div>${item.livro.nome}</div>
-					<div>R$ ${item.livro.preco}</div>
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-						Quantidade
-					</f:facet>
-					<center>
-						<h:commandButton	value="-" 
-											action="${carrinhoMB.subtrai( item )}"
+		<ui:include src="WEB-INF/modal.xhtml" />
+	
+		<b:container>
+			<h2>Carrinho de Compras</h2>
+			
+			<h:form>			
+				<p:dataTable value="${carrinhoMB.itens}" 
+							 var="item"
+							 border="2" 
+							 rendered="${carrinhoMB.itens.size() > 0}"
+							 style="font-size: 15px;">
+					<p:column>
+						<center>
+						<h:commandButton	value="X" 
+											action="${carrinhoMB.remover(item)}"
 											style="font-size: 12px;"/>
-						
-						${item.quantidade}
-						
-						<h:commandButton	value="+" 
-											action="${carrinhoMB.soma( item )}"
-											style="font-size: 12px;"/>
-					</center>
-				</p:column>
-			</p:dataTable>
-			<div style="padding-top: 1em;">
-				<div style="width: 500px;  float: left">
-						<h:commandButton	value="Limpar Carrinho de Compras" 
-											action="${carrinhoMB.limpaCarrinho()}"
-											style="font-size: 12px;"/>
+						</center>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							Livro
+						</f:facet>
+						<center><p:graphicImage value="${item.livro.ilustracao[0]}" height="150"/></center>
+					</p:column>
+					<p:column>
+						<div>${item.livro.nome}</div>
+						<div>R$ ${item.livro.preco}</div>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							Quantidade
+						</f:facet>
+						<center>
+							<h:commandButton	value="-" 
+												action="${carrinhoMB.subtrai( item )}"
+												style="font-size: 12px;"/>
+							
+							${item.quantidade}
+							
+							<h:commandButton	value="+" 
+												action="${carrinhoMB.soma( item )}"
+												style="font-size: 12px;"/>
+						</center>
+					</p:column>
+				</p:dataTable>
+				<div style="padding-top: 1em;">
+					<div style="width: 500px;  float: left">
+							<h:commandButton	value="Limpar Carrinho de Compras" 
+												action="${carrinhoMB.limpaCarrinho()}"
+												style="font-size: 12px;"/>
+					</div>
+					<div align="right" style="width: 350px; float: right">
+						<div>
+							CEP:
+							<p:inputText style="font-size: 12px;
+								 	 	 width: 150px"/>
+							<h:commandButton	value="Calcular Frete" 
+												action="${carrinhoMB.limpaCarrinho()}"
+												style="font-size: 12px;"/>
+						</div>
+						<div style="padding-top: 10px;">
+							Frete: R$ 0,00
+						</div>
+						<div style="padding-top: 10px;"
+							 rendered="${carrinhoMB.pedido.valorTotal != 0}">
+							Valor Total: R$ ${carrinhoMB.pedido.valorTotal}
+						</div>
+						<div style="padding-top: 15px;">
+							<h:commandButton	value="Concluir Pedido" 
+												action="${carrinhoMB.concluirPedido()}"
+												style="font-size: 12px;"/>
+						</div>
+					</div>
 				</div>
-				<div align="right" style="width: 350px; float: right">
-					<div>
-						CEP:
-						<p:inputText style="font-size: 12px;
-							 	 	 width: 150px"/>
-						<h:commandButton	value="Calcular Frete" 
-											action="${carrinhoMB.limpaCarrinho()}"
-											style="font-size: 12px;"/>
-					</div>
-					<div style="padding-top: 10px;">
-						Frete: R$ 0,00
-					</div>
-					<div style="padding-top: 10px;"
-						 rendered="${carrinhoMB.pedido.valorTotal != 0}">
-						Valor Total: R$ ${carrinhoMB.pedido.valorTotal}
-					</div>
-					<div style="padding-top: 15px;">
-						<h:commandButton	value="Concluir Pedido" 
-											action="${carrinhoMB.concluirPedido()}"
-											style="font-size: 12px;"/>
-					</div>
-				</div>
-			</div>
-		</h:form>
+			</h:form>
+		</b:container>
 	</h:body>
+	<script type="text/javascript">
+		$(window).load(function(){
+			var url = window.location.href.toString();
+			var confirma = "http://localhost:8080/PhaseListener/carrinho.xhtml?confirma";
+			if (url == confirma){
+				$('.modalPseudoClass').modal();return false;	
+			} 
+		});
+	</script>
 </html>

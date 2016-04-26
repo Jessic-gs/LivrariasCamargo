@@ -4,25 +4,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
-	
-	<link rel="StyleSheet" type="text/css" href="css/estilo.css" media="screen"></link>
-	<link rel="StyleSheet" type="text/css" href="css/estilo_consulta.css" media="screen"></link>
+
+	<h:outputStylesheet library="css" name="estilo_consulta.css" />
 
 	<!-- MODAL PARA CONFIRMAR ADD AO CARRINHO -->
-	<b:modal class="box_livro_modal box_livro" id="amodal" title="Modal Example" styleClass="modalPseudoClass"
+	<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass"
 		     closable="false" close-on-escape="false" backdrop="false">
 		<h:form id="item_modal">
 			<div class="box_livro_modal box_livro">
 				<div class="imagem_livro_modal imagem_livro">
-					<p:graphicImage value="${item.livro.ilustracao[0]}" height="200"/>
+					<p:graphicImage value="${carrinhoMB.itemLivroAtual.livro.ilustracao[0]}" height="200"/>
 				</div>
 				<div class="info_livro_modal info_livro">
-					<div>${item.livro.nome}</div>
-					<div>R$ ${item.livro.preco}</div>
+					<div>${carrinhoMB.itemLivroAtual.livro.nome}</div>
+					<div>R$ ${carrinhoMB.itemLivroAtual.livro.preco}</div>
 				</div>
 				<div class="qnt_modal">
 					<div>Quantidade</div>
-					<div><b:inputText value="#{1}" class="qnt_num_modal" /></div>
+					<div><b:inputText value="#{carrinhoMB.itemLivroAtual.quantidade}" class="qnt_num_modal" /></div>
 				</div>
 				<div class="button_livro_modal">
 					<b:commandButton value=" Adiciona" 
@@ -31,7 +30,7 @@
 							  		 		border-radius: 0;
 							  		 		border: 1px solid black;
 							  		 		margin: 0 10px 0 0;"
-						 			 action="${carrinhoMB.adiciona( item.livro )}" 
+						 			 action="${carrinhoMB.adiciona( carrinhoMB.itemLivroAtual )}" 
 						 			 size="lg" />
 							 			 
 					<b:button value=" Cancelar"

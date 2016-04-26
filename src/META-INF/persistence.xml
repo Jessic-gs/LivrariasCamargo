@@ -11,8 +11,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		<class>br.livraria.dominio.Livro</class>
 		<class>br.livraria.dominio.Autor</class>
 		<class>br.livraria.dominio.Editora</class>
-		
-		
+				
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

@@ -67,19 +67,21 @@ public class CarrinhoMB {
 	//**************************************************************
 	
 	public String confirmaLivro( Livro livro ){
-		pedido.setNumero(1);
 		
-		itemLivroAtual = new ItemLivro();
 		itemLivroAtual.setLivro(livro);
-		itemLivroAtual.setPedido(pedido);
-		if (itemLivroAtual.getQuantidade() != 1){
-			itemLivroAtual.setQuantidade(1);
+		itemLivroAtual.setQuantidade(1);
+		
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("carrinho.xhtml?confirma");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return "";
 	}
 	
-	public String adiciona( Livro livro ){
+	public String adiciona( ItemLivro il ){
 		/*ItemLivroDao ilDao = new ItemLivroDaoImpl();
 		try {
 			ilDao.inserirItemLivro( itemLivroAtual );
@@ -88,18 +90,13 @@ public class CarrinhoMB {
 			e.printStackTrace();
 		}*/
 		
-		float valorTotal = pedido.getValorTotal()+livro.getPreco();
-		pedido.setNumero(1);
+		float valorTotal = pedido.getValorTotal() + (il.getLivro().getPreco() * il.getQuantidade());
 		pedido.setValorTotal(valorTotal);
+		pedido.setNumero(1);
 		
-		itemLivroAtual = new ItemLivro();
-		itemLivroAtual.setLivro(livro);
-		itemLivroAtual.setPedido(pedido);
-		if (itemLivroAtual.getQuantidade() != 1){
-			itemLivroAtual.setQuantidade(1);
-		}
+		il.setPedido(pedido);
 				
-		itens.add(itemLivroAtual);
+		itens.add(il);
 		itemLivroAtual = new ItemLivro();
 		
 		try {
