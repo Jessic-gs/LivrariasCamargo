@@ -21,9 +21,7 @@ public class Categoria implements EntityGenerica{
 	private String nome;
 	@ManyToMany(mappedBy = "categorias")
 	private List<Livro> livros;
-	public String getNome() {
-		return nome;
-	}
+	
 	/*@OneToMany(mappedBy = "categoria", targetEntity = LivroCategoria.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public List<LivroCategoria> getLivroCategorias() {
 		return livroCategorias;
@@ -31,20 +29,7 @@ public class Categoria implements EntityGenerica{
 	public void setLivroCategorias(List<LivroCategoria> livroCategorias) {
 		this.livroCategorias = livroCategorias;
 	}*/
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	@Override
-	public String toString() {
-		return getNome();
-	}
-	public List<Livro> getLivros() {
-		return livros;
-	}
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
-	}
+	
 	@Override
 	public long getId() {
 		return id;
@@ -52,5 +37,24 @@ public class Categoria implements EntityGenerica{
 	@Override
 	public void setId(long id) {
 		this.id = id;		
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getNome() {
+		return nome;
+	}
+	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
+	
+	@Override
+	public String toString() {
+		return getNome();
 	}
 }

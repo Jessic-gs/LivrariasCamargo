@@ -43,7 +43,7 @@ public class Livro implements EntityGenerica {
 	// private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
 	@ManyToMany
 	@JoinTable(name = "livro_categoria", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "categoria_codigo") )
-	private List<Categoria> categorias = new ArrayList<Categoria>();;
+	private List<Categoria> categorias = new ArrayList<Categoria>();
 	@ManyToMany
 	@JoinTable(name = "livro_autor", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "autor_codigo") )
 	private List<Autor> autores = new ArrayList<Autor>();

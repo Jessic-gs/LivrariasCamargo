@@ -9,10 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.hibernate.type.IntegerType;
-
 import br.livraria.dao.PesquisaDao;
 import br.livraria.dao.PesquisaDaoImpl;
+import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Livro;
 
 @ManagedBean
@@ -22,6 +21,7 @@ public class PesquisaMB {
 	private List<Livro> resultado;
 	private Integer tipo;
 	private String campo;
+	private Categoria categoria;
 	
 	public PesquisaMB(){
 		PesquisaDao pDao = new PesquisaDaoImpl();
@@ -35,7 +35,7 @@ public class PesquisaMB {
 		} else if (getTipo() == 2){
 			resultado = pesquisarPorAutor(Integer.parseInt(getCampo()));
 		} else {
-			resultado = pesquisarPorCategoria(Integer.parseInt(getCampo()));
+			resultado = pesquisarPorCategoria(Long.parseLong(getCampo()));
 		}
 		
 		try {
@@ -68,7 +68,7 @@ public class PesquisaMB {
 		return resultado;
 	}
 	
-	public List<Livro> pesquisarPorCategoria(Integer codigoCategoria){
+	public List<Livro> pesquisarPorCategoria(Long codigoCategoria){
 		PesquisaDao pDao = new PesquisaDaoImpl();
 		try {
 			resultado = pDao.pesquisarPorCategoria(codigoCategoria);
@@ -77,7 +77,6 @@ public class PesquisaMB {
 		}						
 		return resultado;
 	}
-
 
 	public List<Livro> getResultado() {
 		return resultado;
