@@ -30,16 +30,28 @@ public class LivroMB {
 	private Livro livroAtual;
 	private List<Livro> livros;
 	private UploadedFile file;
-	private String[] imagens = new String[2];
+	//private String[] imagens = new String[2];
+	private List<String> imagens = new ArrayList<String>();
+	public List<String> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
+
 	private static int count = 0;
 
 	public LivroMB() {
 		LivroDao livroDao = new LivroDaoImpl();
 		livroAtual = new Livro();
 		livros = new ArrayList<Livro>();
-		// imagens [0] = "resources/img/livro-jogosvorazes-4.jpg";
-		// imagens [1] = "resources/img/guerra-civil-quadrinheiros.jpg";
-		System.out.println(imagens[0] + " outra " + imagens[1]);
+		//imagens [0] = "resources/img/livro-jogosvorazes-4.jpg";
+		//imagens [1] = "resources/img/guerra-civil-quadrinheiros.jpg";
+		//System.out.println(imagens[0] + " outra " + imagens[1]);
+		imagens.add("resources/img/livro-jogosvorazes-4.jpg");
+		imagens.add("resources/img/guerra-civil-quadrinheiros.jpg");
+
 		try {
 			livros = livroDao.pesquisarPorTodos();
 		} catch (SQLException e) {
@@ -100,7 +112,7 @@ public class LivroMB {
 		if (count > 1) {
 			count = 0;
 		}
-		imagens[count] = (filePath + fileNameUploaded);
+		//imagens[count] = (filePath + fileNameUploaded);
 		count++;
 		String infoAboutFile = "<br/> Arquivo recebido: <b>" + fileNameUploaded + "</b><br/>"
 				+ "Tamanho do Arquivo: <b>" + fileSizeUploaded + "</b>";
@@ -109,11 +121,11 @@ public class LivroMB {
 	}
 
 	public void excluirFoto(ActionEvent actionEvent) {
-		imagens[0] = null;
+		//imagens[0] = null;
 	}
 
 	public void excluirFoto1(ActionEvent actionEvent) {
-		imagens[1] = null;
+	//	imagens[1] = null;
 	}
 
 	public UploadedFile getFile() {
@@ -140,13 +152,13 @@ public class LivroMB {
 		this.livroAtual = livroAtual;
 	}
 
-	public String[] getImagens() {
+	/*public String[] getImagens() {
 		return imagens;
 	}
 
 	public void setImagens(String[] imagens) {
 		this.imagens = imagens;
-	}
+	}*/
 
 	public static int getCount() {
 		return count;
