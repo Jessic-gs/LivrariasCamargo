@@ -22,11 +22,11 @@ public class PesquisaDaoImpl implements PesquisaDao{
 	}
 	
 	@Override
-	public List<Livro> pesquisarPorAutor(Integer codigoAutor) throws SQLException{
-		String sql = " select  l" +
-	     			 " from Livro" +
-	     			 " LEFT JOIN FETCH livro_autor" +
-	     			 " where livro_categoria.autor_codigo like :codigo";
+	public List<Livro> pesquisarPorAutor(Long codigoAutor) throws SQLException{
+		String sql = " select l" +
+				 	 " from Livro l" +
+				 	 " left outer join l.autores as la" +
+				 	 " where la.id = :codigo";
 		
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Livro> qry = em.createQuery(sql, Livro.class).setParameter("codigo", codigoAutor);
@@ -56,8 +56,8 @@ public class PesquisaDaoImpl implements PesquisaDao{
 	public List<Livro> pesquisarPorCategoria(Long codigoCategoria) throws SQLException{
 		String sql = " select l" +
 					 " from Livro l" +
-					 " LEFT JOIN FETCH livro_categoria lc" +
-	     			 " where lc.categoria_codigo like :codigo";
+					 " left outer join l.categorias as lc" +
+					 " where lc.id = :codigo";
 		
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Livro> qry = em.createQuery(sql, Livro.class).setParameter("codigo", codigoCategoria);

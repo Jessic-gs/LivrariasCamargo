@@ -7,7 +7,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.ConverterException;
 
 import br.livraria.dao.PesquisaDao;
 import br.livraria.dao.PesquisaDaoImpl;
@@ -33,7 +35,7 @@ public class PesquisaMB {
 		if (getTipo() == 1){
 			resultado = pesquisarPorTitulo(getCampo());
 		} else if (getTipo() == 2){
-			resultado = pesquisarPorAutor(Integer.parseInt(getCampo()));
+			resultado = pesquisarPorAutor(Long.parseLong(getCampo()));
 		} else {
 			resultado = pesquisarPorCategoria(Long.parseLong(getCampo()));
 		}
@@ -48,7 +50,7 @@ public class PesquisaMB {
 		return resultado;
 	}
 	
-	public List<Livro> pesquisarPorAutor(Integer codigoAutor){
+	public List<Livro> pesquisarPorAutor(Long codigoAutor){
 		PesquisaDao pDao = new PesquisaDaoImpl();
 		try {
 			resultado = pDao.pesquisarPorAutor(codigoAutor);
@@ -76,6 +78,20 @@ public class PesquisaMB {
 			e.printStackTrace();
 		}						
 		return resultado;
+	}
+	
+	public List<Categoria> completeTextParaCategoria(String cat, List<Categoria> catList) {
+		List<Categoria> allCategorias = catList; 
+        List<Categoria> filteredCategoria = new ArrayList<Categoria>();
+         
+        for (int i = 0; i < allCategorias.size(); i++) {
+        	Categoria skin = allCategorias.get(i);
+            if(skin.getNome() == cat) {
+            	filteredCategoria.add(skin);
+            }
+        }
+         
+        return filteredCategoria;
 	}
 
 	public List<Livro> getResultado() {
