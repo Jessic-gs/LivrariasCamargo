@@ -6,36 +6,41 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+	<title>Livros</title>
 </h:head>
 <h:body>
-	<p:growl id="mensagens" autoUpdate="true" />
-	<h:form enctype="multipart/form-data" id="formFoto">
+	<ui:include src="WEB-INF/navegacao.xhtml" />
+	<h:form>
+		<p:panel header="Adicione no maximo duas fotos"
+			style="width: 900px; margin: 0 auto; margin-top: 0px">
 
-		<p:fileUpload fileUploadListener="#{livroMB.upload}"
-			fileLimitMessage="Excedido Limite de arquivos" cancelLabel="Cancelar"
-			label="Arquivo" uploadLabel="Anexar"
-			invalidFileMessage="Somente arquivos .jpg, .png ou .gif"
-			allowTypes="/(\.|\/)(gif|jpe?g|png)$/" value="#{livroMB.file}"
-			mode="advanced" skinSimple="true" update="outputPanelUpload" />
-			
-			
-		<p:outputPanel id="outputPanelUpload">
-			<h:panelGrid columns="4">
-				<p:graphicImage style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
-					value="#{livroMB.imagens[0]}" rendered="${livroMB.imagens[0] != null}" height="150" />
-				<p:commandButton value="Excluir"
-					rendered="${livroMB.imagens[0] != null}"
-					actionListener="#{livroMB.excluirFoto}" update="outputPanelUpload"/>
 
-				<p:graphicImage style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
-					value="#{livroMB.imagens[1]}" rendered="${livroMB.imagens[1] != null}" height="150px" />
-				<p:commandButton value="Excluir"
-					rendered="${livroMB.imagens[1] != null}"
-					actionListener="#{livroMB.excluirFoto1}" update="outputPanelUpload"/>
-			</h:panelGrid>
-		</p:outputPanel>
+			<p:fileUpload label="Arquivo" fileLimit="2"
+				fileLimitMessage="Excedido Limite de arquivos"
+				invalidFileMessage="Somente arquivos .jpg, .png ou .gif"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" value="#{livroMB.file}"
+				auto="false" customUI="true" update="outputPanelUpload" />
+
+			<p:outputPanel id="outputPanelUpload">
+				<p:commandButton value="Submit" ajax="false"
+					fileUploadListener="${livroMB.upload}" disabled="false" />
+
+			</p:outputPanel>
+		</p:panel>
 	</h:form>
 </h:body>
+<style type="text/css">
+.ui-fileupload-buttonbar .ui-fileupload-upload {
+	display: none;
+}
+
+.ui-fileupload-progress {
+	display: none;
+}
+</style>
 </html>

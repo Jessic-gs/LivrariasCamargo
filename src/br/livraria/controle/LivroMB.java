@@ -30,15 +30,16 @@ public class LivroMB {
 	private Livro livroAtual;
 	private List<Livro> livros;
 	private UploadedFile file;
-	//private String[] imagens = new String[2];
-	private List<String> imagens = new ArrayList<String>();
-	public List<String> getImagens() {
-		return imagens;
-	}
+	private UploadedFile[] files = new UploadedFile[2];
 
-	public void setImagens(List<String> imagens) {
-		this.imagens = imagens;
-	}
+	private String[] imagens = new String[2];
+	/*
+	 * private List<String> imagens = new ArrayList<String>();
+	 * 
+	 * public List<String> getImagens() { return imagens; }
+	 * 
+	 * public void setImagens(List<String> imagens) { this.imagens = imagens; }
+	 */
 
 	private static int count = 0;
 
@@ -46,11 +47,11 @@ public class LivroMB {
 		LivroDao livroDao = new LivroDaoImpl();
 		livroAtual = new Livro();
 		livros = new ArrayList<Livro>();
-		//imagens [0] = "resources/img/livro-jogosvorazes-4.jpg";
-		//imagens [1] = "resources/img/guerra-civil-quadrinheiros.jpg";
-		//System.out.println(imagens[0] + " outra " + imagens[1]);
-		imagens.add("resources/img/livro-jogosvorazes-4.jpg");
-		imagens.add("resources/img/guerra-civil-quadrinheiros.jpg");
+		// imagens [0] = "resources/img/livro-jogosvorazes-4.jpg";
+		// imagens [1] = "resources/img/guerra-civil-quadrinheiros.jpg";
+		// System.out.println(imagens[0] + " outra " + imagens[1]);
+		// imagens.add("resources/img/livro-jogosvorazes-4.jpg");
+		// imagens.add("resources/img/guerra-civil-quadrinheiros.jpg");
 
 		try {
 			livros = livroDao.pesquisarPorTodos();
@@ -81,7 +82,6 @@ public class LivroMB {
 		UploadedFile uploadedFile = fileUploadEvent.getFile();
 		String fileNameUploaded = uploadedFile.getFileName();
 		long fileSizeUploaded = uploadedFile.getSize();
-
 		System.out.println(fileNameUploaded);
 		String filePath = "C:\\Users\\Plutão\\Desktop\\foto\\";
 		byte[] bytes = null;
@@ -109,23 +109,31 @@ public class LivroMB {
 			}
 
 		}
-		if (count > 1) {
-			count = 0;
-		}
-		//imagens[count] = (filePath + fileNameUploaded);
-		count++;
+
+		imagens[0] = (filePath + fileNameUploaded);
+		imagens[1] = (filePath + fileNameUploaded);
+
 		String infoAboutFile = "<br/> Arquivo recebido: <b>" + fileNameUploaded + "</b><br/>"
 				+ "Tamanho do Arquivo: <b>" + fileSizeUploaded + "</b>";
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.addMessage(null, new FacesMessage("Sucesso", infoAboutFile));
 	}
 
-	public void excluirFoto(ActionEvent actionEvent) {
-		//imagens[0] = null;
-	}
-
-	public void excluirFoto1(ActionEvent actionEvent) {
-	//	imagens[1] = null;
+	public void uploaded() {
+		for (UploadedFile uploadedFile : files) {
+			System.out.println(uploadedFile.getContentType());
+			if (uploadedFile != null) {
+				if (!("image/png".equals(uploadedFile.getContentType()))) {
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de arquivo inválido",
+							"O arquivo deve ser do tipo png, jpg ou jpeg");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+				} else {
+					FacesMessage message = new FacesMessage("Succesful",
+							files[0].getFileName() + "e" + files[1].getFileName() + " is uploaded.");
+					FacesContext.getCurrentInstance().addMessage(null, message);
+				}
+			}
+		}
 	}
 
 	public UploadedFile getFile() {
@@ -134,6 +142,8 @@ public class LivroMB {
 
 	public void setFile(UploadedFile file) {
 		this.file = file;
+		System.out.println(file.getFileName());
+
 	}
 
 	public List<Livro> getLivros() {
@@ -152,13 +162,11 @@ public class LivroMB {
 		this.livroAtual = livroAtual;
 	}
 
-	/*public String[] getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(String[] imagens) {
-		this.imagens = imagens;
-	}*/
+	/*
+	 * public String[] getImagens() { return imagens; }
+	 * 
+	 * public void setImagens(String[] imagens) { this.imagens = imagens; }
+	 */
 
 	public static int getCount() {
 		return count;
@@ -166,5 +174,21 @@ public class LivroMB {
 
 	public static void setCount(int count) {
 		LivroMB.count = count;
+	}
+
+	public String[] getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(String[] imagens) {
+		this.imagens = imagens;
+	}
+
+	public UploadedFile[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(UploadedFile[] files) {
+		this.files = files;
 	}
 }
