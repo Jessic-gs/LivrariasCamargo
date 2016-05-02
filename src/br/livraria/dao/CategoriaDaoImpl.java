@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.livraria.dominio.Categoria;
+import br.livraria.dominio.Livro;
 
 
 public class CategoriaDaoImpl implements CategoriaDao{
@@ -57,6 +58,19 @@ public class CategoriaDaoImpl implements CategoriaDao{
             System.out.println(cat.getNome()); 
 		} 
 		return categorias;
+	}
+	
+	@Override
+	public Categoria buscaCategoria(String categoria) throws SQLException{
+		String sql = " select  c" +
+	    			 " from Categoria c" + 
+	    			 " where c.nome like :categoria";
+		
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Categoria> qry = em.createQuery(sql, Categoria.class).setParameter("categoria", "%"+categoria+"%");
+		Categoria resultado = qry.getSingleResult();
+		
+		return resultado;
 	}
 
 }

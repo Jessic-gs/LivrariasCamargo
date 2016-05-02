@@ -12,5 +12,6 @@ public interface EditoraDao {
 	public void editarEditora(Editora ed) throws SQLException;
 	public List<Editora> listaEditoras() throws SQLException;
 	public void excluirEditora(Editora ed) throws SQLException;
+	public Editora buscaEditora(String editora) throws SQLException;
 	
 }

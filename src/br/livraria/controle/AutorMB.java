@@ -7,7 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import br.livraria.dao.AutorDao;
 import br.livraria.dao.AutorDaoImpl;
+import br.livraria.dao.CategoriaDao;
+import br.livraria.dao.CategoriaDaoImpl;
 import br.livraria.dominio.Autor;
+import br.livraria.dominio.Categoria;
 
 @ManagedBean
 @SessionScoped
@@ -62,6 +65,16 @@ public class AutorMB {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	public Autor buscar(String autor){
+		AutorDao autDao = new AutorDaoImpl();
+		try {
+			autorAtual = autDao.buscaAutor(autor);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return autorAtual;
 	}
 
 	public List<Autor> getAutores() {

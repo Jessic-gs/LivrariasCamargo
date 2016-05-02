@@ -10,15 +10,9 @@
 	<b:navBar class="pesquisa menu_topo" align="center">
 		<h:form styleClass="navbar-form navbar-middle">
 			<div class="form-group">
-
 				<b:inputText id="campo" value="${pesquisaMB.campo}"
 					panelStyle="width:250px" fieldSize="sm"
 					style="width:500px; font-size: 15px;" />
-
-				<b:inputText value="#{categoriaMB.categorias}"
-					var="categoria"
-					itemLabel="#{categoria.nome}"
-					itemValue="#{categoria.id}" />
 
 			</div>
 			<div class="form-group">
@@ -30,10 +24,12 @@
 						itemValue="2" />
 					<f:selectItem value="#{pesquisaMB.tipo}" itemLabel="Categoria"
 						itemValue="3" />
+					<f:selectItem value="#{pesquisaMB.tipo}" itemLabel="Editora"
+						itemValue="4" />
 				</b:selectOneMenu>
 			</div>
 			<div class="form-group">
-				<b:commandButton value="Pesquisar" action="${pesquisaMB.pesquisa()}"
+				<b:commandButton value="Pesquisar" action="${pesquisaMB.pesquisa(categoriaMB, editoraMB, autorMB)}"
 					icon="search" iconAlign="left" style="font-size: 12px;" />
 			</div>
 		</h:form>

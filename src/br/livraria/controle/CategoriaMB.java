@@ -65,6 +65,16 @@ public class CategoriaMB {
 		}
 		return "";
 	}
+	
+	public Categoria buscar(String categoria){
+		CategoriaDao catDao = new CategoriaDaoImpl();
+		try {
+			categoriaAtual = catDao.buscaCategoria(categoria);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return categoriaAtual;
+	}
 
 	public Categoria getCategoriaAtual() {
 		return categoriaAtual;

@@ -11,5 +11,6 @@ public interface CategoriaDao {
 	public void inserirCategoria(Categoria es) throws SQLException;
 	public void excluirCategoria(Categoria es) throws SQLException;
 	public List<Categoria> listaCategorias() throws SQLException;
+	public Categoria buscaCategoria(String categoria) throws SQLException;
 	
 }

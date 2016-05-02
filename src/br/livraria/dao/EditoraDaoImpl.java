@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Editora;
 
 
@@ -63,6 +64,19 @@ public class EditoraDaoImpl implements EditoraDao{
 		em.remove(edi1);
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	@Override
+	public Editora buscaEditora(String editora) throws SQLException{
+		String sql = " select  e" +
+	    			 " from Editora e" + 
+	    			 " where e.nome like :editora";
+		
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", "%"+editora+"%");
+		Editora resultado = qry.getSingleResult();;
+		
+		return resultado;
 	}
 
 }

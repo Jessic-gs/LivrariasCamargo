@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.livraria.dominio.Autor;
+import br.livraria.dominio.Categoria;
 
 
 public class AutorDaoImpl implements AutorDao{
@@ -62,6 +63,19 @@ public class AutorDaoImpl implements AutorDao{
             System.out.println(aut.getNome()); 
 		} 
 		return autores;
+	}
+	
+	@Override
+	public Autor buscaAutor(String autor) throws SQLException{
+		String sql = " select  a" +
+	    			 " from Autor a" + 
+	    			 " where a.nome like :autor";
+		
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Autor> qry = em.createQuery(sql, Autor.class).setParameter("autor", "%"+autor+"%");
+		Autor resultado = qry.getSingleResult();
+		
+		return resultado;
 	}
 
 }
