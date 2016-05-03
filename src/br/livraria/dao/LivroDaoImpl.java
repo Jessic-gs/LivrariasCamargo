@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
+import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Livro;
 
 public class LivroDaoImpl implements LivroDao {
@@ -34,8 +36,16 @@ public class LivroDaoImpl implements LivroDao {
 
 	@Override
 	public List<Livro> pesquisarPorTodos() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = " select  l" + 
+					 " from Livro l";
+
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Livro> qry = em.createQuery(sql, Livro.class);
+		List<Livro> livros = qry.getResultList();
+		for (Livro l : livros) {
+			System.out.println(l.getNome());
+		}
+		return livros;
 	}
 
 	@Override

@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:butter="http://butterfaces.org/components">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="StyleSheet" type="text/css" href="resources/css/estilo_consulta.css" media="screen"></link>
@@ -31,6 +32,7 @@
 								</div>
 								<div class="info_livro">
 									<div>${livro.nome}</div>
+									<div>${livro.autores}</div>
 									<div>R$ ${livro.preco}</div>
 								</div>
 								<div class="button_livro">

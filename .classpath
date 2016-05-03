@@ -30,5 +30,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/components-2.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

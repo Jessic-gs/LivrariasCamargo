@@ -1,6 +1,7 @@
 package br.livraria.controle;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +12,12 @@ import javax.faces.context.FacesContext;
 
 import br.livraria.dao.PesquisaDao;
 import br.livraria.dao.PesquisaDaoImpl;
-import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Livro;
+import de.larmic.butterfaces.model.text.AutoCompleteModel;
 
 @ManagedBean
 @SessionScoped
-public class PesquisaMB {
+public class PesquisaMB implements Serializable, AutoCompleteModel{
 	
 	private List<Livro> resultado;
 	private Integer tipo;
@@ -27,8 +28,29 @@ public class PesquisaMB {
 		resultado = new ArrayList<Livro>();
 	}
 	
-	public List<Livro> pesquisa(CategoriaMB catMB, EditoraMB ediMB, AutorMB autMB){
+	@Override
+	public List<String> autoComplete(Object value) {
+		List<String> lista = new ArrayList<String>();
 		
+		AutorMB autMB = new AutorMB();
+		for (int i = 0; i < autMB.getAutores().size(); i++) {
+			lista.add(autMB.getAutores().get(i).getNome());
+		}
+		
+		CategoriaMB catMB = new CategoriaMB();
+		for (int i = 0; i < catMB.getCategorias().size(); i++) {
+			lista.add(catMB.getCategorias().get(i).getNome());
+		}
+		
+		EditoraMB ediMB = new EditoraMB();
+		for (int i = 0; i < ediMB.getEditoras().size(); i++) {
+			lista.add(ediMB.getEditoras().get(i).getNome());
+		}
+		
+		return lista;
+	}
+	
+	public List<Livro> pesquisa(CategoriaMB catMB, EditoraMB ediMB, AutorMB autMB){	
 		if (getTipo() == 1){
 			resultado = pesquisarPorTitulo(getCampo());
 		} else if (getTipo() == 2){
@@ -92,20 +114,6 @@ public class PesquisaMB {
 		return resultado;
 	}
 	
-	public List<Categoria> completeTextParaCategoria(String cat, List<Categoria> catList) {
-		List<Categoria> allCategorias = catList; 
-        List<Categoria> filteredCategoria = new ArrayList<Categoria>();
-         
-        for (int i = 0; i < allCategorias.size(); i++) {
-        	Categoria skin = allCategorias.get(i);
-            if(skin.getNome().toLowerCase().startsWith(cat)) {
-            	filteredCategoria.add(skin);
-            }
-        }
-         
-        return filteredCategoria;
-	}
-
 	public List<Livro> getResultado() {
 		return resultado;
 	}

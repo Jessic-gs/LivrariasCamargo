@@ -4,62 +4,59 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:b="http://bootsfaces.net/ui">
-	
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
-		<link rel="StyleSheet" type="text/css" href="resources/css/estilo_consulta.css" media="screen"></link>
-		<title>Livros</title>
-	</h:head>
-	
-	<h:body>
-		
-		<ui:include src="WEB-INF/navegacaoSite.xhtml" />
-		<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
-				
-		<b:container>
-			<h2>Consultar Livro</h2>
-			<h:form>
-				<p:dataTable value="${carrinhoMB.livros}" 
-							 var="livro" paginator="true" rows="10"
-							 rendered="${carrinhoMB.livros.size() > 0}"
-							 style="font-size: 15px;">
-					<p:column>
-						<div class="box_livro">
-							<div class="imagem_livro">
-								<p:graphicImage value="${livro.ilustracao[0]}" height="200"/>
-							</div>
-							<div class="info_livro">
-								<div>${livro.nome}</div>
-								<div>R$ ${livro.preco}</div>
-							</div>
-							<div class="button_livro">
-								<div class="button">										 
-									<b:commandButton value=" Comprar"
-											  		 style="font-family: comic sans MS, FontAwesome; 
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="StyleSheet" type="text/css"
+		href="resources/css/estilo_consulta.css" media="screen"></link>
+	<title>Livros</title>
+</h:head>
+
+<h:body>
+
+	<ui:include src="WEB-INF/navegacaoSite.xhtml" />
+	<ui:include src="WEB-INF/barra_pesquisa.xhtml" />
+
+	<b:container>
+		<h2>Consultar Livro</h2>
+		<h:form>
+			<p:dataTable value="${livroMB.livros}" var="livro" paginator="true"
+				rows="10" rendered="#{livroMB.livros.size() > 0}"
+				style="font-size: 15px;">
+				<p:column>
+					<div class="box_livro">
+						<div class="imagem_livro">
+							<p:graphicImage value="${livro.ilustracao[0]}" height="200" />
+						</div>
+						<div class="info_livro">
+							<div>${livro.nome}</div>
+							<div>${livro.autores}</div>
+							<div>R$ ${livro.preco}</div>
+						</div>
+						<div class="button_livro">
+							<div class="button">
+								<b:commandButton value=" Comprar"
+									style="font-family: comic sans MS, FontAwesome; 
 											  		 		width: 100%;
 											  		 		border-radius: 0;
 											  		 		border: 1px solid black;"
-											  		 styleClass="fa fa-cart-plus" iconAlign="left"
-											  		 action="${carrinhoMB.confirmaLivro( livro )}"
-											  		 size="lg" />									
-								</div>
-								<div class="button">
-									<b:commandButton value=" Visualizar"
-											  		 style="font-family: comic sans MS, FontAwesome; 
+									styleClass="fa fa-cart-plus" iconAlign="left"
+									action="${carrinhoMB.confirmaLivro( livro )}" size="lg" />
+							</div>
+							<div class="button">
+								<b:commandButton value=" Visualizar"
+									style="font-family: comic sans MS, FontAwesome; 
 											  		 		width: 100%;
 											  		 		border-radius: 0;
 											  		 		border: 1px solid black;"
-											 		 styleClass="fa fa-eye" iconAlign="left"
-											 	     action="a"
-											 	     size="lg" />
-								</div>
+									styleClass="fa fa-eye" iconAlign="left" action="a" size="lg" />
 							</div>
 						</div>
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</b:container>
-	</h:body>
+					</div>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</b:container>
+</h:body>
 </html>

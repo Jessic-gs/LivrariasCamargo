@@ -2,7 +2,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:butter="http://butterfaces.org/components">
 
 	<link rel="StyleSheet" type="text/css" href="css/estilo.css"
 		media="screen"></link>
@@ -10,9 +11,15 @@
 	<b:navBar class="pesquisa menu_topo" align="center">
 		<h:form styleClass="navbar-form navbar-middle">
 			<div class="form-group">
-				<b:inputText id="campo" value="${pesquisaMB.campo}"
+				<!-- b:inputText id="campo" value="${pesquisaMB.campo}"
 					panelStyle="width:250px" fieldSize="sm"
-					style="width:500px; font-size: 15px;" />
+					style="width:500px; font-size: 15px;" /-->
+
+				<butter:text id="input" value="${pesquisaMB.campo}"
+					panelStyle="width:250px" fieldSize="sm"
+					style="width:500px; font-size: 15px;">
+					<butter:autoComplete autoComplete="#{pesquisaMB}" rendered="true" />
+				</butter:text>
 
 			</div>
 			<div class="form-group">
@@ -29,7 +36,8 @@
 				</b:selectOneMenu>
 			</div>
 			<div class="form-group">
-				<b:commandButton value="Pesquisar" action="${pesquisaMB.pesquisa(categoriaMB, editoraMB, autorMB)}"
+				<b:commandButton value="Pesquisar"
+					action="${pesquisaMB.pesquisa(categoriaMB, editoraMB, autorMB)}"
 					icon="search" iconAlign="left" style="font-size: 12px;" />
 			</div>
 		</h:form>
