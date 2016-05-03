@@ -3,23 +3,24 @@ package br.livraria.controle;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import br.livraria.dao.AutorDao;
 import br.livraria.dao.AutorDaoImpl;
-import br.livraria.dao.CategoriaDao;
-import br.livraria.dao.CategoriaDaoImpl;
 import br.livraria.dominio.Autor;
-import br.livraria.dominio.Categoria;
 
 @ManagedBean
 @SessionScoped
 public class AutorMB {
-	
+
 	private Autor autorAtual;
 	private List<Autor> autores;
-	
-	public AutorMB(){
+
+	public AutorMB() {
 		AutorDao autDao = new AutorDaoImpl();
 		autorAtual = new Autor();
 		autores = new ArrayList<Autor>();
@@ -29,11 +30,11 @@ public class AutorMB {
 			e.printStackTrace();
 		}
 	}
-	
-	public String adiciona(){
+
+	public String adiciona() {
 		AutorDao autDao = new AutorDaoImpl();
 		try {
-			autDao.adicionarAutor( autorAtual );
+			autDao.adicionarAutor(autorAtual);
 			autores = autDao.listaAutores();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,8 +42,13 @@ public class AutorMB {
 		autorAtual = new Autor();
 		return "";
 	}
-	
-	public void atualizar(Autor autor){
+
+	public String cancelar() {
+		autorAtual = new Autor();
+		return "";
+	}
+
+	public void atualizar(Autor autor) {
 		AutorDao autDao = new AutorDaoImpl();
 		try {
 			autDao.adicionarAutor(autor);
@@ -50,13 +56,13 @@ public class AutorMB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String editar(Autor autor) {
 		autorAtual = autor;
 		return "";
 	}
-	
-	public String remover(Autor autor){
+
+	public String remover(Autor autor) {
 		AutorDao autDao = new AutorDaoImpl();
 		try {
 			autDao.excluirAutor(autor);
@@ -66,8 +72,8 @@ public class AutorMB {
 		}
 		return "";
 	}
-	
-	public Autor buscar(String autor){
+
+	public Autor buscar(String autor) {
 		AutorDao autDao = new AutorDaoImpl();
 		try {
 			autorAtual = autDao.buscaAutor(autor);

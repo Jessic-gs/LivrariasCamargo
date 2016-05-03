@@ -17,12 +17,14 @@ public class Autor implements EntityGenerica {
 	private static final long serialVersionUID = -5041525618862980362L;
 	private long id;
 	private String nome;
+	private int falecido;
 	private String biografia;
 	private Date dataNascimento;
 	private Date dataFalecimento;
 	private String localNascimento;
 	private String localFalecimento;
 	private List<Livro> livros;
+
 	@Id
 	@GeneratedValue
 	@Override
@@ -34,6 +36,7 @@ public class Autor implements EntityGenerica {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	@Column
 	public String getNome() {
 		return nome;
@@ -87,6 +90,7 @@ public class Autor implements EntityGenerica {
 	public void setLocalFalecimento(String localFalecimento) {
 		this.localFalecimento = localFalecimento;
 	}
+
 	@Override
 	public String toString() {
 		return getNome();
@@ -101,12 +105,13 @@ public class Autor implements EntityGenerica {
 		this.livros = livros;
 	}
 
-	/*
-	 * @OneToMany(mappedBy = "autor", targetEntity = LivroAutores.class, fetch =
-	 * FetchType.LAZY, cascade = CascadeType.ALL) public List<LivroAutores>
-	 * getLivroAutores() { return livroAutores; }
-	 * 
-	 * public void setLivroAutores(List<LivroAutores> livroAutores) {
-	 * this.livroAutores = livroAutores; }
-	 */
+	@Column
+	public int getFalecido() {
+		return falecido;
+	}
+
+	public void setFalecido(int falecido) {
+		this.falecido = falecido;
+	}
+
 }

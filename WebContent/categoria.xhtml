@@ -15,26 +15,25 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="Nome : " />
-			<p:inputText value="${categoriaMB.categoriaAtual.nome}" 
-						 style="font-size: 12px;
-						 		width: 300px"/>
+			<p:inputText value="${categoriaMB.categoriaAtual.nome}"
+				style="font-size: 12px;
+						 		width: 300px" />
 
-			<h:commandButton value="Adicionar" 
-							 action="${categoriaMB.adiciona()}" 
-							 rendered="${categoriaMB.categoriaAtual.id == 0}"
-							 style="font-size: 12px;"/>
-							 							 
-			<h:commandButton value="Atualizar" 
-							 action="${categoriaMB.adiciona()}" 
-							 rendered="${categoriaMB.categoriaAtual.id != 0}"
-							 style="font-size: 12px;"/>
+			<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
+				rendered="${categoriaMB.categoriaAtual.id == 0}"
+				style="font-size: 12px;" />
+
+			<h:commandButton value="Atualizar" action="${categoriaMB.adiciona()}"
+				rendered="${categoriaMB.categoriaAtual.id != 0}"
+				style="font-size: 12px;" />
+			<h:commandButton value="Cancelar" action="${categoriaMB.cancelar()}"
+				rendered="${categoriaMB.categoriaAtual.id != 0}"
+				style="font-size: 12px;" />
 
 		</h:panelGrid>
-		<p:dataTable value="${categoriaMB.categorias}" 
-					 var="categoria" 
-					 border="2" 
-					 rendered="${categoriaMB.categorias.size() > 0}"
-					 style="font-size: 15px;">
+		<p:dataTable value="${categoriaMB.categorias}" var="categoria"
+			border="2" rendered="${categoriaMB.categorias.size() > 0}"
+			style="font-size: 15px;">
 			<p:column>
 				<f:facet name="header">
 					Nome
@@ -45,12 +44,12 @@
 				<f:facet name="header">
 					Ações
 				</f:facet>
-				<h:commandButton	value="Editar" 
-									action="${categoriaMB.editar( categoria )}"
-									style="font-size: 12px;"/>
-				<h:commandButton	value="Remover" 
-									action="${categoriaMB.remover( categoria )}"
-									style="font-size: 12px;"/>
+				<h:commandButton value="Editar"
+					action="${categoriaMB.editar( categoria )}"
+					style="font-size: 12px;" />
+				<h:commandButton value="Remover"
+					action="${categoriaMB.remover( categoria )}"
+					style="font-size: 12px;" />
 			</p:column>
 		</p:dataTable>
 	</h:form>
