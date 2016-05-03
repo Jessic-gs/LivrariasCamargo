@@ -35,6 +35,10 @@
 			<p:inputText value="${livroMB.livroAtual.id}"
 				style="font-size: 12px;
 						 		width: 300px" />
+			<h:outputText value="Quantidade de páginas : " />
+			<p:inputText value="${livroMB.livroAtual.quatidadePaginas}"
+				style="font-size: 12px;
+						 		width: 300px" />
 		</h:panelGrid>
 
 		<h:panelGrid columns="4">
@@ -98,6 +102,18 @@
 				<f:selectItem itemLabel="Capa Dura" itemValue="1" />
 				<f:selectItem itemLabel="Normal" itemValue="2" />
 			</p:selectOneMenu>
+			<h:outputText value="Custo : " />
+			<p:inputText value="${livroMB.livroAtual.custo}"
+				style="font-size: 12px;
+						 		width: 300px" />
+			<h:outputText value="Preço : " />
+			<p:inputText value="${livroMB.livroAtual.preco}"
+				style="font-size: 12px;
+						 		width: 300px" />
+			<h:outputText value="Quantidade em estoque : " />
+			<p:inputText value="${livroMB.livroAtual.quatidadeEstoque}"
+				style="font-size: 12px;
+						 		width: 300px" />
 
 
 			<h:outputText for="data_publicacao" value="Data de publicação: " />
@@ -105,38 +121,11 @@
 				value="#{livroMB.livroAtual.dataPublicacao}" navigator="true"
 				locale="pt" />
 
+
+
 			<p:growl id="mensagens" autoUpdate="true" />
 			<h:form enctype="multipart/form-data" id="formFoto">
 
-				<p:fileUpload fileUploadListener="#{livroMB.upload}"
-					fileLimitMessage="Excedido Limite de arquivos"
-					cancelLabel="Cancelar" label="Arquivo" uploadLabel="Anexar"
-					invalidFileMessage="Somente arquivos .jpg, .png ou .gif"
-					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" value="#{livroMB.file}"
-					mode="advanced" skinSimple="true" update="outputPanelUpload" />
-
-
-				<p:outputPanel id="outputPanelUpload">
-					<h:panelGrid columns="4">
-						<p:graphicImage
-							style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
-							value="#{livroMB.imagens[0]}"
-							rendered="${livroMB.imagens[0] != null}" height="150" />
-						<p:commandButton value="Excluir"
-							rendered="${livroMB.imagens[0] != null}"
-							actionListener="#{livroMB.excluirFoto}"
-							update="outputPanelUpload" />
-
-						<p:graphicImage
-							style="margin-top: 5px; border: none; box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);"
-							value="#{livroMB.imagens[1]}"
-							rendered="${livroMB.imagens[1] != null}" height="150px" />
-						<p:commandButton value="Excluir"
-							rendered="${livroMB.imagens[1] != null}"
-							actionListener="#{livroMB.excluirFoto1}"
-							update="outputPanelUpload" />
-					</h:panelGrid>
-				</p:outputPanel>
 			</h:form>
 			<h:commandButton value="Adicionar" action="${livroMB.adiciona()}"
 				style="font-size: 12px;" />

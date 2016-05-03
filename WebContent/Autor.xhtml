@@ -8,6 +8,8 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Autores</title>
+	<h:outputScript library="js" name="locales.js" />
+
 </h:head>
 <h:body>
 	<ui:include src="WEB-INF/navegacao.xhtml" />
@@ -15,26 +17,49 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="Nome : " />
-			<p:inputText value="${autorMB.autorAtual.nome}" 
-						 style="font-size: 12px;
-						 		width: 300px"/>
+			<p:inputText value="${autorMB.autorAtual.nome}"
+				style="font-size: 12px;
+						 		width: 300px" />
+			<h:outputText value="Data de Nascimento : " />
 
-			<h:commandButton value="Adicionar" 
-							 action="${autorMB.adiciona()}" 
-							 rendered="${autorMB.autorAtual.id == 0}"
-							 style="font-size: 12px;"/>
-							 							 
-			<h:commandButton value="Atualizar" 
-							 action="${autorMB.adiciona()}" 
-							 rendered="${autorMB.autorAtual.id != 0}"
-							 style="font-size: 12px;"/>
+			<p:calendar id="data_nascimento"
+				value="#{autorMB.autorAtual.dataNascimento}" navigator="true"
+				locale="pt" />
+			<h:outputText value="País de Origem :" />
+			<p:inputText value="${autorMB.autorAtual.localNascimento}"
+				style="font-size: 12px;
+						 		width: 300px" />
+
+
+			<h:outputText for="falecido" value="É falecido ?" />
+			<p:selectOneRadio id="falecido"
+				value="${autorMB.autorAtual.falecido}" update="display">
+				<f:selectItem itemLabel="Sim" itemValue="1" />
+				<f:selectItem itemLabel="Não" itemValue="0" />
+			</p:selectOneRadio>
+
+			<h:outputText value="Data da Morte : " />
+			<p:calendar id="data_falecimento"
+				value="#{autorMB.autorAtual.dataFalecimento}" navigator="true"
+				locale="pt" />
+
+			<h:outputText value="País da Morte :" />
+			<p:inputText value="${autorMB.autorAtual.localFalecimento}"
+				style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:commandButton value="Adicionar" action="${autorMB.adiciona()}"
+				rendered="${autorMB.autorAtual.id == 0}" style="font-size: 12px;" />
+
+			<h:commandButton value="Atualizar" action="${autorMB.adiciona()}"
+				rendered="${autorMB.autorAtual.id != 0}" style="font-size: 12px;" />
+				
+			<h:commandButton value="Cancelar" action="${autorMB.cancelar()}"
+				rendered="${autorMB.autorAtual.id != 0}" style="font-size: 12px;" />
 
 		</h:panelGrid>
-		<p:dataTable value="${autorMB.autores}" 
-					 var="autor" 
-					 border="2" 
-					 rendered="${autorMB.autores.size() > 0}"
-					 style="font-size: 15px;">
+		<p:dataTable value="${autorMB.autores}" var="autor" border="2"
+			rendered="${autorMB.autores.size() > 0}" style="font-size: 15px;">
 			<p:column>
 				<f:facet name="header">
 					Nome
@@ -43,14 +68,27 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">
+					Local de Nascimento
+				</f:facet>
+				${autor.localNascimento}
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					Data de Nascimento
+				</f:facet>
+				<h:outputText value="${autor.dataNascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">
 					Ações
 				</f:facet>
-				<h:commandButton	value="Editar" 
-									action="${autorMB.editar( autor )}"
-									style="font-size: 12px;"/>
-				<h:commandButton	value="Remover" 
-									action="${autorMB.remover( autor )}"
-									style="font-size: 12px;"/>
+				<h:commandButton value="Editar" action="${autorMB.editar( autor )}"
+					style="font-size: 12px;" />
+				<h:commandButton value="Remover"
+					action="${autorMB.remover( autor )}" style="font-size: 12px;" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

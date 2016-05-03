@@ -11,53 +11,51 @@ import javax.persistence.TypedQuery;
 import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Editora;
 
+public class EditoraDaoImpl implements EditoraDao {
 
-public class EditoraDaoImpl implements EditoraDao{
-	
 	private static EntityManagerFactory emf;
-	
-	public EditoraDaoImpl(){
-		if (emf == null){
+
+	public EditoraDaoImpl() {
+		if (emf == null) {
 			emf = Persistence.createEntityManagerFactory("livrarias_camargo");
 		}
 	}
-	
+
 	@Override
-	public void adicionarEditora(Editora ed) throws SQLException{
+	public void adicionarEditora(Editora ed) throws SQLException {
 		EntityManager em = emf.createEntityManager();
-		
+
 		em.getTransaction().begin();
-		if(em.contains(ed)){
+		if (em.contains(ed)) {
 			em.persist(ed);
 		} else {
 			em.merge(ed);
 		}
 		em.getTransaction().commit();
-		em.close();		
+		em.close();
 	}
 
 	@Override
 	public void editarEditora(Editora ed) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public List<Editora> listaEditoras() throws SQLException{
-		String sql = " select  e" +
-	     			 " from Editora e";
-		
+	public List<Editora> listaEditoras() throws SQLException {
+		String sql = " select  e" + " from Editora e";
+
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class);
 		List<Editora> editoras = qry.getResultList();
-		for(Editora ed : editoras){  
-            System.out.println(ed.getNome()); 
-		} 
+		for (Editora ed : editoras) {
+			System.out.println(ed.getNome());
+		}
 		return editoras;
 	}
-	
+
 	@Override
-	public void excluirEditora(Editora edi) throws SQLException{
+	public void excluirEditora(Editora edi) throws SQLException {
 		EntityManager em = emf.createEntityManager();
 		Editora edi1 = em.getReference(Editora.class, edi.getCnpj());
 		em.getTransaction().begin();
@@ -65,17 +63,16 @@ public class EditoraDaoImpl implements EditoraDao{
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	@Override
-	public Editora buscaEditora(String editora) throws SQLException{
-		String sql = " select  e" +
-	    			 " from Editora e" + 
-	    			 " where e.nome like :editora";
-		
+	public Editora buscaEditora(String editora) throws SQLException {
+		String sql = " select  e" + " from Editora e" + " where e.nome like :editora";
+
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", "%"+editora+"%");
-		Editora resultado = qry.getSingleResult();;
-		
+		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", "%" + editora + "%");
+		Editora resultado = qry.getSingleResult();
+		;
+
 		return resultado;
 	}
 

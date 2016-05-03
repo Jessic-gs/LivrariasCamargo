@@ -15,26 +15,39 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputText value="Nome : " />
-			<p:inputText value="${editoraMB.editoraAtual.nome}" 
-						 style="font-size: 12px;
-						 		width: 300px"/>
+			<p:inputText value="${editoraMB.editoraAtual.nome}"
+				style="font-size: 12px;
+						 		width: 300px" />
+			<h:outputText for="cnpj" value="CNPJ : " />
 
-			<h:commandButton value="Adicionar" 
-							 action="${editoraMB.adiciona()}" 
-							 rendered="${editoraMB.editoraAtual.cnpj == 0}"
-							 style="font-size: 12px;"/>
-							 							 
-			<h:commandButton value="Atualizar" 
-							 action="${editoraMB.adiciona()}" 
-							 rendered="${editoraMB.editoraAtual.cnpj != 0}"
-							 style="font-size: 12px;"/>
+			<p:inputMask id="cnpj" value="${editoraMB.editoraAtual.cnpj}"
+				mask="99.999.999/9999-99"
+				style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:outputText for="telefone" value="Telefone : " />
+			<p:inputMask id="telefone" value="${editoraMB.editoraAtual.telefone}"
+				mask="(99)9999-9999" style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:outputText value="Endereço : " />
+			<p:inputText value="${editoraMB.editoraAtual.endereco}"
+				style="font-size: 12px;
+						 		width: 300px" />
+
+			<h:commandButton value="Adicionar" action="${editoraMB.adiciona()}"
+				rendered="${editoraMB.editoraAtual.cnpj == 0}"
+				style="font-size: 12px;" />
+			<h:commandButton value="Atualizar" action="${editoraMB.adiciona()}"
+				rendered="${editoraMB.editoraAtual.cnpj != 0}"
+				style="font-size: 12px;" />
+			<h:commandButton value="Cancelar" action="${editoraMB.cancelar()}"
+				rendered="${editoraMB.editoraAtual.cnpj != 0}"
+				style="font-size: 12px;" />
 
 		</h:panelGrid>
-		<p:dataTable value="${editoraMB.editoras}" 
-					 var="editora" 
-					 border="2" 
-					 rendered="${editoraMB.editoras.size() > 0}"
-					 style="font-size: 15px;">
+		<p:dataTable value="${editoraMB.editoras}" var="editora" border="2"
+			rendered="${editoraMB.editoras.size() > 0}" style="font-size: 15px;">
 			<p:column>
 				<f:facet name="header">
 					Nome
@@ -43,14 +56,30 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">
+					CNPJ
+				</f:facet>
+				${editora.cnpj}
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					Telefone
+				</f:facet>
+				${editora.telefone}
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					Endereço
+				</f:facet>
+				${editora.endereco}
+			</p:column>
+			<p:column>
+				<f:facet name="header">
 					Ações
 				</f:facet>
-				<h:commandButton	value="Editar" 
-									action="${editoraMB.editar( editora )}"
-									style="font-size: 12px;"/>
-				<h:commandButton	value="Remover" 
-									action="${editoraMB.remover( editora )}"
-									style="font-size: 12px;"/>
+				<h:commandButton value="Editar"
+					action="${editoraMB.editar( editora )}" style="font-size: 12px;" />
+				<h:commandButton value="Remover"
+					action="${editoraMB.remover( editora )}" style="font-size: 12px;" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

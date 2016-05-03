@@ -16,11 +16,11 @@ import br.livraria.dominio.Editora;
 @ManagedBean
 @SessionScoped
 public class EditoraMB {
-	
+
 	private Editora editoraAtual;
 	private List<Editora> editoras;
-	
-	public EditoraMB(){
+
+	public EditoraMB() {
 		EditoraDao ediDao = new EditoraDaoImpl();
 		editoraAtual = new Editora();
 		try {
@@ -29,11 +29,11 @@ public class EditoraMB {
 			e.printStackTrace();
 		}
 	}
-	
-	public String adiciona(){
+
+	public String adiciona() {
 		EditoraDao ediDao = new EditoraDaoImpl();
 		try {
-			ediDao.adicionarEditora( editoraAtual );
+			ediDao.adicionarEditora(editoraAtual);
 			editoras = ediDao.listaEditoras();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,8 +41,8 @@ public class EditoraMB {
 		editoraAtual = new Editora();
 		return "";
 	}
-	
-	public void atualizar(Editora ed){
+
+	public void atualizar(Editora ed) {
 		EditoraDao ediDao = new EditoraDaoImpl();
 		try {
 			ediDao.adicionarEditora(ed);
@@ -50,13 +50,18 @@ public class EditoraMB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String editar(Editora ed) {
 		editoraAtual = ed;
 		return "";
 	}
-	
-	public String remover(Editora ed){
+
+	public String cancelar() {
+		editoraAtual = new Editora();
+		return "";
+	}
+
+	public String remover(Editora ed) {
 		EditoraDao ediDao = new EditoraDaoImpl();
 		try {
 			ediDao.excluirEditora(ed);
@@ -66,8 +71,8 @@ public class EditoraMB {
 		}
 		return "";
 	}
-	
-	public Editora buscar(String editora){
+
+	public Editora buscar(String editora) {
 		EditoraDao ediDao = new EditoraDaoImpl();
 		try {
 			editoraAtual = ediDao.buscaEditora(editora);
@@ -92,5 +97,5 @@ public class EditoraMB {
 	public void setEditoras(List<Editora> editoras) {
 		this.editoras = editoras;
 	}
-	
+
 }

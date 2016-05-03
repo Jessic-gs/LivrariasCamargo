@@ -1,6 +1,5 @@
 package br.livraria.dominio;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,31 +18,28 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Livro implements EntityGenerica {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3944201228532106574L;
+	
 	@Id
 	@Column(name = "isbn")
 	private long id;
+	
 	@Column(name = "nome")
-
 	private String nome;
+	
 	@Column(name = "sinopse")
-
 	private String sinopse;
+	
 	@Column(name = "sumario")
-
 	private String sumario;
+	
 	@Column
-
 	private Date dataPublicacao;
-	// private List<LivroCategoria> livroCategorias = new
-	// ArrayList<LivroCategoria>();
-	// private List<LivroAutores> livroAutores= new ArrayList<LivroAutores>();
+	
 	@ManyToMany
 	@JoinTable(name = "livro_categoria", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "categoria_codigo") )
 	private List<Categoria> categorias = new ArrayList<Categoria>();
+	
 	@ManyToMany
 	@JoinTable(name = "livro_autor", joinColumns = @JoinColumn(name = "livro_isbn") , inverseJoinColumns = @JoinColumn(name = "autor_codigo") )
 	private List<Autor> autores = new ArrayList<Autor>();
@@ -51,14 +47,20 @@ public class Livro implements EntityGenerica {
 	@ManyToOne(targetEntity = Editora.class)
 	@JoinColumn(name = "id_editora")
 	private Editora editora;
+	
 	@Column
-
 	private int tipo;
+	
 	@Column(name = "preco")
-
 	private float preco;
-	@Column
 
+	@Column
+	private int quatidadeEstoque;
+	
+	@Column
+	private int quatidadePaginas;
+	
+	@Column
 	private float custo;
 
 	@ElementCollection
@@ -118,22 +120,25 @@ public class Livro implements EntityGenerica {
 	public float getCusto() {
 		return custo;
 	}
+	public int getQuatidadeEstoque() {
+		return quatidadeEstoque;
+	}
+
+	public void setQuatidadeEstoque(int quatidadeEstoque) {
+		this.quatidadeEstoque = quatidadeEstoque;
+	}
+
+	public int getQuatidadePaginas() {
+		return quatidadePaginas;
+	}
+
+	public void setQuatidadePaginas(int quatidadePaginas) {
+		this.quatidadePaginas = quatidadePaginas;
+	}
 
 	public void setCusto(float custo) {
 		this.custo = custo;
-	}/*
-		 * //@ManyToMany //@JoinTable(name = "livro_categoria", joinColumns =
-		 * { @JoinColumn(name = "isbn") }, inverseJoinColumns =
-		 * { @JoinColumn(name = "codigo") }) //@OneToMany(cascade =
-		 * CascadeType.ALL, orphanRemoval = true)
-		 * 
-		 * @OneToMany(mappedBy = "livro", targetEntity = LivroCategoria.class,
-		 * fetch = FetchType.LAZY, cascade = CascadeType.ALL) public
-		 * List<LivroCategoria> getLivroCategorias() { return livroCategorias; }
-		 * public void setLivroCategorias(List<LivroCategoria> livroCategorias)
-		 * { this.livroCategorias = livroCategorias; }
-		 */
-
+	}
 	public int getTipo() {
 		return tipo;
 	}
@@ -149,14 +154,6 @@ public class Livro implements EntityGenerica {
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-	/*
-	 * @OneToMany(mappedBy = "livro", targetEntity = LivroAutores.class, fetch =
-	 * FetchType.LAZY, cascade = CascadeType.ALL) public List<LivroAutores>
-	 * getLivroAutores() { return livroAutores; } public void
-	 * setLivroAutores(List<LivroAutores> livroAutores) { this.livroAutores =
-	 * livroAutores; }
-	 */
-
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}

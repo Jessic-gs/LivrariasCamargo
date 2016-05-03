@@ -9,16 +9,17 @@ import javax.faces.bean.SessionScoped;
 
 import br.livraria.dao.CategoriaDao;
 import br.livraria.dao.CategoriaDaoImpl;
+import br.livraria.dominio.Autor;
 import br.livraria.dominio.Categoria;
 
 @ManagedBean
 @SessionScoped
 public class CategoriaMB {
-	
+
 	private Categoria categoriaAtual;
 	private List<Categoria> categorias;
-	
-	public CategoriaMB(){
+
+	public CategoriaMB() {
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		categoriaAtual = new Categoria();
 		categorias = new ArrayList<Categoria>();
@@ -28,11 +29,11 @@ public class CategoriaMB {
 			e.printStackTrace();
 		}
 	}
-	
-	public String adiciona(){
+
+	public String adiciona() {
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		try {
-			catDao.inserirCategoria( categoriaAtual );
+			catDao.inserirCategoria(categoriaAtual);
 			categorias = catDao.listaCategorias();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,8 +41,13 @@ public class CategoriaMB {
 		categoriaAtual = new Categoria();
 		return "";
 	}
-	
-	public void atualizar(Categoria es){
+
+	public String cancelar() {
+		categoriaAtual = new Categoria();
+		return "";
+	}
+
+	public void atualizar(Categoria es) {
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		try {
 			catDao.inserirCategoria(es);
@@ -49,13 +55,13 @@ public class CategoriaMB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String editar(Categoria es) {
 		categoriaAtual = es;
 		return "";
 	}
-	
-	public String remover(Categoria es){
+
+	public String remover(Categoria es) {
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		try {
 			catDao.excluirCategoria(es);
@@ -65,8 +71,8 @@ public class CategoriaMB {
 		}
 		return "";
 	}
-	
-	public Categoria buscar(String categoria){
+
+	public Categoria buscar(String categoria) {
 		CategoriaDao catDao = new CategoriaDaoImpl();
 		try {
 			categoriaAtual = catDao.buscaCategoria(categoria);
@@ -91,5 +97,5 @@ public class CategoriaMB {
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-	
+
 }
