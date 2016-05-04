@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -22,36 +20,30 @@ import org.primefaces.model.UploadedFile;
 import br.livraria.dao.LivroDao;
 import br.livraria.dao.LivroDaoImpl;
 import br.livraria.dominio.Livro;
+import extras.UploadArquivo;
 
 @ManagedBean
 @SessionScoped
 public class LivroMB {
 
 	private Livro livroAtual;
+	private UploadArquivo arquivo = new UploadArquivo();
+	private UploadArquivo arquivo2 = new UploadArquivo();
+
 	private List<Livro> livros;
-	private UploadedFile file;
 	private UploadedFile[] files = new UploadedFile[2];
 
-	private String[] imagens = new String[2];
-	/*
-	 * private List<String> imagens = new ArrayList<String>();
-	 * 
-	 * public List<String> getImagens() { return imagens; }
-	 * 
-	 * public void setImagens(List<String> imagens) { this.imagens = imagens; }
-	 */
-
-	private static int count = 0;
+	private List<String> imagens = new ArrayList<String>();
 
 	public LivroMB() {
 		LivroDao livroDao = new LivroDaoImpl();
 		livroAtual = new Livro();
 		livros = new ArrayList<Livro>();
-		// imagens [0] = "resources/img/livro-jogosvorazes-4.jpg";
-		// imagens [1] = "resources/img/guerra-civil-quadrinheiros.jpg";
+
+		// imagens[1] = "C:\\Users\\Plutão\\Pictures\\1° Premio\\91.jpg";
 		// System.out.println(imagens[0] + " outra " + imagens[1]);
-		// imagens.add("resources/img/livro-jogosvorazes-4.jpg");
-		// imagens.add("resources/img/guerra-civil-quadrinheiros.jpg");
+		imagens.add("1462376935311.jpg");
+		imagens.add("1462376935312.jpg");
 
 		try {
 			livros = livroDao.pesquisarPorTodos();
@@ -62,82 +54,71 @@ public class LivroMB {
 
 	public String adiciona() {
 		LivroDao livroDao = new LivroDaoImpl();
-		try {
-			livroDao.adicionar(livroAtual);
-			livros = (livroDao.pesquisarPorTodos());
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (this.livroAtual.getId() == 0) {
+			System.out.println("Isbn invalido");
+		} else {
+			FacesMessage msg = new FacesMessage("O Livro : ", this.livroAtual.getNome() + " foi inserido com sucesso");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			this.arquivo.gravar();
+			this.arquivo2.gravar();
+			try {
+				livroDao.adicionar(livroAtual);
+				livros = (livroDao.pesquisarPorTodos());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			livroAtual = new Livro();
+
 		}
-		livroAtual = new Livro();
 		return "";
 	}
 
-	public void upload(FileUploadEvent fileUploadEvent) {
-		UploadedFile uploadedFile = fileUploadEvent.getFile();
-		String fileNameUploaded = uploadedFile.getFileName();
-		long fileSizeUploaded = uploadedFile.getSize();
-		System.out.println(fileNameUploaded);
-		String filePath = "C:\\Users\\Plutão\\Desktop\\foto\\";
-		byte[] bytes = null;
-		if (null != uploadedFile) {
-			bytes = uploadedFile.getContents();
-			BufferedOutputStream stream;
-			System.err.println(filePath + fileNameUploaded);
-			try {
-				stream = new BufferedOutputStream(new FileOutputStream(new File(filePath + fileNameUploaded)));
-				try {
-					stream.write(bytes);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					stream.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		imagens[0] = (filePath + fileNameUploaded);
-		imagens[1] = (filePath + fileNameUploaded);
-
-		String infoAboutFile = "<br/> Arquivo recebido: <b>" + fileNameUploaded + "</b><br/>"
-				+ "Tamanho do Arquivo: <b>" + fileSizeUploaded + "</b>";
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.addMessage(null, new FacesMessage("Sucesso", infoAboutFile));
+	public void handleKeyEvent() {
+		livroAtual.setNome(livroAtual.getNome().toUpperCase());
 	}
 
-	public void uploaded() {
-		for (UploadedFile uploadedFile : files) {
-			System.out.println(uploadedFile.getContentType());
-			if (uploadedFile != null) {
-				if (!("image/png".equals(uploadedFile.getContentType()))) {
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de arquivo inválido",
-							"O arquivo deve ser do tipo png, jpg ou jpeg");
-					FacesContext.getCurrentInstance().addMessage(null, msg);
-				} else {
-					FacesMessage message = new FacesMessage("Succesful",
-							files[0].getFileName() + "e" + files[1].getFileName() + " is uploaded.");
-					FacesContext.getCurrentInstance().addMessage(null, message);
-				}
-			}
+	public void uploadAction() {
+		ArrayList<String> ilustracoes = new ArrayList<String>();
+		if (files[0].getFileName().equalsIgnoreCase("") || files[1].getFileName().equalsIgnoreCase("")) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carregue as Duas Imagens", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage("Succesful", files[0].getFileName() + " is uploaded.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+
+			arquivo2.fileUpload(files[1], ".jpg", "/image/");
+			ilustracoes.add(arquivo2.getNome());
+			arquivo.fileUpload(files[0], ".jpg", "/image/");
+			ilustracoes.add(arquivo.getNome());
+
+			livroAtual.setIlustracao(ilustracoes);
+
+			adiciona();
 		}
 	}
 
-	public UploadedFile getFile() {
-		return file;
+	public UploadArquivo getArquivo2() {
+		return arquivo2;
 	}
 
-	public void setFile(UploadedFile file) {
-		this.file = file;
-		System.out.println(file.getFileName());
+	public List<String> getImagens() {
+		return imagens;
+	}
 
+	public void setImagens(List<String> imagens) {
+		this.imagens = imagens;
+	}
+
+	public void setArquivo2(UploadArquivo arquivo2) {
+		this.arquivo2 = arquivo2;
+	}
+
+	public UploadArquivo getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(UploadArquivo arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	public List<Livro> getLivros() {
@@ -154,28 +135,6 @@ public class LivroMB {
 
 	public void setLivroAtual(Livro livroAtual) {
 		this.livroAtual = livroAtual;
-	}
-
-	/*
-	 * public String[] getImagens() { return imagens; }
-	 * 
-	 * public void setImagens(String[] imagens) { this.imagens = imagens; }
-	 */
-
-	public static int getCount() {
-		return count;
-	}
-
-	public static void setCount(int count) {
-		LivroMB.count = count;
-	}
-
-	public String[] getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(String[] imagens) {
-		this.imagens = imagens;
 	}
 
 	public UploadedFile[] getFiles() {

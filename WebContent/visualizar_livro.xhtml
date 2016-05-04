@@ -19,34 +19,43 @@
 	<b:container>
 		<h:form>
 			<p:panelGrid layout="grid"
-				style="text-align:center; margin-top:20px;"
-				panelStyle="width:250px" fieldSize="sm" columns="2">
+				style="text-align:center; margin-top:20px;" panelStyle="width:250px"
+				fieldSize="sm" columns="2">
 				<p:row>
 					<p:column style="text-align: left;" width="10px">
 						<p:galleria value="${livroMB.imagens}" var="image"
-							panelWidth="270" panelHeight="350" showCaption="false"
+							panelWidth="370" panelHeight="450" showCaption="false"
 							style="border:1px solid">
-							<p:graphicImage value="${image}" height="100%" width="100%" />
+							<p:graphicImage value="./image/#{image}" height="100%"
+								width="100%" />
 						</p:galleria>
+
 					</p:column>
 				</p:row>
 				<p:row>
 					<p:column>
 						<p:row>
-							<h1 style="text-align: left;margin-top: -5px;">
-								<h:outputLabel value="Nome do Livro" />
+							<h1 style="text-align: left; margin-top: -5px;">
+								<h:outputLabel value="#{livro.nome}" />
 							</h1>
-							<h2 style="text-align: left;">
+							<h3 style="text-align: left;">
 								<h:outputLabel value="Nome do Autor" />
-							</h2>
-							<h:outputLabel value="Nome da Editora" />
-							<h:outputLabel value="Preço" />
-							<p:button outcome="carrinho" value="Comprar">
-								<f:param name="id_livro" value="10" />
-							</p:button>
+							</h3>
+							<h4 style="text-align: left;">
+								<h:outputLabel value="#{livro.nome}" />
+							</h4>
+							<h4 style="text-align: left;">
+								<h:outputLabel value="#{livro.nome}" />
+							</h4>
+							<b:commandButton value=" Comprar"
+								style="font-family: comic sans MS, FontAwesome; 
+											  		 		width: 100%;
+											  		 		border-radius: 0;
+											  		 		border: 1px solid black;"
+								styleClass="fa fa-cart-plus" iconAlign="left"
+								action="${carrinhoMB.confirmaLivro( livro )}" size="lg" />
 						</p:row>
 					</p:column>
-
 				</p:row>
 			</p:panelGrid>
 
@@ -54,17 +63,36 @@
 			<p:tabView>
 				<p:tab title="Livro">
 					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-						<h:outputText value="The story begins as Don Vito Corleone..." />
+
+						<div>Formato do Livro :#{livroMB.livroAtual.tipo}</div>
+						<div>Número de Páginas :
+							#{livro.livroAtual.quatidadePaginas}</div>
+						<div>ISBN #{livro.preco}</div>
+						<div>
+							Data da Publicação :
+							<h:outputText value="#{livro.livroAtual.dataPublicacao}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</div>
+						<div>
+							Sinopse Do Livro :<br></br> #{livro.livroAtual.sinopse}
+						</div>
+						<div>
+							Sumário :<br></br> #{livro.livroAtual.sumario}
+						</div>
 					</h:panelGrid>
 				</p:tab>
 				<p:tab title="Autor">
 					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage name="demo/images/godfather/godfather2.jpg" />
-						<h:outputText value="Francis Ford Coppola's legendary..." />
+						<div>Nome :#{livro.livroA}</div>
+						<div>Pais de Origem :#{livro.preco}</div>
+						<div>
+							Biografia :<br></br> #{livro.preco}
+						</div>
 					</h:panelGrid>
 				</p:tab>
 			</p:tabView>
+			<div class="rodape" style="height: 200px;"></div>
 		</h:form>
 	</b:container>
 </h:body>

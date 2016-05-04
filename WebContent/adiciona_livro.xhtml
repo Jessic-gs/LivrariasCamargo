@@ -17,14 +17,13 @@
 		<h:outputText value="Novo Livro"></h:outputText>
 	</h2>
 	<h:form enctype="multipart/form-data">
+		<p:growl id="messages" showDetail="true" />
+
 		<h:panelGrid columns="2" panelStyle="width:250px">
 			<h:outputText value="Titulo : " />
 			<p:inputText value="${livroMB.livroAtual.nome}"
 				style="font-size: 12px;
 						 		width: 300px" />
-
-
-
 			<h:outputText value="ISBN : " />
 
 			<p:inputText value="${livroMB.livroAtual.id}"
@@ -36,12 +35,12 @@
 						 		width: 300px" />
 			<h:outputText value="Data de publicação: " />
 			<p:calendar id="data_publicacao"
-				value="#{livroMB.livroAtual.dataPublicacao}" navigator="true"
+				value="${livroMB.livroAtual.dataPublicacao}" navigator="true"
 				locale="pt" />
 
 
 			<h:outputText for="tipo" value="Tipo do Livro: " />
-			<p:selectOneMenu id="tipo" value="#{livroMB.livroAtual.tipo}"
+			<p:selectOneMenu id="tipo" value="${livroMB.livroAtual.tipo}"
 				style="width:150px">
 				<f:selectItem itemLabel="Selecione" itemValue="0"
 					noSelectionOption="true" />
@@ -54,14 +53,12 @@
 
 			<h:outputText for="menu_autor" value="Autor(es):" />
 			<p:selectCheckboxMenu id="menu_autor"
-				value="#{livroMB.livroAtual.autores}" label="Autor" filter="true"
+				value="${livroMB.livroAtual.autores}" label="Autor" filter="true"
 				filterMatchMode="startsWith" panelStyle="width:250px"
 				converter="simpleIndexConverter">
 				<f:selectItems value="#{autorMB.autores}" />
 			</p:selectCheckboxMenu>
 			<p:commandLink value="Confirmar" update="display_autor" />
-
-
 
 			<p:outputPanel id="display_autor"
 				style="width:250px;padding-left:5px;margin-top:10px">
@@ -74,7 +71,7 @@
 
 			<h:outputText for="menu_categoria" value="Categoria(s):" />
 			<p:selectCheckboxMenu id="menu_categoria"
-				value="#{livroMB.livroAtual.categorias}" label="Categoria"
+				value="${livroMB.livroAtual.categorias}" label="Categoria"
 				filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
 				converter="simpleIndexConverter">
 				<f:selectItems value="#{categoriaMB.categorias}" />
@@ -101,15 +98,12 @@
 			<h:outputText value="Resumo : " />
 
 			<p:inputTextarea rows="6" cols="40"
-				value="#{livroMB.livroAtual.sinopse}" />
+				value="${livroMB.livroAtual.sinopse}" />
 
 			<h:outputText value="Sumário : " />
 
 			<p:inputTextarea rows="6" cols="40"
-				value="#{livroMB.livroAtual.sumario}" />
-
-
-
+				value="${livroMB.livroAtual.sumario}" />
 
 			<h:outputText value="Custo : " />
 			<p:inputText value="${livroMB.livroAtual.custo}"
@@ -123,11 +117,17 @@
 			<p:inputText value="${livroMB.livroAtual.quatidadeEstoque}"
 				style="font-size: 12px;
 						 		width: 300px" />
-
-
-			<h:commandButton value="Adicionar" action="${livroMB.adiciona()}"
-				rendered="${livroMB.livroAtual.id == 0}" style="font-size: 12px;" />
+			<p:fileUpload value="${livroMB.files[0]}" mode="simple"
+				skinSimple="true" />
+			<p:spacer width="30" />
+			<p:fileUpload value="${livroMB.files[1]}" mode="simple"
+				skinSimple="true" />
+			<p:spacer width="30" />
+			<center> <h:commandButton value="Adicionar"
+				actionListener="${livroMB.uploadAction}"
+				rendered="${livroMB.livroAtual.id == 0}" style="font-size: 12px;" /></center>
 		</h:panelGrid>
+
 		<!-- <h:commandButton value="Atualizar" action="${livroMB.adiciona()}"
 				rendered="${livroMB.livroAtual.id != 0}"
 				style="font-size: 12px;" />-->
