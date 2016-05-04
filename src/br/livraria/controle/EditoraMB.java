@@ -19,6 +19,7 @@ public class EditoraMB {
 
 	private Editora editoraAtual;
 	private List<Editora> editoras;
+	private String cnpj;
 
 	public EditoraMB() {
 		EditoraDao ediDao = new EditoraDaoImpl();
@@ -96,6 +97,14 @@ public class EditoraMB {
 
 	public void setEditoras(List<Editora> editoras) {
 		this.editoras = editoras;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 }

@@ -62,18 +62,12 @@ public class LivroMB {
 
 	public String adiciona() {
 		LivroDao livroDao = new LivroDaoImpl();
-		// System.out.println("Premeiro
-		// "+livroAtual.getCategorias().get(0).getCodigo());
-		// System.out.println("Segundo "
-		// +livroAtual.getCategorias().get(1).getCodigo());
-
 		try {
 			livroDao.adicionar(livroAtual);
 			livros = (livroDao.pesquisarPorTodos());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		livroAtual = new Livro();
 		return "";
 	}

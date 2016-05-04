@@ -16,19 +16,14 @@
 	<h2>
 		<h:outputText value="Novo Livro"></h:outputText>
 	</h2>
-	<h:form>
+	<h:form enctype="multipart/form-data">
 		<h:panelGrid columns="2" panelStyle="width:250px">
 			<h:outputText value="Titulo : " />
 			<p:inputText value="${livroMB.livroAtual.nome}"
 				style="font-size: 12px;
 						 		width: 300px" />
 
-			<h:outputText for="editora" value="Editora: " />
-			<p:selectOneMenu id="editora" value="#{livroMB.livroAtual.editora}"
-				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
 
-				<f:selectItems value="#{EditoraMB.editoras}" />
-			</p:selectOneMenu>
 
 			<h:outputText value="ISBN : " />
 
@@ -39,6 +34,20 @@
 			<p:inputText value="${livroMB.livroAtual.quatidadePaginas}"
 				style="font-size: 12px;
 						 		width: 300px" />
+			<h:outputText value="Data de publicação: " />
+			<p:calendar id="data_publicacao"
+				value="#{livroMB.livroAtual.dataPublicacao}" navigator="true"
+				locale="pt" />
+
+
+			<h:outputText for="tipo" value="Tipo do Livro: " />
+			<p:selectOneMenu id="tipo" value="#{livroMB.livroAtual.tipo}"
+				style="width:150px">
+				<f:selectItem itemLabel="Selecione" itemValue="0"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Capa Dura" itemValue="1" />
+				<f:selectItem itemLabel="Normal" itemValue="2" />
+			</p:selectOneMenu>
 		</h:panelGrid>
 
 		<h:panelGrid columns="4">
@@ -61,8 +70,7 @@
             #{autor}
         </p:dataList>
 			</p:outputPanel>
-		</h:panelGrid>
-		<h:panelGrid columns="4" cellpadding="5">
+
 
 			<h:outputText for="menu_categoria" value="Categoria(s):" />
 			<p:selectCheckboxMenu id="menu_categoria"
@@ -82,8 +90,14 @@
             #{categoria}
         </p:dataList>
 			</p:outputPanel>
+			<!-- <h:outputText value="Editora: " />
+			<p:selectOneMenu id="editora" value="${livroMB.livroAtual.editora}"
+				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+				<f:selectItems value="#{editoraMB.editoras}" />
+			</p:selectOneMenu>-->
 		</h:panelGrid>
 		<h:panelGrid columns="2">
+
 			<h:outputText value="Resumo : " />
 
 			<p:inputTextarea rows="6" cols="40"
@@ -94,14 +108,9 @@
 			<p:inputTextarea rows="6" cols="40"
 				value="#{livroMB.livroAtual.sumario}" />
 
-			<h:outputText for="tipo" value="Tipo do Livro: " />
-			<p:selectOneMenu id="tipo" value="#{livroMB.livroAtual.tipo}"
-				style="width:150px">
-				<f:selectItem itemLabel="Selecione" itemValue="0"
-					noSelectionOption="true" />
-				<f:selectItem itemLabel="Capa Dura" itemValue="1" />
-				<f:selectItem itemLabel="Normal" itemValue="2" />
-			</p:selectOneMenu>
+
+
+
 			<h:outputText value="Custo : " />
 			<p:inputText value="${livroMB.livroAtual.custo}"
 				style="font-size: 12px;
@@ -116,19 +125,8 @@
 						 		width: 300px" />
 
 
-			<h:outputText for="data_publicacao" value="Data de publicação: " />
-			<p:calendar id="data_publicacao"
-				value="#{livroMB.livroAtual.dataPublicacao}" navigator="true"
-				locale="pt" />
-
-
-
-			<p:growl id="mensagens" autoUpdate="true" />
-			<h:form enctype="multipart/form-data" id="formFoto">
-
-			</h:form>
 			<h:commandButton value="Adicionar" action="${livroMB.adiciona()}"
-				style="font-size: 12px;" />
+				rendered="${livroMB.livroAtual.id == 0}" style="font-size: 12px;" />
 		</h:panelGrid>
 		<!-- <h:commandButton value="Atualizar" action="${livroMB.adiciona()}"
 				rendered="${livroMB.livroAtual.id != 0}"

@@ -7,29 +7,32 @@ import javax.persistence.Id;
 @Entity
 public class Editora {
 
-	private int cnpj;
+	private long cnpj;
 	private String nome;
 	private String endereco;
 	private String telefone;
 
 	@Id
-	public int getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
+
 	@Column
 	public String getNome() {
 		return nome;
 	}
+
 	@Column
 	public String getEndereco() {
 		return endereco;
 	}
+
 	@Column
 	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setCnpj(int cnpj) {
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -44,6 +47,7 @@ public class Editora {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
 	@Override
 	public String toString() {
 		return getNome();
