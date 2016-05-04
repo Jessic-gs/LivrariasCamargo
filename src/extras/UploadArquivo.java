@@ -41,6 +41,7 @@ public class UploadArquivo {
 			this.arquivo = event.getContents();
 
 			File file = new File(getRealPath() + diretorio);
+			System.out.println(file);
 			file.mkdirs();
 
 		} catch (Exception ex) {
