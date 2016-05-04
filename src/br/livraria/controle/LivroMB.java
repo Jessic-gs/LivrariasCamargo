@@ -96,6 +96,16 @@ public class LivroMB {
 			adiciona();
 		}
 	}
+	
+	public void visualizarLivro(Livro l) {
+		livroAtual = l;
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("visualizar_livro.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public UploadArquivo getArquivo2() {
 		return arquivo2;

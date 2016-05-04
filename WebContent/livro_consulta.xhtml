@@ -27,7 +27,7 @@
 				<p:column>
 					<div class="box_livro">
 						<div class="imagem_livro">
-							<p:graphicImage value="${livro.ilustracao[0]}" height="200" />
+							<p:graphicImage value="./image/#{livro.ilustracao[0]}" height="200" />
 						</div>
 						<div class="info_livro">
 							<div>${livro.nome}</div>
@@ -50,7 +50,7 @@
 											  		 		width: 100%;
 											  		 		border-radius: 0;
 											  		 		border: 1px solid black;"
-									styleClass="fa fa-eye" iconAlign="left" action="a" size="lg" />
+									styleClass="fa fa-eye" iconAlign="left" action="${livroMB.visualizarLivro(livro)}" size="lg" />
 							</div>
 						</div>
 					</div>
