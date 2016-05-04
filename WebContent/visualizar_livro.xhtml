@@ -36,16 +36,16 @@
 					<p:column>
 						<p:row>
 							<h1 style="text-align: left; margin-top: -5px;">
-								<h:outputLabel value="#{livro.nome}" />
+								<h:outputLabel value="#{livro.livroAtual.nome}" />
 							</h1>
 							<h3 style="text-align: left;">
-								<h:outputLabel value="Nome do Autor" />
+								<h:outputLabel value="#{livro.livroAtual.autores}" />
 							</h3>
 							<h4 style="text-align: left;">
-								<h:outputLabel value="#{livro.nome}" />
+								<h:outputLabel value="#{livro.livroAtual.editora}" />
 							</h4>
 							<h4 style="text-align: left;">
-								<h:outputLabel value="#{livro.nome}" />
+								<h:outputLabel value="#{livro.livroAtual.preco}" />
 							</h4>
 							<b:commandButton value=" Comprar"
 								style="font-family: comic sans MS, FontAwesome; 
@@ -67,7 +67,7 @@
 						<div>Formato do Livro :#{livroMB.livroAtual.tipo}</div>
 						<div>Número de Páginas :
 							#{livro.livroAtual.quatidadePaginas}</div>
-						<div>ISBN #{livro.preco}</div>
+						<div>ISBN #{livro.livroAtual.id}</div>
 						<div>
 							Data da Publicação :
 							<h:outputText value="#{livro.livroAtual.dataPublicacao}">
@@ -84,11 +84,11 @@
 				</p:tab>
 				<p:tab title="Autor">
 					<h:panelGrid columns="2" cellpadding="10">
-						<div>Nome :#{livro.livroA}</div>
+						<!-- div>Nome :#{livro.livroA}</div>
 						<div>Pais de Origem :#{livro.preco}</div>
 						<div>
 							Biografia :<br></br> #{livro.preco}
-						</div>
+						</div-->
 					</h:panelGrid>
 				</p:tab>
 			</p:tabView>
