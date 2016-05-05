@@ -93,11 +93,6 @@
             #{categoria}
         </p:dataList>
 			</p:outputPanel>
-			<!-- <h:outputText value="Editora: " />
-			<p:selectOneMenu id="editora" value="${livroMB.livroAtual.editora}"
-				filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-				<f:selectItems value="#{editoraMB.editoras}" />
-			</p:selectOneMenu>-->
 		</h:panelGrid>
 		<h:panelGrid columns="2">
 
@@ -124,19 +119,15 @@
 				style="font-size: 12px;
 						 		width: 300px" />
 			<p:fileUpload value="${livroMB.files[0]}" mode="simple"
-				skinSimple="true" />
+				skinSimple="true" label="Escolher Imagem" />
 			<p:spacer width="30" />
-			<p:fileUpload value="${livroMB.files[1]}" mode="simple"
-				skinSimple="true" />
+			<p:fileUpload value="${livroMB.files[1]}" label="Escolher Imagem"
+				mode="simple" skinSimple="true" />
 			<p:spacer width="30" />
 			<center> <h:commandButton value="Adicionar"
-				actionListener="${livroMB.uploadAction}"
-				rendered="${livroMB.livroAtual.id == 0}" style="font-size: 12px;" /></center>
+				actionListener="${livroMB.uploadAction}" style="font-size: 12px;" /></center>
 		</h:panelGrid>
 
-		<!-- <h:commandButton value="Atualizar" action="${livroMB.adiciona()}"
-				rendered="${livroMB.livroAtual.id != 0}"
-				style="font-size: 12px;" />-->
 
 	</h:form>
 </h:body>

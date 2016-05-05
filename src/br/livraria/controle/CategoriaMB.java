@@ -32,6 +32,8 @@ public class CategoriaMB {
 
 	public String adiciona() {
 		CategoriaDao catDao = new CategoriaDaoImpl();
+		System.out.println("catDao invalido");
+
 		try {
 			catDao.inserirCategoria(categoriaAtual);
 			categorias = catDao.listaCategorias();

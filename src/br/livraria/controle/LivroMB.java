@@ -34,17 +34,10 @@ public class LivroMB {
 	private List<Livro> livros;
 	private UploadedFile[] files = new UploadedFile[2];
 
-	private List<String> imagens = new ArrayList<String>();
-
 	public LivroMB() {
 		LivroDao livroDao = new LivroDaoImpl();
 		livroAtual = new Livro();
 		livros = new ArrayList<Livro>();
-
-		// imagens[1] = "C:\\Users\\Plutão\\Pictures\\1° Premio\\91.jpg";
-		// System.out.println(imagens[0] + " outra " + imagens[1]);
-		imagens.add("1462376935311.jpg");
-		imagens.add("1462376935312.jpg");
 
 		try {
 			livros = livroDao.pesquisarPorTodos();
@@ -53,13 +46,14 @@ public class LivroMB {
 		}
 	}
 
-	public String adiciona() {
+	public String salva() {
 		LivroDao livroDao = new LivroDaoImpl();
 		if (this.livroAtual.getId() == 0) {
 			System.out.println("Isbn invalido");
 		} else {
 			FacesMessage msg = new FacesMessage("O Livro : ", this.livroAtual.getNome() + " foi inserido com sucesso");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
+			System.out.println(livroAtual.getIlustracao().get(1));
 			this.arquivo.gravar();
 			this.arquivo2.gravar();
 			try {
@@ -89,17 +83,13 @@ public class LivroMB {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carregue as Duas Imagens", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
-			FacesMessage message = new FacesMessage("Succesful", files[0].getFileName() + " is uploaded.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-
 			arquivo2.fileUpload(files[1], ".jpg", "/image/");
 			ilustracoes.add(arquivo2.getNome());
 			arquivo.fileUpload(files[0], ".jpg", "/image/");
 			ilustracoes.add(arquivo.getNome());
-
 			livroAtual.setIlustracao(ilustracoes);
 
-			adiciona();
+			salva();
 		}
 	}
 
@@ -125,14 +115,6 @@ public class LivroMB {
 
 	public UploadArquivo getArquivo2() {
 		return arquivo2;
-	}
-
-	public List<String> getImagens() {
-		return imagens;
-	}
-
-	public void setImagens(List<String> imagens) {
-		this.imagens = imagens;
 	}
 
 	public void setArquivo2(UploadArquivo arquivo2) {
