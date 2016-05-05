@@ -61,9 +61,13 @@
 				</p:outputPanel>
 			</p:column>
 			<p:column>
-				<f:facet name="header">
+				<p:column>
+					<f:facet name="header">
 					Ações
 				</f:facet>
+					<h:commandButton value="Editar" action="${livroMB.editar( livro )}"
+						style="font-size: 12px;" />
+				</p:column>
 			</p:column>
 		</p:dataTable>
 		<center> <br></br>

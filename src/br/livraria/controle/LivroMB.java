@@ -19,6 +19,7 @@ import org.primefaces.model.UploadedFile;
 
 import br.livraria.dao.LivroDao;
 import br.livraria.dao.LivroDaoImpl;
+import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Livro;
 import extras.UploadArquivo;
 
@@ -77,6 +78,11 @@ public class LivroMB {
 		livroAtual.setNome(livroAtual.getNome().toUpperCase());
 	}
 
+	public String cancelar() {
+		livroAtual = new Livro();
+		return "";
+	}
+
 	public void uploadAction() {
 		ArrayList<String> ilustracoes = new ArrayList<String>();
 		if (files[0].getFileName().equalsIgnoreCase("") || files[1].getFileName().equalsIgnoreCase("")) {
@@ -96,11 +102,21 @@ public class LivroMB {
 			adiciona();
 		}
 	}
-	
+
 	public void visualizarLivro(Livro l) {
 		livroAtual = l;
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("visualizar_livro.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void editar(Livro l) {
+		livroAtual = l;
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("adiciona_livro.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

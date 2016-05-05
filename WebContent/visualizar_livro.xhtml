@@ -23,7 +23,7 @@
 				fieldSize="sm" columns="2">
 				<p:row>
 					<p:column style="text-align: left;" width="10px">
-						<p:galleria value="${livroMB.imagens}" var="image"
+						<p:galleria value="${livroMB.livroAtual.ilustracao}" var="image"
 							panelWidth="370" panelHeight="450" showCaption="false"
 							style="border:1px solid">
 							<p:graphicImage value="./image/#{image}" height="100%"
@@ -36,24 +36,29 @@
 					<p:column>
 						<p:row>
 							<h1 style="text-align: left; margin-top: -5px;">
-								<h:outputLabel value="#{livro.livroAtual.nome}" />
+								<h:outputLabel value="#{livroMB.livroAtual.nome}" />
 							</h1>
 							<h3 style="text-align: left;">
-								<h:outputLabel value="#{livro.livroAtual.autores}" />
+								<h:outputLabel value="Autores: ${livroMB.livroAtual.autores}" />
 							</h3>
 							<h4 style="text-align: left;">
-								<h:outputLabel value="#{livro.livroAtual.editora}" />
+								<h:outputLabel value="Editora: #{livroMB.livroAtual.editora}" />
 							</h4>
 							<h4 style="text-align: left;">
-								<h:outputLabel value="#{livro.livroAtual.preco}" />
+								<h:outputLabel value="R$ #{livroMB.livroAtual.preco}" />
 							</h4>
+							<br></br>
+							<br></br>
+
 							<b:commandButton value=" Comprar"
 								style="font-family: comic sans MS, FontAwesome; 
-											  		 		width: 100%;
+											  		 		width: 70%;
+											  		 		height: 60px;
 											  		 		border-radius: 0;
 											  		 		border: 1px solid black;"
 								styleClass="fa fa-cart-plus" iconAlign="left"
-								action="${carrinhoMB.confirmaLivro( livro )}" size="lg" />
+								action="${carrinhoMB.confirmaLivro( livroMB.livroAtual )}"
+								size="lg" />
 						</p:row>
 					</p:column>
 				</p:row>
@@ -63,32 +68,24 @@
 			<p:tabView>
 				<p:tab title="Livro">
 					<h:panelGrid columns="2" cellpadding="10">
+						<h:outputLabel value="Formato do Livro :" />
+						<h:outputLabel value="#{livroMB.livroAtual.tipo}" />
+						<h:outputLabel value="Número de Páginas :" />
+						<h:outputLabel value="#{livroMB.livroAtual.quatidadePaginas}" />
+						<h:outputLabel value="ISBN :" />
+						<h:outputLabel value="#{livroMB.livroAtual.id}" />
+						<h:outputLabel value="Data da Publicação :" />
+						<h:outputText style="    font-weight: bold;"
+							value="#{livroMB.livroAtual.dataPublicacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+						<h:outputLabel value="Sinopse :" />
 
-						<div>Formato do Livro :#{livroMB.livroAtual.tipo}</div>
-						<div>Número de Páginas :
-							#{livro.livroAtual.quatidadePaginas}</div>
-						<div>ISBN #{livro.livroAtual.id}</div>
-						<div>
-							Data da Publicação :
-							<h:outputText value="#{livro.livroAtual.dataPublicacao}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</div>
-						<div>
-							Sinopse Do Livro :<br></br> #{livro.livroAtual.sinopse}
-						</div>
-						<div>
-							Sumário :<br></br> #{livro.livroAtual.sumario}
-						</div>
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Autor">
-					<h:panelGrid columns="2" cellpadding="10">
-						<!-- div>Nome :#{livro.livroA}</div>
-						<div>Pais de Origem :#{livro.preco}</div>
-						<div>
-							Biografia :<br></br> #{livro.preco}
-						</div-->
+						<h:outputLabel value="#{livroMB.livroAtual.sinopse}" />
+						<h:outputLabel value="Sumário :" />
+
+						<h:outputLabel value="#{livroMB.livroAtual.sumario}" />
+
 					</h:panelGrid>
 				</p:tab>
 			</p:tabView>
