@@ -32,6 +32,7 @@ public class LivroMB {
 	private UploadArquivo arquivo2 = new UploadArquivo();
 
 	private List<Livro> livros;
+	private List<Livro> livrosFiltrado;
 	private UploadedFile[] files = new UploadedFile[2];
 
 	public LivroMB() {
@@ -44,6 +45,7 @@ public class LivroMB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		livrosFiltrado = livros;
 	}
 
 	public String salva() {
@@ -68,10 +70,33 @@ public class LivroMB {
 		return "";
 	}
 
-	public void handleKeyEvent() {
-		livroAtual.setNome(livroAtual.getNome().toUpperCase());
+	public void filtraNome() {
+		ArrayList<Livro> ls = new ArrayList<Livro>();
+		for (Livro livro : livros) {
+			if (livro.getNome().contains(livroAtual.getNome())) {
+				ls.add(livro);
+			}
+		}
+		livrosFiltrado = ls;
 	}
 
+	public void filtrar() {
+		String id = null;
+		String idFiltro = null;
+		ArrayList<Livro> ls = new ArrayList<Livro>();
+		for (Livro livro : livros) {
+			id = String.valueOf(livro.getId());
+			idFiltro = String.valueOf(livroAtual.getId());
+			if (id.contains(idFiltro)) {
+				ls.add(livro);
+			}
+		}
+		livroAtual.setId(0);
+		livrosFiltrado = ls;
+	}
+	public void exibirTodos() {
+		livrosFiltrado = livros;
+	}
 	public String cancelar() {
 		livroAtual = new Livro();
 		return "";
@@ -151,5 +176,13 @@ public class LivroMB {
 
 	public void setFiles(UploadedFile[] files) {
 		this.files = files;
+	}
+
+	public List<Livro> getLivrosFiltrado() {
+		return livrosFiltrado;
+	}
+
+	public void setLivrosFiltrado(List<Livro> livrosFiltrado) {
+		this.livrosFiltrado = livrosFiltrado;
 	}
 }
