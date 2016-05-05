@@ -62,7 +62,7 @@ public class PesquisaDaoImpl implements PesquisaDao {
 
 	@Override
 	public List<Livro> pesquisarPorEditora(Long codigoEditora) throws SQLException {
-		String sql = " select l" + " from Livro l" + " where l.editora.cnpj = :codigo";
+		String sql = " select l" + " from Livro l" + " where l.editora.id = :codigo";
 
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Livro> qry = em.createQuery(sql, Livro.class).setParameter("codigo", codigoEditora);
