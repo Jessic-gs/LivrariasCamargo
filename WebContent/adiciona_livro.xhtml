@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Livros</title>
@@ -13,122 +13,153 @@
 </h:head>
 <h:body>
 	<ui:include src="WEB-INF/navegacao.xhtml" />
-	<h2>
-		<h:outputText value="Novo Livro"></h:outputText>
-	</h2>
-	<h:form enctype="multipart/form-data">
-		<p:growl id="messages" showDetail="true" />
 
-		<h:panelGrid columns="2" panelStyle="width:250px">
-			<h:outputText value="Titulo : " />
-			<p:inputText value="${livroMB.livroAtual.nome}"
-				style="font-size: 12px;
+	<b:container>
+		<center> <h:form enctype="multipart/form-data">
+			<p:growl id="messages" showDetail="true" />
+			<h:outputText value="Novo Livro" style="font-size: 40px" />
+
+			<h:panelGrid columns="2" layout="grid" style="margin-top:20px;">
+				<h:outputText value="Titulo : " />
+				<p:inputText value="${livroMB.livroAtual.nome}"
+					style="font-size: 12px;
+						 		width: 500px" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="ISBN : " />
+
+				<p:inputText value="${livroMB.livroAtual.id}"
+					style="font-size: 12px;
 						 		width: 300px" />
-			<h:outputText value="ISBN : " />
-
-			<p:inputText value="${livroMB.livroAtual.id}"
-				style="font-size: 12px;
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Quantidade de páginas : " />
+				<p:inputText value="${livroMB.livroAtual.quatidadePaginas}"
+					style="font-size: 12px;
 						 		width: 300px" />
-			<h:outputText value="Quantidade de páginas : " />
-			<p:inputText value="${livroMB.livroAtual.quatidadePaginas}"
-				style="font-size: 12px;
-						 		width: 300px" />
-			<h:outputText value="Data de publicação: " />
-			<p:calendar id="data_publicacao"
-				value="${livroMB.livroAtual.dataPublicacao}" navigator="true"
-				locale="pt" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Data de publicação: " />
+				<p:calendar id="data_publicacao"
+					value="${livroMB.livroAtual.dataPublicacao}" navigator="true"
+					locale="pt" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Editora: " />
 
-			<h:outputText value="Editora: " />
+				<p:selectOneMenu id="editora" value="#{livroMB.livroAtual.editora}"
+					filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
+					converter="simpleIndexConverter">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{editoraMB.editoras}" />
+				</p:selectOneMenu>
+				<p:spacer width="30" />
+				<p:spacer width="30" />
 
-			<p:selectOneMenu id="editora" value="#{livroMB.livroAtual.editora}"
-				filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
-				converter="simpleIndexConverter">
-				<f:selectItems value="#{editoraMB.editoras}" />
-			</p:selectOneMenu>
+				<h:outputText for="tipo" value="Tipo do Livro: " />
+				<p:selectOneMenu id="tipo" value="${livroMB.livroAtual.tipo}"
+					style="width:150px">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItem itemLabel="Capa Dura" itemValue="1" />
+					<f:selectItem itemLabel="Normal" itemValue="2" />
+				</p:selectOneMenu>
+			</h:panelGrid>
 
+			<h:panelGrid columns="4" layout="grid" style="margin-top:20px;">
 
-			<h:outputText for="tipo" value="Tipo do Livro: " />
-			<p:selectOneMenu id="tipo" value="${livroMB.livroAtual.tipo}"
-				style="width:150px">
-				<f:selectItem itemLabel="Capa Dura" itemValue="1" />
-				<f:selectItem itemLabel="Normal" itemValue="2" />
-			</p:selectOneMenu>
-		</h:panelGrid>
+				<h:outputText for="menu_autor" value="Autor(es):" />
+				<p:selectCheckboxMenu id="menu_autor"
+					value="${livroMB.livroAtual.autores}" label="Autor" filter="true"
+					filterMatchMode="startsWith" panelStyle="width:250px"
+					converter="simpleIndexConverter">
+					<f:selectItems value="#{autorMB.autores}" />
+				</p:selectCheckboxMenu>
+				<p:commandLink value="Confirmar" update="display_autor"
+					style="padding-left:10px;" />
 
-		<h:panelGrid columns="4">
-
-			<h:outputText for="menu_autor" value="Autor(es):" />
-			<p:selectCheckboxMenu id="menu_autor"
-				value="${livroMB.livroAtual.autores}" label="Autor" filter="true"
-				filterMatchMode="startsWith" panelStyle="width:250px"
-				converter="simpleIndexConverter">
-				<f:selectItems value="#{autorMB.autores}" />
-			</p:selectCheckboxMenu>
-			<p:commandLink value="Confirmar" update="display_autor" />
-
-			<p:outputPanel id="display_autor"
-				style="width:250px;padding-left:5px;margin-top:10px">
-				<p:dataList value="#{livroMB.livroAtual.autores}" var="autor"
-					emptyMessage="Nenhum autor selecionado">
+				<p:outputPanel id="display_autor"
+					style="width:426px;padding-left:5px;margin-top:10px ">
+					<p:dataList value="#{livroMB.livroAtual.autores}" var="autor"
+						emptyMessage="Nenhum autor selecionado">
             #{autor}
         </p:dataList>
-			</p:outputPanel>
+				</p:outputPanel>
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+
+				<h:outputText for="menu_categoria" value="Categoria(s):" />
+				<p:selectCheckboxMenu id="menu_categoria"
+					value="${livroMB.livroAtual.categorias}" label="Categoria"
+					filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
+					converter="simpleIndexConverter">
+					<f:selectItems value="#{categoriaMB.categorias}" />
+				</p:selectCheckboxMenu>
+				<p:commandLink value="Confirmar" update="display_Categoria"
+					style="padding-left:10px;" />
 
 
-			<h:outputText for="menu_categoria" value="Categoria(s):" />
-			<p:selectCheckboxMenu id="menu_categoria"
-				value="${livroMB.livroAtual.categorias}" label="Categoria"
-				filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
-				converter="simpleIndexConverter">
-				<f:selectItems value="#{categoriaMB.categorias}" />
-			</p:selectCheckboxMenu>
-			<p:commandLink value="Confirmar" update="display_Categoria" />
 
-
-
-			<p:outputPanel id="display_Categoria"
-				style="width:250px;padding-left:5px;margin-top:10px">
-				<p:dataList value="#{livroMB.livroAtual.categorias}" var="categoria"
-					emptyMessage="Nenhuma categoria selecionada">
+				<p:outputPanel id="display_Categoria"
+					style="width:426px;padding-left:5px;margin-top:10px">
+					<p:dataList value="#{livroMB.livroAtual.categorias}"
+						var="categoria" emptyMessage="Nenhuma categoria selecionada">
             #{categoria}
         </p:dataList>
-			</p:outputPanel>
-		</h:panelGrid>
-		<h:panelGrid columns="2">
+				</p:outputPanel>
+			</h:panelGrid>
+			<h:panelGrid columns="2" layout="grid" style="margin-top:20px;">
 
-			<h:outputText value="Resumo : " />
+				<h:outputText value="Resumo : " />
 
-			<p:inputTextarea rows="6" cols="40"
-				value="${livroMB.livroAtual.sinopse}" />
+				<p:inputTextarea rows="6"
+					style="font-size: 12px;
+						 		width: 500px"
+					value="${livroMB.livroAtual.sinopse}" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Sumário : " />
 
-			<h:outputText value="Sumário : " />
-
-			<p:inputTextarea rows="6" cols="40"
-				value="${livroMB.livroAtual.sumario}" />
-
-			<h:outputText value="Custo : " />
-			<p:inputText value="${livroMB.livroAtual.custo}"
-				style="font-size: 12px;
+				<p:inputTextarea rows="6"
+					style="font-size: 12px;
+						 		width: 500px"
+					value="${livroMB.livroAtual.sumario}" />
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Custo : " />
+				<p:inputText value="${livroMB.livroAtual.custo}"
+					style="font-size: 12px;
 						 		width: 300px" />
-			<h:outputText value="Preço : " />
-			<p:inputText value="${livroMB.livroAtual.preco}"
-				style="font-size: 12px;
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Preço : " />
+				<p:inputText value="${livroMB.livroAtual.preco}"
+					style="font-size: 12px;
 						 		width: 300px" />
-			<h:outputText value="Quantidade em estoque : " />
-			<p:inputText value="${livroMB.livroAtual.quatidadeEstoque}"
-				style="font-size: 12px;
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<h:outputText value="Quantidade em estoque : " />
+				<p:inputText value="${livroMB.livroAtual.quatidadeEstoque}"
+					style="font-size: 12px;
 						 		width: 300px" />
-			<p:fileUpload value="${livroMB.files[0]}" mode="simple"
-				skinSimple="true" label="Escolher Imagem" />
-			<p:spacer width="30" />
-			<p:fileUpload value="${livroMB.files[1]}" label="Escolher Imagem"
-				mode="simple" skinSimple="true" />
-			<p:spacer width="30" />
-			<center> <h:commandButton value="Adicionar"
-				actionListener="${livroMB.uploadAction}" style="font-size: 12px;" /></center>
-		</h:panelGrid>
+				<p:spacer width="30" />
+				<p:spacer width="30" />
+				<p:fileUpload value="${livroMB.files[0]}" mode="simple"
+					skinSimple="true" label="Escolher Imagem" />
+				<p:spacer width="30" />
 
 
-	</h:form>
+				<p:fileUpload value="${livroMB.files[1]}" label="Escolher Imagem"
+					mode="simple" skinSimple="true" />
+				<p:spacer width="30" />
+
+
+				<center> <h:commandButton value="Adicionar"
+					actionListener="${livroMB.uploadAction}" style="font-size: 12px;" /></center>
+			</h:panelGrid>
+			<div class="rodape" style="height: 200px;"></div>
+		</h:form> </center>
+	</b:container>
 </h:body>
 </html>
