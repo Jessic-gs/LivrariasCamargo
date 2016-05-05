@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:butter="http://butterfaces.org/components">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,6 +22,12 @@
 	<b:container>
 		<h2>Consultar Livro</h2>
 		<h:form>
+			<center>
+				<h:outputText value="Nenhum livro encontrado!!!" 
+							  rendered="${pesquisaMB.resultado.size() == 0}" 
+							  style="font-size: 18px;" />
+			</center>
+			
 			<p:dataTable value="${livroMB.livros}" var="livro" paginator="true"
 				rows="10" rendered="#{livroMB.livros.size() > 0}"
 				style="font-size: 15px;">

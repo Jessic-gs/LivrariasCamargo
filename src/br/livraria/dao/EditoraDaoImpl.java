@@ -66,10 +66,10 @@ public class EditoraDaoImpl implements EditoraDao {
 
 	@Override
 	public Editora buscaEditora(String editora) throws SQLException {
-		String sql = " select  e" + " from Editora e" + " where e.nome like :editora";
+		String sql = " select  e" + " from Editora e" + " where e.nome = :editora";
 
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", "%" + editora + "%");
+		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", editora);
 		Editora resultado = qry.getSingleResult();
 		;
 

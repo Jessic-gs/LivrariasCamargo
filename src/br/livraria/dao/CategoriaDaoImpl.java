@@ -61,13 +61,13 @@ public class CategoriaDaoImpl implements CategoriaDao{
 	}
 	
 	@Override
-	public Categoria buscaCategoria(String categoria) throws SQLException{
+	public Categoria buscaCategoria(String cat) throws SQLException{
 		String sql = " select  c" +
 	    			 " from Categoria c" + 
-	    			 " where c.nome like :categoria";
+	    			 " where c.nome = :cat";
 		
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Categoria> qry = em.createQuery(sql, Categoria.class).setParameter("categoria", "%"+categoria+"%");
+		TypedQuery<Categoria> qry = em.createQuery(sql, Categoria.class).setParameter("cat", cat);
 		Categoria resultado = qry.getSingleResult();
 		
 		return resultado;
