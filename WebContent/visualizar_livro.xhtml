@@ -69,7 +69,10 @@
 				<p:tab title="Livro">
 					<h:panelGrid columns="2" cellpadding="10">
 						<h:outputLabel value="Formato do Livro :" />
-						<h:outputLabel value="#{livroMB.livroAtual.tipo}" />
+						<h:outputLabel value="Capa dura"
+							rendered="#{livroMB.livroAtual.tipo == 1}" />
+						<h:outputLabel value="Brochura"
+							rendered="#{livroMB.livroAtual.tipo == 2}" />
 						<h:outputLabel value="Número de Páginas :" />
 						<h:outputLabel value="#{livroMB.livroAtual.quatidadePaginas}" />
 						<h:outputLabel value="ISBN :" />
