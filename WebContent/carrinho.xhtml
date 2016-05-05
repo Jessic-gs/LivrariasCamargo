@@ -40,6 +40,7 @@
 					</p:column>
 					<p:column>
 						<div>${item.livro.nome}</div>
+						<div>${item.livro.autores}</div>
 						<div>R$ ${item.livro.preco}</div>
 					</p:column>
 					<p:column>
@@ -71,7 +72,7 @@
 							<p:inputText style="font-size: 12px;
 								 	 	 width: 150px"/>
 							<h:commandButton	value="Calcular Frete" 
-												action="${carrinhoMB.limpaCarrinho()}"
+												action="a"
 												style="font-size: 12px;"/>
 						</div>
 						<div style="padding-top: 10px;">
@@ -83,7 +84,7 @@
 						</div>
 						<div style="padding-top: 15px;">
 							<h:commandButton	value="Concluir Pedido" 
-												action="${carrinhoMB.concluirPedido()}"
+												action="a"
 												style="font-size: 12px;"/>
 						</div>
 					</div>

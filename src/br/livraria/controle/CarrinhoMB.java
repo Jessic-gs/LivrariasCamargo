@@ -20,7 +20,6 @@ public class CarrinhoMB {
 	private ItemLivro itemLivroAtual;
 	private Pedido pedido;
 	private List<ItemLivro> itens;
-	private List<Livro> livros; // Sera Apagado
 	
 	public CarrinhoMB(){
 		//ItemLivroDao ilDao = new ItemLivroDaoImpl();
@@ -32,39 +31,8 @@ public class CarrinhoMB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}*/
-		livros = carregalista();
 		pedido.setValorTotal(0.0f);
 	}
-	
-	//**************************************************************
-	// Sera apagado
-	// Só o fiz aqui para testar o carrinho
-	// Esse metodo não é aqui é no LivroMB e também não é assim
-	public List<Livro> carregalista(){
-		List<Livro> lista = new ArrayList<Livro>();
-		
-		List<String> ilustracao = new ArrayList<String>();
-		ilustracao.add("resources/img/livro-jogosvorazes-4.jpg");
-		
-		Livro l1 = new Livro();
-		l1.setIlustracao(ilustracao);
-		l1.setNome("Jogos Vorazes");
-		l1.setPreco(20.0f);
-		
-		List<String> ilustracao2 = new ArrayList<String>();
-		ilustracao2.add("resources/img/guerra-civil-quadrinheiros.jpg");
-		
-		Livro l2 = new Livro();
-		l2.setIlustracao(ilustracao2);
-		l2.setNome("Guerra Civil");
-		l2.setPreco(20.0f);
-		
-		lista.add(l1);
-		lista.add(l2);
-		l2 = new Livro();
-		return lista;
-	}
-	//**************************************************************
 	
 	public String confirmaLivro( Livro livro ){
 		
@@ -158,10 +126,6 @@ public class CarrinhoMB {
 		return "";
 	}
 	
-	public String concluirPedido(List<ItemLivro> listaIL){
-		return "";
-	}
-
 	public ItemLivro getItemLivroAtual() {
 		return itemLivroAtual;
 	}
@@ -177,17 +141,6 @@ public class CarrinhoMB {
 	public void setItens(List<ItemLivro> itens) {
 		this.itens = itens;
 	}
-	
-	//**************************************************************
-	// Sera apagado
-	public List<Livro> getLivros() {
-		return livros;
-	}
-
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
-	}
-	//**************************************************************
 
 	public Pedido getPedido() {
 		return pedido;

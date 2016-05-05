@@ -91,6 +91,32 @@
 
 					</h:panelGrid>
 				</p:tab>
+				<p:tab title="Autores">
+
+					<p:dataTable value="${livroMB.livroAtual.autores}" var="autor"
+						rendered="#{livroMB.livroAtual.autores.size() > 0}"
+						style="font-size: 15px;">
+						<p:column>
+							<h:panelGrid columns="2" cellpadding="10">
+								<h:outputLabel value="Nome: " />
+								<h:outputLabel value="${autor.nome}" />
+								<h:outputLabel value="Data de Nasc.: " />
+								<h:outputLabel value="${autor.dataNascimento}" />
+								<h:outputLabel value="Local de Nasc: " />
+								<h:outputLabel value="${autor.localNascimento}" />
+								<h:outputLabel value="Data de Falecimento: "
+									rendered="#{autor.falecido == 1}" />
+								<h:outputLabel value="${autor.dataFalecimento}" />
+								<h:outputLabel value="Local de Falecimento: "
+									rendered="#{autor.falecido == 1}" />
+								<h:outputLabel value="${autor.localFalecimento}" />
+								<h:outputLabel value="Biografia: " />
+								<h:outputLabel value="${autor.biografia}" />
+							</h:panelGrid>
+						</p:column>
+					</p:dataTable>
+
+				</p:tab>
 			</p:tabView>
 			<div class="rodape" style="height: 200px;"></div>
 		</h:form>
