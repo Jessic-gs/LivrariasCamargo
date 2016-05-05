@@ -57,7 +57,7 @@ public class EditoraDaoImpl implements EditoraDao {
 	@Override
 	public void excluirEditora(Editora edi) throws SQLException {
 		EntityManager em = emf.createEntityManager();
-		Editora edi1 = em.getReference(Editora.class, edi.getCnpj());
+		Editora edi1 = em.getReference(Editora.class, edi.getId());
 		em.getTransaction().begin();
 		em.remove(edi1);
 		em.getTransaction().commit();

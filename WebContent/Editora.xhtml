@@ -20,7 +20,7 @@
 						 		width: 300px" />
 			<h:outputText for="cnpj" value="CNPJ : " />
 
-			<p:inputText id="cnpj" value="${editoraMB.editoraAtual.cnpj}"
+			<p:inputText id="cnpj" value="${editoraMB.editoraAtual.id}"
 				style="font-size: 12px;
 						 		width: 300px" />
 
@@ -35,13 +35,13 @@
 						 		width: 300px" />
 
 			<h:commandButton value="Adicionar" action="${editoraMB.adiciona()}"
-				rendered="${editoraMB.editoraAtual.cnpj == 0}"
+				rendered="${editoraMB.editoraAtual.id == 0}"
 				style="font-size: 12px;" />
 			<h:commandButton value="Atualizar" action="${editoraMB.adiciona()}"
-				rendered="${editoraMB.editoraAtual.cnpj != 0}"
+				rendered="${editoraMB.editoraAtual.id != 0}"
 				style="font-size: 12px;" />
 			<h:commandButton value="Cancelar" action="${editoraMB.cancelar()}"
-				rendered="${editoraMB.editoraAtual.cnpj != 0}"
+				rendered="${editoraMB.editoraAtual.id != 0}"
 				style="font-size: 12px;" />
 
 		</h:panelGrid>
@@ -57,7 +57,7 @@
 				<f:facet name="header">
 					CNPJ
 				</f:facet>
-				${editora.cnpj}
+				${editora.id}
 			</p:column>
 			<p:column>
 				<f:facet name="header">

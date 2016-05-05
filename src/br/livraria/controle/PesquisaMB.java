@@ -61,7 +61,7 @@ public class PesquisaMB implements Serializable, AutoCompleteModel {
 			resultado = pesquisarPorCategoria(catMB.getCategoriaAtual().getId());
 		} else {
 			ediMB.setEditoraAtual(ediMB.buscar(getCampo()));
-			resultado = pesquisarPorEditora(ediMB.getEditoraAtual().getCnpj());
+			resultado = pesquisarPorEditora(ediMB.getEditoraAtual().getId());
 		}
 
 		try {
@@ -70,7 +70,7 @@ public class PesquisaMB implements Serializable, AutoCompleteModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+
 		return resultado;
 	}
 

@@ -38,12 +38,18 @@
 				value="${livroMB.livroAtual.dataPublicacao}" navigator="true"
 				locale="pt" />
 
+			<h:outputText value="Editora: " />
+
+			<p:selectOneMenu id="editora" value="#{livroMB.livroAtual.editora}"
+				filter="true" filterMatchMode="startsWith" panelStyle="width:250px"
+				converter="simpleIndexConverter">
+				<f:selectItems value="#{editoraMB.editoras}" />
+			</p:selectOneMenu>
+
 
 			<h:outputText for="tipo" value="Tipo do Livro: " />
 			<p:selectOneMenu id="tipo" value="${livroMB.livroAtual.tipo}"
 				style="width:150px">
-				<f:selectItem itemLabel="Selecione" itemValue="0"
-					noSelectionOption="true" />
 				<f:selectItem itemLabel="Capa Dura" itemValue="1" />
 				<f:selectItem itemLabel="Normal" itemValue="2" />
 			</p:selectOneMenu>

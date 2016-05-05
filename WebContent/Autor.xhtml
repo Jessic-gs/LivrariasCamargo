@@ -30,6 +30,12 @@
 				style="font-size: 12px;
 						 		width: 300px" />
 
+			<h:outputText value="Resumo : " />
+
+			<p:inputTextarea rows="6"
+				style="font-size: 12px;
+						 		width: 300px"
+				value="${autorMB.autorAtual.biografia}" />
 
 			<h:outputText for="falecido" value="É falecido ?" />
 			<p:selectOneRadio id="falecido"
@@ -48,12 +54,13 @@
 				style="font-size: 12px;
 						 		width: 300px" />
 
+
 			<h:commandButton value="Adicionar" action="${autorMB.adiciona()}"
 				rendered="${autorMB.autorAtual.id == 0}" style="font-size: 12px;" />
 
 			<h:commandButton value="Atualizar" action="${autorMB.adiciona()}"
 				rendered="${autorMB.autorAtual.id != 0}" style="font-size: 12px;" />
-				
+
 			<h:commandButton value="Cancelar" action="${autorMB.cancelar()}"
 				rendered="${autorMB.autorAtual.id != 0}" style="font-size: 12px;" />
 

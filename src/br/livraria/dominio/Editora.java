@@ -5,16 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Editora {
+public class Editora implements EntityGenerica {
 
-	private long cnpj;
+	private static final long serialVersionUID = -6242124539409979554L;
+	private long id;
 	private String nome;
 	private String endereco;
 	private String telefone;
 
 	@Id
-	public long getCnpj() {
-		return cnpj;
+	@Column(name = "cnpj")
+	@Override
+	public long getId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+
+	@Override
+	public void setId(long id) {
+		// TODO Auto-generated method stub
+		this.id = id;
 	}
 
 	@Column
@@ -30,10 +40,6 @@ public class Editora {
 	@Column
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public void setCnpj(long cnpj) {
-		this.cnpj = cnpj;
 	}
 
 	public void setNome(String nome) {
@@ -52,4 +58,5 @@ public class Editora {
 	public String toString() {
 		return getNome();
 	}
+
 }
