@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import br.livraria.dominio.Autor;
 import br.livraria.dominio.Categoria;
 import br.livraria.dominio.Livro;
 
@@ -68,8 +69,12 @@ public class CategoriaDaoImpl implements CategoriaDao{
 		
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Categoria> qry = em.createQuery(sql, Categoria.class).setParameter("cat", cat);
-		Categoria resultado = qry.getSingleResult();
-		
+		Categoria resultado = new Categoria(); 
+		try {
+			resultado = qry.getSingleResult();
+		} catch (Exception e) {
+			resultado = new Categoria();
+		}
 		return resultado;
 	}
 

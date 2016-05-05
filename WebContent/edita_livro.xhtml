@@ -11,69 +11,71 @@
 </h:head>
 <h:body>
 	<ui:include src="WEB-INF/navegacao.xhtml" />
-	<h2>Filtros</h2>
-	<h:form>
-		<h:panelGrid columns="11">
-			<h:outputText value="Nome : " />
-			<p:spacer width="30" />
-
-			<p:inputText id="titulo" value="${livroMB.livroAtual.nome}"
-				style="font-size: 12px;
-						 		width: 300px">
-				<p:ajax update="tbl_livros" listener="#{livroMB.filtraNome}" />
-			</p:inputText>
-			<p:spacer width="30" />
-
-			<h:outputText value="ISBN : " />
-			<p:spacer width="30" />
-
-			<p:inputText id="isbn" value="${livroMB.livroAtual.id}"
-				style="font-size: 12px;
-						 		width: 300px" />
-
-			<p:spacer width="30" />
-			<h:commandButton value="Pesquisar" update="tbl_livros"
-				actionListener="#{livroMB.filtrar}" style="font-size: 12px;" />
-			<p:spacer width="15" />
-			<h:commandButton value="Exibir Todos" update="tbl_livros"
-				actionListener="#{livroMB.exibirTodos}" style="font-size: 12px;" />
-		</h:panelGrid>
-		<p:dataTable id="tbl_livros" value="${livroMB.livrosFiltrado}"
-			var="livro" border="4" rendered="${livroMB.livros.size() > 0}"
-			style="font-size: 15px;">
-			<p:column>
-				<f:facet name="header">
-					ISBN
-				</f:facet>
-				${livro.id}
-			</p:column>
-			<p:column>
-				<f:facet name="header">
-					Nome
-				</f:facet>
-				${livro.nome}
-			</p:column>
-			<p:column headerText="Categorias">
-				<p:outputPanel id="display">
-					<p:dataList value="#{livro.categorias}" var="categoria"
-						emptyMessage="Nenhuma Categorias Selecionada">
-           				 #{categoria}
-        			</p:dataList>
-				</p:outputPanel>
-			</p:column>
-			<p:column>
+	<b:container>
+		<h2>Filtros</h2>
+		<h:form>
+			<h:panelGrid columns="11">
+				<h:outputText value="Nome : " />
+				<p:spacer width="30" />
+	
+				<p:inputText id="titulo" value="${livroMB.livroAtual.nome}"
+					style="font-size: 12px;
+							 		width: 300px">
+					<p:ajax update="tbl_livros" listener="#{livroMB.filtraNome}" />
+				</p:inputText>
+				<p:spacer width="30" />
+	
+				<h:outputText value="ISBN : " />
+				<p:spacer width="30" />
+	
+				<p:inputText id="isbn" value="${livroMB.livroAtual.id}"
+					style="font-size: 12px;
+							 		width: 300px" />
+	
+				<p:spacer width="30" />
+				<h:commandButton value="Pesquisar" update="tbl_livros"
+					actionListener="#{livroMB.filtrar}" style="font-size: 12px;" />
+				<p:spacer width="15" />
+				<h:commandButton value="Exibir Todos" update="tbl_livros"
+					actionListener="#{livroMB.exibirTodos}" style="font-size: 12px;" />
+			</h:panelGrid>
+			<p:dataTable id="tbl_livros" value="${livroMB.livrosFiltrado}"
+				var="livro" border="4" rendered="${livroMB.livros.size() > 0}"
+				style="font-size: 15px;">
 				<p:column>
 					<f:facet name="header">
-					Ações
-				</f:facet>
-					<h:commandButton value="Editar" action="${livroMB.editar( livro )}"
-						style="font-size: 12px;" />
+						ISBN
+					</f:facet>
+					${livro.id}
 				</p:column>
-			</p:column>
-		</p:dataTable>
-		<center> <br></br>
-		<h:outputText style="font-size:30px" value="Nenhum Livro Cadastrado"
-			rendered="${livroMB.livros.size() == null}" /> </center>
-	</h:form>
+				<p:column>
+					<f:facet name="header">
+						Nome
+					</f:facet>
+					${livro.nome}
+				</p:column>
+				<p:column headerText="Categorias">
+					<p:outputPanel id="display">
+						<p:dataList value="#{livro.categorias}" var="categoria"
+							emptyMessage="Nenhuma Categorias Selecionada">
+	           				 #{categoria}
+	        			</p:dataList>
+					</p:outputPanel>
+				</p:column>
+				<p:column>
+					<p:column>
+						<f:facet name="header">
+						Ações
+					</f:facet>
+						<h:commandButton value="Editar" action="${livroMB.editar( livro )}"
+							style="font-size: 12px;" />
+					</p:column>
+				</p:column>
+			</p:dataTable>
+			<center> <br></br>
+			<h:outputText style="font-size:30px" value="Nenhum Livro Cadastrado"
+				rendered="${livroMB.livros.size() == null}" /> </center>
+		</h:form>
+	</b:container>
 </h:body>
 </html>

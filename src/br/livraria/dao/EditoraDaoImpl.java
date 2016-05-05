@@ -70,8 +70,12 @@ public class EditoraDaoImpl implements EditoraDao {
 
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Editora> qry = em.createQuery(sql, Editora.class).setParameter("editora", editora);
-		Editora resultado = qry.getSingleResult();
-		;
+		Editora resultado = new Editora(); 
+		try {
+			resultado = qry.getSingleResult();
+		} catch (Exception e) {
+			resultado = new Editora();
+		}
 
 		return resultado;
 	}

@@ -4,54 +4,56 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Categorias</title>
 </h:head>
 <h:body>
 	<ui:include src="WEB-INF/navegacao.xhtml" />
-	<h2>Categoria</h2>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputText value="Nome : " />
-			<p:inputText value="${categoriaMB.categoriaAtual.nome}"
-				style="font-size: 12px;
-						 		width: 300px" />
-
-			<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
-				rendered="${categoriaMB.categoriaAtual.id == 0}"
-				style="font-size: 12px;" />
-
-			<h:commandButton value="Atualizar" action="${categoriaMB.adiciona()}"
-				rendered="${categoriaMB.categoriaAtual.id != 0}"
-				style="font-size: 12px;" />
-			<h:commandButton value="Cancelar" action="${categoriaMB.cancelar()}"
-				rendered="${categoriaMB.categoriaAtual.id != 0}"
-				style="font-size: 12px;" />
-
-		</h:panelGrid>
-		<p:dataTable value="${categoriaMB.categorias}" var="categoria"
-			border="2" rendered="${categoriaMB.categorias.size() > 0}"
-			style="font-size: 15px;">
-			<p:column>
-				<f:facet name="header">
-					Nome
-				</f:facet>
-				${categoria.nome}
-			</p:column>
-			<p:column>
-				<f:facet name="header">
-					Ações
-				</f:facet>
-				<h:commandButton value="Editar"
-					action="${categoriaMB.editar( categoria )}"
+	<b:container>
+		<h2>Categoria</h2>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nome : " />
+				<p:inputText value="${categoriaMB.categoriaAtual.nome}"
+					style="font-size: 12px;
+							 		width: 300px" />
+	
+				<h:commandButton value="Adicionar" action="${categoriaMB.adiciona()}"
+					rendered="${categoriaMB.categoriaAtual.id == 0}"
 					style="font-size: 12px;" />
-				<h:commandButton value="Remover"
-					action="${categoriaMB.remover( categoria )}"
+	
+				<h:commandButton value="Atualizar" action="${categoriaMB.adiciona()}"
+					rendered="${categoriaMB.categoriaAtual.id != 0}"
 					style="font-size: 12px;" />
-			</p:column>
-		</p:dataTable>
-	</h:form>
+				<h:commandButton value="Cancelar" action="${categoriaMB.cancelar()}"
+					rendered="${categoriaMB.categoriaAtual.id != 0}"
+					style="font-size: 12px;" />
+	
+			</h:panelGrid>
+			<p:dataTable value="${categoriaMB.categorias}" var="categoria"
+				border="2" rendered="${categoriaMB.categorias.size() > 0}"
+				style="font-size: 15px;">
+				<p:column>
+					<f:facet name="header">
+						Nome
+					</f:facet>
+					${categoria.nome}
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						Ações
+					</f:facet>
+					<h:commandButton value="Editar"
+						action="${categoriaMB.editar( categoria )}"
+						style="font-size: 12px;" />
+					<h:commandButton value="Remover"
+						action="${categoriaMB.remover( categoria )}"
+						style="font-size: 12px;" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</b:container>
 </h:body>
 </html>

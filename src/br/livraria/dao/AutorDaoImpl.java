@@ -73,7 +73,12 @@ public class AutorDaoImpl implements AutorDao{
 		
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<Autor> qry = em.createQuery(sql, Autor.class).setParameter("autor", autor);
-		Autor resultado = qry.getSingleResult();
+		Autor resultado = new Autor(); 
+		try {
+			resultado = qry.getSingleResult();
+		} catch (Exception e) {
+			resultado = new Autor();
+		}
 		
 		return resultado;
 	}
